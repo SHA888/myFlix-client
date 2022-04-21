@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { MovieCard } from '../movie-card/movie-card';
+
 export class MainView extends React.Component {
   constructor() {
     super();
@@ -36,7 +38,7 @@ export class MainView extends React.Component {
       return (
         <div className='main-view'>
           {movies.map((movie) => {
-            return <div key={movie.id}>{movie.Title}</div>;
+            return <MovieCard key={movie._id} movieData={movie} />;
           })}
         </div>
       );
