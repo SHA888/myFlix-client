@@ -2,6 +2,8 @@ import React from 'react';
 
 import { MovieCard } from '../movie-card/movie-card';
 
+import { MovieView } from '../movie-view/movie-view';
+
 export class MainView extends React.Component {
   constructor() {
     super();
@@ -26,22 +28,26 @@ export class MainView extends React.Component {
           ImagePath: 'images/3',
         },
       ],
+      selectedMovie: null,
     };
   }
 
   render() {
-    let { movies } = this.state;
+    let { movies, selectedMovie } = this.state;
 
-    if (movies.length === 0) {
-      return <div className='main-view'>The list is empty!</div>;
-    } else {
-      return (
-        <div className='main-view'>
-          {movies.map((movie) => {
-            return <MovieCard key={movie._id} movieData={movie} />;
-          })}
-        </div>
-      );
+    if (selectedMovie) {
+      return <MovieView movie={selectedMovie} />;
     }
+
+    if (movies.length === 0)
+      return <div className='main-view'>The list is empty!</div>;
+
+    return (
+      <div className='main-view'>
+        {movies.map((movie) => {
+          return <MovieCard key={movie._id} movie={movie} />;
+        })}
+      </div>
+    );
   }
 }
