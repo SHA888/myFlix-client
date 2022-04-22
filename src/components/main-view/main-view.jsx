@@ -10,20 +10,29 @@ export class MainView extends React.Component {
         {
           _id: 1,
           Title: 'Inception',
-          Description: 'desc1',
-          ImagePath: 'images/1',
+          Description:
+            'Inception is a 2010 stars Leonardo DiCaprio as a professional thief who steals information by infiltrating the subconscious of his targets. He is offered a chance to have his criminal history erased as payment for the implantation of another person idea into a target subconscious.',
+          ImagePath: '../../img/inception.jpg',
+          Genre: 'Science Fiction',
+          Director: 'Christopher Nolan',
         },
         {
           _id: 2,
           Title: 'The Shawshank Redemption',
-          Description: 'desc2',
-          ImagePath: 'images/2',
+          Description:
+            'The Shawshank Redemption is a 1994 American film based on the 1982 Stephen King novella Rita Hayworth and Shawshank Redemption. It tells the story of banker Andy Dufresne (Tim Robbins), who is sentenced to life in Shawshank State Penitentiary for the murders of his wife and her lover, despite his claims of innocence.',
+          ImagePath: '../../img/the-shawshank-redemption.jpg',
+          Genre: 'Drama',
+          Director: 'Frank Darabont',
         },
         {
           _id: 3,
           Title: 'Gladiator',
-          Description: 'desc3',
-          ImagePath: 'images/3',
+          Description:
+            'Gladiator is a 2000 epic historical drama film stars Russell Crowe, portrays Roman general Maximus Decimus Meridius, who is betrayed when Commodus, the ambitious son of Emperor Marcus Aurelius, murders his father and seizes the throne. Reduced to slavery, Maximus becomes a gladiator and rises through the ranks of the arena to avenge the murders of his family and his emperor.',
+          ImagePath: '../../img/gladiator.jpg',
+          Genre: 'Drama',
+          Director: 'Ridley Scott ',
         },
       ],
       selectedMovie: null,
