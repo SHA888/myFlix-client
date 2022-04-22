@@ -25022,40 +25022,25 @@ class MainView extends _reactDefault.default.Component {
     }
     render() {
         let { movies , selectedMovie  } = this.state;
-        if (selectedMovie) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieView.MovieView, {
-            movie: selectedMovie
-        }, void 0, false, {
-            fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 50,
-            columnNumber: 14
-        }, this);
         if (movies.length === 0) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
             className: "main-view",
             children: "The list is empty!"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 54,
+            lineNumber: 50,
             columnNumber: 14
         }, this);
         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
             className: "main-view",
-            children: /* {movies.map((movie) => (
-          <MovieCard
-            key={movie._id}
-            movie={movie}
-            onMovieClick={(movie) => {
-              this.setSelectedMovie(movie);
-            }}
-          />
-        ))} */ selectedMovie ? /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieView.MovieView, {
+            children: selectedMovie ? /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieView.MovieView, {
                 movie: selectedMovie,
                 onBackClick: (newSelectedMovie)=>{
                     this.setSelectedMovie(newSelectedMovie);
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 70,
-                columnNumber: 13
+                lineNumber: 55,
+                columnNumber: 11
             }, this) : movies.map((movie1)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieCard.MovieCard, {
                     movie: movie1,
                     onMovieClick: (movie)=>{
@@ -25063,13 +25048,13 @@ class MainView extends _reactDefault.default.Component {
                     }
                 }, movie1._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 78,
-                    columnNumber: 15
+                    lineNumber: 63,
+                    columnNumber: 13
                 }, this)
             )
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 57,
+            lineNumber: 53,
             columnNumber: 7
         }, this);
     }
