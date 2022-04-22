@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"f1uG0":[function(require,module,exports) {
+})({"6HQxs":[function(require,module,exports) {
 var Refresh = require('react-refresh/runtime');
 Refresh.injectIntoGlobalHook(window);
 window.$RefreshReg$ = function() {};
@@ -152,11 +152,11 @@ window.$RefreshSig$ = function() {
     };
 };
 
-},{"react-refresh/runtime":"Vq4AH"}],"Vq4AH":[function(require,module,exports) {
+},{"react-refresh/runtime":"8QnHs"}],"8QnHs":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-refresh-runtime.development.js');
 
-},{"./cjs/react-refresh-runtime.development.js":"h246l"}],"h246l":[function(require,module,exports) {
+},{"./cjs/react-refresh-runtime.development.js":"10Glq"}],"10Glq":[function(require,module,exports) {
 /** @license React v0.9.0
  * react-refresh-runtime.development.js
  *
@@ -171,26 +171,26 @@ module.exports = require('./cjs/react-refresh-runtime.development.js');
     // Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
     // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
     // nor polyfill, then a plain number is used for performance.
-    var REACT_ELEMENT_TYPE = 60103;
-    var REACT_PORTAL_TYPE = 60106;
-    var REACT_FRAGMENT_TYPE = 60107;
-    var REACT_STRICT_MODE_TYPE = 60108;
-    var REACT_PROFILER_TYPE = 60114;
-    var REACT_PROVIDER_TYPE = 60109;
-    var REACT_CONTEXT_TYPE = 60110;
-    var REACT_FORWARD_REF_TYPE = 60112;
-    var REACT_SUSPENSE_TYPE = 60113;
-    var REACT_SUSPENSE_LIST_TYPE = 60120;
-    var REACT_MEMO_TYPE = 60115;
-    var REACT_LAZY_TYPE = 60116;
-    var REACT_BLOCK_TYPE = 60121;
-    var REACT_SERVER_BLOCK_TYPE = 60122;
-    var REACT_FUNDAMENTAL_TYPE = 60117;
-    var REACT_SCOPE_TYPE = 60119;
-    var REACT_OPAQUE_ID_TYPE = 60128;
-    var REACT_DEBUG_TRACING_MODE_TYPE = 60129;
-    var REACT_OFFSCREEN_TYPE = 60130;
-    var REACT_LEGACY_HIDDEN_TYPE = 60131;
+    var REACT_ELEMENT_TYPE = 0xeac7;
+    var REACT_PORTAL_TYPE = 0xeaca;
+    var REACT_FRAGMENT_TYPE = 0xeacb;
+    var REACT_STRICT_MODE_TYPE = 0xeacc;
+    var REACT_PROFILER_TYPE = 0xead2;
+    var REACT_PROVIDER_TYPE = 0xeacd;
+    var REACT_CONTEXT_TYPE = 0xeace;
+    var REACT_FORWARD_REF_TYPE = 0xead0;
+    var REACT_SUSPENSE_TYPE = 0xead1;
+    var REACT_SUSPENSE_LIST_TYPE = 0xead8;
+    var REACT_MEMO_TYPE = 0xead3;
+    var REACT_LAZY_TYPE = 0xead4;
+    var REACT_BLOCK_TYPE = 0xead9;
+    var REACT_SERVER_BLOCK_TYPE = 0xeada;
+    var REACT_FUNDAMENTAL_TYPE = 0xead5;
+    var REACT_SCOPE_TYPE = 0xead7;
+    var REACT_OPAQUE_ID_TYPE = 0xeae0;
+    var REACT_DEBUG_TRACING_MODE_TYPE = 0xeae1;
+    var REACT_OFFSCREEN_TYPE = 0xeae2;
+    var REACT_LEGACY_HIDDEN_TYPE = 0xeae3;
     if (typeof Symbol === 'function' && Symbol.for) {
         var symbolFor = Symbol.for;
         REACT_ELEMENT_TYPE = symbolFor('react.element');
@@ -615,7 +615,7 @@ module.exports = require('./cjs/react-refresh-runtime.development.js');
     exports.setSignature = setSignature;
 })();
 
-},{}],"ccp0d":[function(require,module,exports) {
+},{}],"v8Tqx":[function(require,module,exports) {
 "use strict";
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -696,7 +696,7 @@ function _arrayLikeToArray(arr, len) {
     for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
     return arr2;
 }
-/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE */ /*::
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser */ /*::
 import type {
   HMRAsset,
   HMRMessage,
@@ -723,11 +723,18 @@ interface ParcelModule {
     _disposeCallbacks: Array<(mixed) => void>,
   |};
 }
+interface ExtensionContext {
+  runtime: {|
+    reload(): void,
+  |};
+}
 declare var module: {bundle: ParcelRequire, ...};
 declare var HMR_HOST: string;
 declare var HMR_PORT: string;
 declare var HMR_ENV_HASH: string;
 declare var HMR_SECURE: boolean;
+declare var chrome: ExtensionContext;
+declare var browser: ExtensionContext;
 */ var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
 function Module(moduleName) {
@@ -782,7 +789,12 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
                     var id = assetsToAccept[i][1];
                     if (!acceptedAssets[id]) hmrAcceptRun(assetsToAccept[i][0], id);
                 }
-            } else window.location.reload();
+            } else if ('reload' in location) location.reload();
+            else {
+                // Web extension context
+                var ext = typeof chrome === 'undefined' ? typeof browser === 'undefined' ? null : browser : chrome;
+                if (ext && ext.runtime && ext.runtime.reload) ext.runtime.reload();
+            }
         }
         if (data.type === 'error') {
             // Log parcel errors to console
@@ -876,7 +888,7 @@ function reloadCSS() {
             var href = links[i].getAttribute('href');
             var hostname = getHostname();
             var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
-            var absolute = /^https?:\/\//i.test(href) && href.indexOf(window.location.origin) !== 0 && !servedFromHMRServer;
+            var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
             if (!absolute) updateLink(links[i]);
         }
         cssTimeout = null;
@@ -1022,7 +1034,7 @@ _reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElemen
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom":"j6uA9","./components/main-view/main-view":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"bEKFv","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2SpVj"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom":"j6uA9","./components/main-view/main-view":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"iTorj":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-dev-runtime.development.js');
 
@@ -25039,7 +25051,40 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"bEKFv","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2SpVj","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx"}],"bEKFv":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"bwuIu":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$67b2.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+class MovieCard extends _reactDefault.default.Component {
+    render() {
+        const { movie  } = this.props;
+        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+            className: "movie-card",
+            children: movie.Title
+        }, void 0, false, {
+            fileName: "src/components/movie-card/movie-card.jsx",
+            lineNumber: 6,
+            columnNumber: 12
+        }, this);
+    }
+}
+
+  $parcel$ReactRefreshHelpers$67b2.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"fD7H8":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -25069,7 +25114,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"2SpVj":[function(require,module,exports) {
+},{}],"fDiVC":[function(require,module,exports) {
 "use strict";
 var Refresh = require('react-refresh/runtime');
 function debounce(func, delay) {
@@ -25189,40 +25234,7 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-},{"react-refresh/runtime":"Vq4AH"}],"bwuIu":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$67b2.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-class MovieCard extends _reactDefault.default.Component {
-    render() {
-        const { movie  } = this.props;
-        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-            className: "movie-card",
-            children: movie.Title
-        }, void 0, false, {
-            fileName: "src/components/movie-card/movie-card.jsx",
-            lineNumber: 6,
-            columnNumber: 12
-        }, this);
-    }
-}
-
-  $parcel$ReactRefreshHelpers$67b2.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"bEKFv","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2SpVj"}],"ggaUx":[function(require,module,exports) {
+},{"react-refresh/runtime":"8QnHs"}],"ggaUx":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -25320,6 +25332,6 @@ class MovieView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"bEKFv","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"2SpVj"}],"lJZlQ":[function() {},{}]},["f1uG0","ccp0d","d8Dch"], "d8Dch", "parcelRequiree3ea")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"lJZlQ":[function() {},{}]},["6HQxs","v8Tqx","d8Dch"], "d8Dch", "parcelRequiree3ea")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
