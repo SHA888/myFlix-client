@@ -13,19 +13,6 @@ export class MainView extends React.Component {
     };
   }
 
-  componentDidMount() {
-    axios
-      .get('https://my-flix-93462.herokuapp.com/movies')
-      .then((response) => {
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
   setSelectedMovie(newSelectedMovie) {
     this.setState({ selectedMovie: newSelectedMovie });
   }
@@ -58,4 +45,24 @@ export class MainView extends React.Component {
       </div>
     );
   }
+
+  componentDidMount() {
+    // code executed right after the component is added to the DOM.
+
+    axios
+      .get('https://my-flix-93462.herokuapp.com/movies')
+      .then((response) => {
+        this.setState({
+          movies: response.data,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  componentWillUnmount() {
+    // code executed just before the moment the component gets removed from the DOM.
+  }
+
 }
