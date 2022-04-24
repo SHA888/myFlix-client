@@ -5,8 +5,8 @@ myFlix is a small web application for movie database where user can register to 
 ## Technologies
 
 - Language: [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- Library/framework : [React](https://reactjs.org/)
-- Compiler/transpiler :[Babel](https://babel.dev/)
+- Library/framework: [React](https://reactjs.org/)
+- Compiler/transpiler: [Babel](https://babel.dev/)
 - Build tool: [Parcel](https://parceljs.org/)
 
 ## Screenshots
