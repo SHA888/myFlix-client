@@ -61,6 +61,10 @@ export class MainView extends React.Component {
       });
   }
 
+  componentDidUpdate(){
+    // code executed right after component's state or props are changed.
+  }
+
   componentWillUnmount() {
     // code executed just before the moment the component gets removed from the DOM.
   }
