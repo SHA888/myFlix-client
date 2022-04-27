@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'react';
 
+import './movie-card.scss';
+
 export class MovieCard extends React.Component {
   render() {
     const { movie, onMovieClick } = this.props;

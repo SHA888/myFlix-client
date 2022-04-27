@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './register-view.scss';
+
 export class RegisterView extends React.Component {
   constructor(props) {
     super(props);

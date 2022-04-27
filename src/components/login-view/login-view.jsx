@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RegisterView from '../register-view/register-view';
 
+import './login-view.scss';
+
 export class LoginView extends React.Component {
   constructor(props) {
     super(props);
