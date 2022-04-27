@@ -47,7 +47,7 @@ export class LoginView extends React.Component {
           />
         </label>
         <label htmlFor=''>
-          Password:{' '}
+          Password:
           <input
             type='password'
             value={this.state.password}
@@ -55,7 +55,7 @@ export class LoginView extends React.Component {
           />
         </label>
         <button type='button' onClick={this.handleSubmit}>
-          Submit
+          Login
         </button>
       </form>
     );
