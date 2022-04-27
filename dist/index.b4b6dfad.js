@@ -25216,11 +25216,31 @@ class MovieCard extends _reactDefault.default.Component {
             children: movie.Title
         }, void 0, false, {
             fileName: "src/components/movie-card/movie-card.jsx",
-            lineNumber: 7,
+            lineNumber: 9,
             columnNumber: 7
         }, this);
     }
 }
+MovieCard.propTypes = {
+    movie: _reactDefault.default.shape({
+        Title: _reactDefault.default.string.isRequired,
+        ReleaseYear: _reactDefault.default.string,
+        Description: _reactDefault.default.string.isRequired,
+        Genre: _reactDefault.default.shape({
+            Name: _reactDefault.default.string.isRequired,
+            Description: _reactDefault.default.string
+        }),
+        Directors: _reactDefault.default.shape({
+            Name: _reactDefault.default.string.isRequired,
+            Biography: _reactDefault.default.string,
+            Birth: _reactDefault.default.string,
+            Death: _reactDefault.default.string
+        }),
+        ImagePath: _reactDefault.default.string.isRequired,
+        Featured: _reactDefault.default.bool
+    }).isRequired,
+    onMovieClick: _reactDefault.default.func.isRequired
+};
 
   $parcel$ReactRefreshHelpers$67b2.postlude(module);
 } finally {
