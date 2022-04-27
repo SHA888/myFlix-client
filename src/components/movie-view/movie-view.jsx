@@ -1,7 +1,7 @@
 import React from 'react';
 
 export class MovieView extends React.Component {
-  keypressCallBack(event) {
+  keypressCallback(event) {
     console.log(event.key);
   }
 
@@ -41,10 +41,10 @@ export class MovieView extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keypress', this.keypressCallBack);
+    document.addEventListener('keypress', this.keypressCallback);
   }
 
   componentWillUnmount() {
-    document.addEventListener('keypress', this.keypressCallBack);
+    document.removeEventListener('keypress', this.keypressCallback);
   }
 }
