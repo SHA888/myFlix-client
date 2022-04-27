@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class RegistrationView extends React.Component {
+export class RegisterView extends React.Component {
   constructor(props) {
     super(props);
 
