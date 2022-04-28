@@ -29428,31 +29428,117 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "RegisterView", ()=>RegisterView
 );
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _registerViewScss = require("./register-view.scss");
-class RegisterView extends _reactDefault.default.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            username: '',
-            password: ''
-        };
-        this.onUsernameCreate = this.onUsernameCreate.bind(this);
-        this.onPasswordCreate = this.onPasswordCreate.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    onUsernameCreate() {}
-    onPasswordCreate() {}
-    handleSubmit() {}
+function RegisterView() {
+    var _s = $RefreshSig$();
+    const handleRegistration = ()=>{
+        _s();
+        const [username, setUsername] = useState('');
+        const [password, setPassword] = useState('');
+        const [email, setEmail] = useState('');
+    };
+    _s(handleRegistration, "aynwAZdNgcDEmsoEpp+mcQSpBRo=");
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "register-form",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("form", {
+            children: [
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                    children: [
+                        "Email:",
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "email",
+                            value: email,
+                            onChange: (e)=>setEmail(e.target.value)
+                        }, void 0, false, {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 18,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/register-view/register-view.jsx",
+                    lineNumber: 16,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                    children: [
+                        "Username:",
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "text",
+                            value: username,
+                            onChange: (e)=>setUsername(e.target.value)
+                        }, void 0, false, {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 26,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/register-view/register-view.jsx",
+                    lineNumber: 24,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                    children: [
+                        "Password:",
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "password",
+                            value: password,
+                            onChange: (e)=>setPassword(e.target.value)
+                        }, void 0, false, {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 34,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/register-view/register-view.jsx",
+                    lineNumber: 32,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
+                    type: "button",
+                    onClick: handleRegistration(),
+                    children: "Register"
+                }, void 0, false, {
+                    fileName: "src/components/register-view/register-view.jsx",
+                    lineNumber: 40,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "src/components/register-view/register-view.jsx",
+            lineNumber: 15,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "src/components/register-view/register-view.jsx",
+        lineNumber: 14,
+        columnNumber: 5
+    }, this);
 }
+_c = RegisterView;
+RegisterView.propTypes = {
+    user: _propTypesDefault.default.exact({
+        email: _propTypesDefault.default.string.isRequired,
+        username: _propTypesDefault.default.string.isRequired,
+        password: _propTypesDefault.default.string.isRequired
+    }).isRequired
+};
+var _c;
+$RefreshReg$(_c, "RegisterView");
 
   $parcel$ReactRefreshHelpers$f521.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./register-view.scss":"8il1C"}],"fD7H8":[function(require,module,exports) {
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./register-view.scss":"8il1C","prop-types":"7wKI2","react/jsx-dev-runtime":"iTorj"}],"fD7H8":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
