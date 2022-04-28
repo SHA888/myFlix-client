@@ -25098,6 +25098,7 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _loginView = require("../login-view/login-view");
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
+var _registerView = require("../register-view/register-view");
 var _mainViewScss = require("./main-view.scss");
 class MainView extends _reactDefault.default.Component {
     constructor(){
@@ -25105,11 +25106,12 @@ class MainView extends _reactDefault.default.Component {
         this.state = {
             movies: [],
             selectedMovie: null,
-            user: null
+            user: null,
+            isRegistered: false
         };
     }
+    // code executed right after the component is added to the DOM.
     componentDidMount() {
-        // code executed right after the component is added to the DOM.
         _axiosDefault.default.get('https://my-flix-93462.herokuapp.com/movies').then((response)=>{
             this.setState({
                 movies: response.data
@@ -25126,9 +25128,9 @@ class MainView extends _reactDefault.default.Component {
     }
     /* 
   When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*
-  */ setSelectedMovie(movie) {
+  */ setSelectedMovie(newSelectedMovie) {
         this.setState({
-            selectedMovie: movie
+            selectedMovie: newSelectedMovie
         });
     }
     /*
@@ -25146,7 +25148,7 @@ class MainView extends _reactDefault.default.Component {
             onLoggedIn: (user)=>this.onLoggedIn(user)
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 66,
+            lineNumber: 68,
             columnNumber: 14
         }, this);
         // Before the movies have been loaded
@@ -25154,7 +25156,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 69,
+            lineNumber: 71,
             columnNumber: 37
         }, this);
         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -25166,22 +25168,22 @@ class MainView extends _reactDefault.default.Component {
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 77,
+                lineNumber: 79,
                 columnNumber: 11
-            }, this) : movies.map((movie)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieCard.MovieCard, {
-                    movie: movie,
-                    onMovieClick: (newSelectedMovie)=>{
-                        this.setSelectedMovie(newSelectedMovie);
+            }, this) : movies.map((movie1)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieCard.MovieCard, {
+                    movie: movie1,
+                    onMovieClick: (movie)=>{
+                        this.setSelectedMovie(movie);
                     }
-                }, movie._id, false, {
+                }, movie1._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 85,
+                    lineNumber: 87,
                     columnNumber: 13
                 }, this)
             )
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 72,
+            lineNumber: 74,
             columnNumber: 7
         }, this);
     }
@@ -25192,7 +25194,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../login-view/login-view":"9YtA0","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./main-view.scss":"eBaMl"}],"jo6P5":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../login-view/login-view":"9YtA0","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./main-view.scss":"eBaMl","../register-view/register-view":"6jAr6"}],"jo6P5":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"63MyY"}],"63MyY":[function(require,module,exports) {
@@ -28561,8 +28563,8 @@ var _loginViewScss = require("./login-view.scss");
 var _s = $RefreshSig$();
 function LoginView(props) {
     _s();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = _react.useState('');
+    const [password, setPassword] = _react.useState('');
     const handleSubmit = (e)=>{
         e.preventDefault();
         console.log(username, password);
@@ -28581,10 +28583,8 @@ function LoginView(props) {
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("form", {
-                action: "",
                 children: [
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                        htmlFor: "",
                         children: [
                             "Username:",
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
@@ -28603,7 +28603,6 @@ function LoginView(props) {
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                        htmlFor: "",
                         children: [
                             "Password:",
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
@@ -28638,15 +28637,16 @@ function LoginView(props) {
             }, this),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
                 children: [
-                    "Don't have account? ",
+                    "Don't have account?",
+                    ' ',
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV("a", {
-                        href: "#",
+                        href: "",
                         onClick: handleNewUser,
                         children: "Register"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 48,
-                        columnNumber: 33
+                        lineNumber: 50,
+                        columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
@@ -28667,7 +28667,8 @@ LoginView.propTypes = {
     user: _propTypesDefault.default.exact({
         username: _propTypesDefault.default.string.isRequired,
         password: _propTypesDefault.default.string.isRequired
-    }).isRequired
+    }),
+    onLoggedIn: _propTypesDefault.default.func.isRequired
 };
 var _c;
 $RefreshReg$(_c, "LoginView");
@@ -28677,7 +28678,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","../register-view/register-view":"6jAr6","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./login-view.scss":"e57ax"}],"7wKI2":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./login-view.scss":"e57ax","../register-view/register-view":"6jAr6"}],"7wKI2":[function(require,module,exports) {
 var ReactIs = require('react-is');
 // By explicitly using `prop-types` you are opting into new development behavior.
 // http://fb.me/prop-types-in-prod
@@ -29417,128 +29418,7 @@ printWarning = function(text) {
 };
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":"jZTZJ","./lib/has":"fqKuf"}],"6jAr6":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$f521 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$f521.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "RegisterView", ()=>RegisterView
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _registerViewScss = require("./register-view.scss");
-function RegisterView() {
-    var _s = $RefreshSig$();
-    const handleRegistration = ()=>{
-        _s();
-        const [username, setUsername] = useState('');
-        const [password, setPassword] = useState('');
-        const [email, setEmail] = useState('');
-    };
-    _s(handleRegistration, "aynwAZdNgcDEmsoEpp+mcQSpBRo=");
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "register-form",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("form", {
-            children: [
-                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                    children: [
-                        "Email:",
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                            type: "email",
-                            value: email,
-                            onChange: (e)=>setEmail(e.target.value)
-                        }, void 0, false, {
-                            fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 18,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 16,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                    children: [
-                        "Username:",
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                            type: "text",
-                            value: username,
-                            onChange: (e)=>setUsername(e.target.value)
-                        }, void 0, false, {
-                            fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 26,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 24,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                    children: [
-                        "Password:",
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                            type: "password",
-                            value: password,
-                            onChange: (e)=>setPassword(e.target.value)
-                        }, void 0, false, {
-                            fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 34,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 32,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
-                    type: "button",
-                    onClick: handleRegistration(),
-                    children: "Register"
-                }, void 0, false, {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 40,
-                    columnNumber: 9
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "src/components/register-view/register-view.jsx",
-            lineNumber: 15,
-            columnNumber: 7
-        }, this)
-    }, void 0, false, {
-        fileName: "src/components/register-view/register-view.jsx",
-        lineNumber: 14,
-        columnNumber: 5
-    }, this);
-}
-_c = RegisterView;
-RegisterView.propTypes = {
-    user: _propTypesDefault.default.exact({
-        email: _propTypesDefault.default.string.isRequired,
-        username: _propTypesDefault.default.string.isRequired,
-        password: _propTypesDefault.default.string.isRequired
-    }).isRequired
-};
-var _c;
-$RefreshReg$(_c, "RegisterView");
-
-  $parcel$ReactRefreshHelpers$f521.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./register-view.scss":"8il1C","prop-types":"7wKI2","react/jsx-dev-runtime":"iTorj"}],"fD7H8":[function(require,module,exports) {
+},{"./lib/ReactPropTypesSecret":"jZTZJ","./lib/has":"fqKuf"}],"fD7H8":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -29688,7 +29568,127 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-},{"react-refresh/runtime":"8QnHs"}],"8il1C":[function() {},{}],"e57ax":[function() {},{}],"bwuIu":[function(require,module,exports) {
+},{"react-refresh/runtime":"8QnHs"}],"e57ax":[function() {},{}],"6jAr6":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$f521 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$f521.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "RegisterView", ()=>RegisterView
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _registerViewScss = require("./register-view.scss");
+var _s = $RefreshSig$();
+function RegisterView(props) {
+    _s();
+    const [email, setEmail] = _react.useState('');
+    const [username, setUsername] = _react.useState('');
+    const [password, setPassword] = _react.useState('');
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        console.log(email, username, password);
+        /* Send a request to the server for authentication */ /* then call props on registored user(username) */ props.onRegistration(username);
+    };
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "registration-form",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("form", {
+            children: [
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                    children: [
+                        "Email:",
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "email",
+                            value: email,
+                            onChange: (e)=>setEmail(e.target.value)
+                        }, void 0, false, {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 24,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/register-view/register-view.jsx",
+                    lineNumber: 22,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                    children: [
+                        "Username:",
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "text",
+                            value: username,
+                            onChange: (e)=>setUsername(e.target.value)
+                        }, void 0, false, {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 32,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/register-view/register-view.jsx",
+                    lineNumber: 30,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                    children: [
+                        "Password:",
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "password",
+                            value: password,
+                            onChange: (e)=>setPassword(e.target.value)
+                        }, void 0, false, {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 40,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/register-view/register-view.jsx",
+                    lineNumber: 38,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
+                    type: "button",
+                    onClick: handleSubmit,
+                    children: "Register"
+                }, void 0, false, {
+                    fileName: "src/components/register-view/register-view.jsx",
+                    lineNumber: 46,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "src/components/register-view/register-view.jsx",
+            lineNumber: 21,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "src/components/register-view/register-view.jsx",
+        lineNumber: 20,
+        columnNumber: 5
+    }, this);
+}
+_s(RegisterView, "wACJe+bl+8h3O7KtuFOMof9+G20=");
+_c = RegisterView;
+RegisterView.propTypes = {
+    onRegistration: _propTypesDefault.default.func.isRequired
+};
+var _c;
+$RefreshReg$(_c, "RegisterView");
+
+  $parcel$ReactRefreshHelpers$f521.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","./register-view.scss":"8il1C","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"8il1C":[function() {},{}],"bwuIu":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29702,6 +29702,8 @@ parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _movieCardScss = require("./movie-card.scss");
 class MovieCard extends _reactDefault.default.Component {
     render() {
@@ -29711,7 +29713,27 @@ class MovieCard extends _reactDefault.default.Component {
             onClick: ()=>{
                 onMovieClick(movie);
             },
-            children: movie.Title
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                children: [
+                    movie.Title,
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                        children: movie.ReleaseYear
+                    }, void 0, false, {
+                        fileName: "src/components/movie-card/movie-card.jsx",
+                        lineNumber: 19,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
+                        fileName: "src/components/movie-card/movie-card.jsx",
+                        lineNumber: 20,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movie-card/movie-card.jsx",
+                lineNumber: 17,
+                columnNumber: 9
+            }, this)
         }, void 0, false, {
             fileName: "src/components/movie-card/movie-card.jsx",
             lineNumber: 11,
@@ -29720,24 +29742,24 @@ class MovieCard extends _reactDefault.default.Component {
     }
 }
 MovieCard.propTypes = {
-    movie: _reactDefault.default.shape({
-        Title: _reactDefault.default.string.isRequired,
-        ReleaseYear: _reactDefault.default.string,
-        Description: _reactDefault.default.string.isRequired,
-        Genre: _reactDefault.default.shape({
-            Name: _reactDefault.default.string.isRequired,
-            Description: _reactDefault.default.string
+    movie: _propTypesDefault.default.shape({
+        Title: _propTypesDefault.default.string.isRequired,
+        ReleaseYear: _propTypesDefault.default.string,
+        Description: _propTypesDefault.default.string.isRequired,
+        Genre: _propTypesDefault.default.shape({
+            Name: _propTypesDefault.default.string.isRequired,
+            Description: _propTypesDefault.default.string
         }),
-        Directors: _reactDefault.default.shape({
-            Name: _reactDefault.default.string.isRequired,
-            Biography: _reactDefault.default.string,
-            Birth: _reactDefault.default.string,
-            Death: _reactDefault.default.string
+        Directors: _propTypesDefault.default.shape({
+            Name: _propTypesDefault.default.string.isRequired,
+            Biography: _propTypesDefault.default.string,
+            Birth: _propTypesDefault.default.string,
+            Death: _propTypesDefault.default.string
         }),
-        ImagePath: _reactDefault.default.string.isRequired,
-        Featured: _reactDefault.default.bool
+        ImagePath: _propTypesDefault.default.string.isRequired,
+        Featured: _propTypesDefault.default.bool
     }).isRequired,
-    onMovieClick: _reactDefault.default.func.isRequired
+    onMovieClick: _propTypesDefault.default.func.isRequired
 };
 
   $parcel$ReactRefreshHelpers$67b2.postlude(module);
@@ -29745,7 +29767,7 @@ MovieCard.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./movie-card.scss":"d6HH4"}],"d6HH4":[function() {},{}],"ggaUx":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","prop-types":"7wKI2","./movie-card.scss":"d6HH4"}],"d6HH4":[function() {},{}],"ggaUx":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29759,6 +29781,8 @@ parcelHelpers.export(exports, "MovieView", ()=>MovieView
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _movieViewScss = require("./movie-view.scss");
 class MovieView extends _reactDefault.default.Component {
     render() {
@@ -29772,12 +29796,12 @@ class MovieView extends _reactDefault.default.Component {
                         src: movie.ImagePath
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 12,
+                        lineNumber: 14,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 11,
+                    lineNumber: 13,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -29788,7 +29812,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Title: "
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 15,
+                            lineNumber: 17,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
@@ -29796,13 +29820,13 @@ class MovieView extends _reactDefault.default.Component {
                             children: movie.Title
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 16,
+                            lineNumber: 18,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 14,
+                    lineNumber: 16,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -29813,7 +29837,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Description: "
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 19,
+                            lineNumber: 21,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
@@ -29821,63 +29845,13 @@ class MovieView extends _reactDefault.default.Component {
                             children: movie.Description
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 20,
+                            lineNumber: 22,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 18,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-                    className: "movie-genre",
-                    children: [
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
-                            className: "label",
-                            children: "Genre: "
-                        }, void 0, false, {
-                            fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 23,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
-                            className: "value",
-                            children: movie.Genre
-                        }, void 0, false, {
-                            fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 24,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 22,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-                    className: "movie-director",
-                    children: [
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
-                            className: "label",
-                            children: "Director: "
-                        }, void 0, false, {
-                            fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 27,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
-                            className: "value",
-                            children: movie.Director
-                        }, void 0, false, {
-                            fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 28,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 26,
+                    lineNumber: 20,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
@@ -29887,23 +29861,31 @@ class MovieView extends _reactDefault.default.Component {
                     children: "Back"
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 30,
+                    lineNumber: 24,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/movie-view/movie-view.jsx",
-            lineNumber: 10,
+            lineNumber: 12,
             columnNumber: 7
         }, this);
     }
 }
+MovieView.propTypes = {
+    movie: _propTypesDefault.default.shape({
+        Title: _propTypesDefault.default.string.isRequired,
+        Description: _propTypesDefault.default.string.isRequired,
+        ImagePath: _propTypesDefault.default.string.isRequired
+    }).isRequired,
+    onBackClick: _propTypesDefault.default.func.isRequired
+};
 
   $parcel$ReactRefreshHelpers$e9f6.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./movie-view.scss":"jnlR5"}],"jnlR5":[function() {},{}],"eBaMl":[function() {},{}],"lJZlQ":[function() {},{}]},["6HQxs","v8Tqx","d8Dch"], "d8Dch", "parcelRequiree3ea")
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","react":"21dqq","prop-types":"7wKI2","./movie-view.scss":"jnlR5"}],"jnlR5":[function() {},{}],"eBaMl":[function() {},{}],"lJZlQ":[function() {},{}]},["6HQxs","v8Tqx","d8Dch"], "d8Dch", "parcelRequiree3ea")
 
 //# sourceMappingURL=index.b4b6dfad.js.map

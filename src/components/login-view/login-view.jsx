@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RegisterView from '../register-view/register-view';
 
@@ -19,13 +19,13 @@ export function LoginView(props) {
 
   const handleNewUser = () => {
     console.log('Register new user');
-    return <RegisterView  />;
+    return <RegisterView />;
   };
 
   return (
     <div>
-      <form action=''>
-        <label htmlFor=''>
+      <form>
+        <label>
           Username:
           <input
             type='text'
@@ -33,7 +33,7 @@ export function LoginView(props) {
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
-        <label htmlFor=''>
+        <label>
           Password:
           <input
             type='password'
@@ -45,7 +45,12 @@ export function LoginView(props) {
           Login
         </button>
       </form>
-      <span>Don't have account? <a href="#" onClick={handleNewUser}>Register</a></span>
+      <span>
+        Don't have account?{' '}
+        <a href='' onClick={handleNewUser}>
+          Register
+        </a>
+      </span>
     </div>
   );
 }
@@ -54,5 +59,6 @@ LoginView.propTypes = {
   user: PropTypes.exact({
     username: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
+  onLoggedIn: PropTypes.func.isRequired,
 };

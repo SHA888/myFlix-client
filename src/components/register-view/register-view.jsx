@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import './register-view.scss';
 
-export function RegisterView() {
-  const handleRegistration = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
+export function RegisterView(props) {
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(email, username, password);
+    /* Send a request to the server for authentication */
+    /* then call props on registored user(username) */
+    props.onRegistration(username);
   };
 
   return (
-    <div className='register-form'>
+    <div className='registration-form'>
       <form>
         <label>
           Email:
@@ -37,7 +43,7 @@ export function RegisterView() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button type='button' onClick={handleRegistration()}>
+        <button type='button' onClick={handleSubmit}>
           Register
         </button>
       </form>
@@ -46,9 +52,5 @@ export function RegisterView() {
 }
 
 RegisterView.propTypes = {
-  user: PropTypes.exact({
-    email: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-  }).isRequired,
+  onRegistration: PropTypes.func.isRequired,
 };

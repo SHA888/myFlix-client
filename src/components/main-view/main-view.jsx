@@ -4,6 +4,7 @@ import axios from 'axios';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { RegisterView } from '../register-view/register-view';
 
 import './main-view.scss';
 
@@ -14,12 +15,13 @@ export class MainView extends React.Component {
       movies: [],
       selectedMovie: null,
       user: null,
+      isRegistered: false
     };
   }
 
+  // code executed right after the component is added to the DOM.
   componentDidMount() {
-    // code executed right after the component is added to the DOM.
-
+    
     axios
       .get('https://my-flix-93462.herokuapp.com/movies')
       .then((response) => {
@@ -44,8 +46,8 @@ export class MainView extends React.Component {
   When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*
   */
 
-  setSelectedMovie(movie) {
-    this.setState({ selectedMovie: movie });
+  setSelectedMovie(newSelectedMovie) {
+    this.setState({ selectedMovie: newSelectedMovie });
   }
 
   /*
@@ -85,8 +87,8 @@ export class MainView extends React.Component {
             <MovieCard
               key={movie._id}
               movie={movie}
-              onMovieClick={(newSelectedMovie) => {
-                this.setSelectedMovie(newSelectedMovie);
+              onMovieClick={(movie) => {
+                this.setSelectedMovie(movie);
               }}
             />
           ))
