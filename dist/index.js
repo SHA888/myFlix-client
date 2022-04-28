@@ -1050,15 +1050,10 @@ module.exports = require('./cjs/react-jsx-dev-runtime.development.js');
  */ 'use strict';
 (function() {
     var React = require('react');
-    // -----------------------------------------------------------------------------
-    var enableScopeAPI = false; // Experimental Create Event Handle API.
-    var enableCacheElement = false;
-    var enableTransitionTracing = false; // No known bugs, but needs performance testing
-    var enableLegacyHidden = false; // Enables unstable_avoidThisFallback feature in Fiber
-    // stuff. Intended to enable React core members to more easily debug scheduling
-    // issues in DEV builds.
-    var enableDebugTracing = false; // Track which Fiber(s) schedule render work.
     // ATTENTION
+    // When adding new symbols to this file,
+    // Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
+    // The Symbol used to tag the ReactElement-like types.
     var REACT_ELEMENT_TYPE = Symbol.for('react.element');
     var REACT_PORTAL_TYPE = Symbol.for('react.portal');
     var REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
@@ -1102,8 +1097,15 @@ module.exports = require('./cjs/react-jsx-dev-runtime.development.js');
         // eslint-disable-next-line react-internal/no-production-logging
         Function.prototype.apply.call(console[level], console, argsWithFormat);
     }
-    var REACT_MODULE_REFERENCE;
-    REACT_MODULE_REFERENCE = Symbol.for('react.module.reference');
+    // -----------------------------------------------------------------------------
+    var enableScopeAPI = false; // Experimental Create Event Handle API.
+    var enableCacheElement = false;
+    var enableTransitionTracing = false; // No known bugs, but needs performance testing
+    var enableLegacyHidden = false; // Enables unstable_avoidThisFallback feature in Fiber
+    // stuff. Intended to enable React core members to more easily debug scheduling
+    // issues in DEV builds.
+    var enableDebugTracing = false; // Track which Fiber(s) schedule render work.
+    var REACT_MODULE_REFERENCE = Symbol.for('react.module.reference');
     function isValidElementType(type) {
         if (typeof type === 'string' || typeof type === 'function') return true;
          // Note: typeof might be other than 'symbol' or 'number' (e.g. if it's a polyfill).
@@ -1879,16 +1881,11 @@ module.exports = require('./cjs/react.development.js');
  */ 'use strict';
 (function() {
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === 'function') __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
-    var ReactVersion = '18.1.0';
-    // -----------------------------------------------------------------------------
-    var enableScopeAPI = false; // Experimental Create Event Handle API.
-    var enableCacheElement = false;
-    var enableTransitionTracing = false; // No known bugs, but needs performance testing
-    var enableLegacyHidden = false; // Enables unstable_avoidThisFallback feature in Fiber
-    // stuff. Intended to enable React core members to more easily debug scheduling
-    // issues in DEV builds.
-    var enableDebugTracing = false; // Track which Fiber(s) schedule render work.
+    var ReactVersion = '18.0.0-fc46dba67-20220329';
     // ATTENTION
+    // When adding new symbols to this file,
+    // Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
+    // The Symbol used to tag the ReactElement-like types.
     var REACT_ELEMENT_TYPE = Symbol.for('react.element');
     var REACT_PORTAL_TYPE = Symbol.for('react.portal');
     var REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
@@ -1958,6 +1955,14 @@ module.exports = require('./cjs/react.development.js');
         if (impl) stack += impl() || '';
         return stack;
     };
+    // -----------------------------------------------------------------------------
+    var enableScopeAPI = false; // Experimental Create Event Handle API.
+    var enableCacheElement = false;
+    var enableTransitionTracing = false; // No known bugs, but needs performance testing
+    var enableLegacyHidden = false; // Enables unstable_avoidThisFallback feature in Fiber
+    // stuff. Intended to enable React core members to more easily debug scheduling
+    // issues in DEV builds.
+    var enableDebugTracing = false; // Track which Fiber(s) schedule render work.
     var ReactSharedInternals = {
         ReactCurrentDispatcher: ReactCurrentDispatcher,
         ReactCurrentBatchConfig: ReactCurrentBatchConfig,
@@ -2908,8 +2913,7 @@ module.exports = require('./cjs/react.development.js');
         });
         return elementType;
     }
-    var REACT_MODULE_REFERENCE;
-    REACT_MODULE_REFERENCE = Symbol.for('react.module.reference');
+    var REACT_MODULE_REFERENCE = Symbol.for('react.module.reference');
     function isValidElementType(type) {
         if (typeof type === 'string' || typeof type === 'function') return true;
          // Note: typeof might be other than 'symbol' or 'number' (e.g. if it's a polyfill).
@@ -3821,7 +3825,7 @@ module.exports = require('./cjs/react-dom.development.js');
     var CacheComponent = 24;
     var TracingMarkerComponent = 25;
     // -----------------------------------------------------------------------------
-    var enableClientRenderFallbackOnTextMismatch = true; // TODO: Need to review this code one more time before landing
+    var enableClientRenderFallbackOnTextMismatch = true; // Recoil still uses useMutableSource in www, need to delete
     // the react-reconciler package.
     var enableNewReconciler = false; // Support legacy Primer support on internal FB www
     var enableLazyContextPropagation = false; // FB-only usage. The new API has different semantics.
@@ -4411,6 +4415,9 @@ module.exports = require('./cjs/react-dom.development.js');
         }
     }
     // ATTENTION
+    // When adding new symbols to this file,
+    // Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
+    // The Symbol used to tag the ReactElement-like types.
     var REACT_ELEMENT_TYPE = Symbol.for('react.element');
     var REACT_PORTAL_TYPE = Symbol.for('react.portal');
     var REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
@@ -4849,12 +4856,9 @@ module.exports = require('./cjs/react-dom.development.js');
         isRendering = false;
     }
     function setCurrentFiber(fiber) {
-        ReactDebugCurrentFrame1.getCurrentStack = fiber === null ? null : getCurrentFiberStackInDev;
+        ReactDebugCurrentFrame1.getCurrentStack = getCurrentFiberStackInDev;
         current1 = fiber;
         isRendering = false;
-    }
-    function getCurrentFiber() {
-        return current1;
     }
     function setIsRendering(rendering) {
         isRendering = rendering;
@@ -7159,6 +7163,7 @@ module.exports = require('./cjs/react-dom.development.js');
     var PerformedWork = /*                */ 1; // You can change the rest (and add more).
     var Placement = /*                    */ 2;
     var Update = /*                       */ 4;
+    var PlacementAndUpdate = /*           */ Placement | Update;
     var ChildDeletion = /*                */ 16;
     var ContentReset = /*                 */ 32;
     var Callback = /*                     */ 64;
@@ -7168,6 +7173,7 @@ module.exports = require('./cjs/react-dom.development.js');
     var Snapshot = /*                     */ 1024;
     var Passive = /*                      */ 2048;
     var Hydrating = /*                    */ 4096;
+    var HydratingAndUpdate = /*           */ Hydrating | Update;
     var Visibility = /*                   */ 8192;
     var StoreConsistency = /*             */ 16384;
     var LifecycleEffectMask = Passive | Update | Callback | Ref | Snapshot | StoreConsistency; // Union of all commit flags (flags with the lifetime of a particular commit)
@@ -7629,9 +7635,9 @@ module.exports = require('./cjs/react-dom.development.js');
     var NoLane = /*                          */ 0;
     var SyncLane = /*                        */ 1;
     var InputContinuousHydrationLane = /*    */ 2;
-    var InputContinuousLane = /*             */ 4;
+    var InputContinuousLane = /*            */ 4;
     var DefaultHydrationLane = /*            */ 8;
-    var DefaultLane = /*                     */ 16;
+    var DefaultLane = /*                    */ 16;
     var TransitionHydrationLane = /*                */ 32;
     var TransitionLanes = /*                       */ 4194240;
     var TransitionLane1 = /*                        */ 64;
@@ -7658,9 +7664,9 @@ module.exports = require('./cjs/react-dom.development.js');
     var RetryLane5 = /*                             */ 67108864;
     var SomeRetryLane = RetryLane1;
     var SelectiveHydrationLane = /*          */ 134217728;
-    var NonIdleLanes = /*                          */ 268435455;
+    var NonIdleLanes = /*                                 */ 268435455;
     var IdleHydrationLane = /*               */ 268435456;
-    var IdleLane = /*                        */ 536870912;
+    var IdleLane = /*                       */ 536870912;
     var OffscreenLane = /*                   */ 1073741824; // This function is used for the experimental timeline (react-devtools-timeline)
     // It should be kept in sync with the Lanes values above.
     function getLabelForLane(lane) {
@@ -7922,10 +7928,6 @@ module.exports = require('./cjs/react-dom.development.js');
     function includesOnlyRetries(lanes) {
         return (lanes & RetryLanes) === lanes;
     }
-    function includesOnlyNonUrgentLanes(lanes) {
-        var UrgentLanes = SyncLane | InputContinuousLane | DefaultLane;
-        return (lanes & UrgentLanes) === NoLanes;
-    }
     function includesOnlyTransitions(lanes) {
         return (lanes & TransitionLanes) === lanes;
     }
@@ -7939,7 +7941,7 @@ module.exports = require('./cjs/react-dom.development.js');
         return (lanes & root.expiredLanes) !== NoLanes;
     }
     function isTransitionLane(lane) {
-        return (lane & TransitionLanes) !== NoLanes;
+        return (lane & TransitionLanes) !== 0;
     }
     function claimNextTransitionLane() {
         // Cycle through the lanes, assigning each new transition to the next lane.
@@ -7947,13 +7949,13 @@ module.exports = require('./cjs/react-dom.development.js');
         // run out of lanes and cycle back to the beginning.
         var lane = nextTransitionLane;
         nextTransitionLane <<= 1;
-        if ((nextTransitionLane & TransitionLanes) === NoLanes) nextTransitionLane = TransitionLane1;
+        if ((nextTransitionLane & TransitionLanes) === 0) nextTransitionLane = TransitionLane1;
         return lane;
     }
     function claimNextRetryLane() {
         var lane = nextRetryLane;
         nextRetryLane <<= 1;
-        if ((nextRetryLane & RetryLanes) === NoLanes) nextRetryLane = RetryLane1;
+        if ((nextRetryLane & RetryLanes) === 0) nextRetryLane = RetryLane1;
         return lane;
     }
     function getHighestPriorityLane(lanes) {
@@ -8042,8 +8044,8 @@ module.exports = require('./cjs/react-dom.development.js');
     function markRootFinished(root, remainingLanes) {
         var noLongerPendingLanes = root.pendingLanes & ~remainingLanes;
         root.pendingLanes = remainingLanes; // Let's try everything again
-        root.suspendedLanes = NoLanes;
-        root.pingedLanes = NoLanes;
+        root.suspendedLanes = 0;
+        root.pingedLanes = 0;
         root.expiredLanes &= remainingLanes;
         root.mutableReadLanes &= remainingLanes;
         root.entangledLanes &= remainingLanes;
@@ -8159,9 +8161,6 @@ module.exports = require('./cjs/react-dom.development.js');
             lanes &= ~lane;
         }
     }
-    function getTransitionsForLanes(root, lanes) {
-        return null;
-    }
     var DiscreteEventPriority = SyncLane;
     var ContinuousEventPriority = InputContinuousLane;
     var DefaultEventPriority = DefaultLane;
@@ -8238,7 +8237,7 @@ module.exports = require('./cjs/react-dom.development.js');
     var queuedPointers = new Map();
     var queuedPointerCaptures = new Map(); // We could consider replaying selectionchange and touchmoves too.
     var queuedExplicitHydrationTargets = [];
-    var discreteReplayableEvents = [
+    var synchronouslyHydratedEvents = [
         'mousedown',
         'mouseup',
         'touchcancel',
@@ -8269,7 +8268,7 @@ module.exports = require('./cjs/react-dom.development.js');
         'submit'
     ];
     function isDiscreteEventThatRequiresHydration(eventType) {
-        return discreteReplayableEvents.indexOf(eventType) > -1;
+        return synchronouslyHydratedEvents.indexOf(eventType) > -1;
     }
     function createQueuedReplayableEvent(blockedOn, domEventName, eventSystemFlags, targetContainer, nativeEvent) {
         return {
@@ -8281,7 +8280,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 targetContainer
             ]
         };
-    }
+    } // Resets the replaying for this type of continuous event to no event.
     function clearIfContinuousEvent(domEventName, nativeEvent) {
         switch(domEventName){
             case 'focusin':
@@ -8312,9 +8311,9 @@ module.exports = require('./cjs/react-dom.development.js');
         if (existingQueuedEvent === null || existingQueuedEvent.nativeEvent !== nativeEvent) {
             var queuedEvent = createQueuedReplayableEvent(blockedOn, domEventName, eventSystemFlags, targetContainer, nativeEvent);
             if (blockedOn !== null) {
-                var _fiber2 = getInstanceFromNode(blockedOn);
-                if (_fiber2 !== null) // Attempt to increase the priority of this target.
-                attemptContinuousHydration(_fiber2);
+                var _fiber = getInstanceFromNode(blockedOn);
+                if (_fiber !== null) // Attempt to increase the priority of this target.
+                attemptContinuousHydration(_fiber);
             }
             return queuedEvent;
         } // If we have already queued this exact event, then it's because
@@ -8420,8 +8419,8 @@ module.exports = require('./cjs/react-dom.development.js');
                 resetReplayingEvent();
             } else {
                 // We're still blocked. Try again later.
-                var _fiber3 = getInstanceFromNode(nextBlockedOn);
-                if (_fiber3 !== null) attemptContinuousHydration(_fiber3);
+                var _fiber2 = getInstanceFromNode(nextBlockedOn);
+                if (_fiber2 !== null) attemptContinuousHydration(_fiber2);
                 queuedEvent.blockedOn = nextBlockedOn;
                 return false;
             } // This target container was successfully dispatched. Try the next.
@@ -8433,7 +8432,7 @@ module.exports = require('./cjs/react-dom.development.js');
         if (attemptReplayContinuousQueuedEvent(queuedEvent)) map.delete(key);
     }
     function replayUnblockedEvents() {
-        hasScheduledReplayAttempt = false;
+        hasScheduledReplayAttempt = false; // Next replay any continuous events.
         if (queuedFocus !== null && attemptReplayContinuousQueuedEvent(queuedFocus)) queuedFocus = null;
         if (queuedDrag !== null && attemptReplayContinuousQueuedEvent(queuedDrag)) queuedDrag = null;
         if (queuedMouse !== null && attemptReplayContinuousQueuedEvent(queuedMouse)) queuedMouse = null;
@@ -8486,14 +8485,6 @@ module.exports = require('./cjs/react-dom.development.js');
         }
     }
     var ReactCurrentBatchConfig = ReactSharedInternals.ReactCurrentBatchConfig; // TODO: can we stop exporting these?
-    var _enabled = true; // This is exported in FB builds for use by legacy FB layer infra.
-    // We'd like to remove this but it's not clear if this is safe.
-    function setEnabled(enabled) {
-        _enabled = !!enabled;
-    }
-    function isEnabled() {
-        return _enabled;
-    }
     function createEventListenerWrapperWithPriority(targetContainer, domEventName, eventSystemFlags) {
         var eventPriority = getEventPriority(domEventName);
         var listenerWrapper;
@@ -8536,10 +8527,6 @@ module.exports = require('./cjs/react-dom.development.js');
         }
     }
     function dispatchEvent(domEventName, eventSystemFlags, targetContainer, nativeEvent) {
-        if (!_enabled) return;
-        dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay(domEventName, eventSystemFlags, targetContainer, nativeEvent);
-    }
-    function dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay(domEventName, eventSystemFlags, targetContainer, nativeEvent) {
         var blockedOn = findInstanceBlockingEvent(domEventName, eventSystemFlags, targetContainer, nativeEvent);
         if (blockedOn === null) {
             dispatchEventForPluginEventSystem(domEventName, eventSystemFlags, nativeEvent, return_targetInst, targetContainer);
@@ -10851,6 +10838,7 @@ module.exports = require('./cjs/react-dom.development.js');
     var STYLE = 'style';
     var HTML$1 = '__html';
     var warnedUnknownTags;
+    var suppressHydrationWarning;
     var validatePropertiesInDevelopment;
     var warnForPropDifference;
     var warnForExtraAttributes;
@@ -11294,6 +11282,7 @@ module.exports = require('./cjs/react-dom.development.js');
     function diffHydratedProperties(domElement, tag, rawProps, parentNamespace, rootContainerElement, isConcurrentMode, shouldWarnDev) {
         var isCustomComponentTag;
         var extraAttributeNames;
+        suppressHydrationWarning = rawProps[SUPPRESS_HYDRATION_WARNING] === true;
         isCustomComponentTag = isCustomComponent(tag, rawProps);
         validatePropertiesInDevelopment(tag, rawProps);
         switch(tag){
@@ -11387,7 +11376,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 // TODO: Should we use domElement.firstChild.nodeValue to compare?
                 if (typeof nextProp === 'string') {
                     if (domElement.textContent !== nextProp) {
-                        if (rawProps[SUPPRESS_HYDRATION_WARNING] !== true) checkForUnmatchedText(domElement.textContent, nextProp, isConcurrentMode, shouldWarnDev);
+                        if (!suppressHydrationWarning) checkForUnmatchedText(domElement.textContent, nextProp, isConcurrentMode, shouldWarnDev);
                         updatePayload = [
                             CHILDREN,
                             nextProp
@@ -11395,7 +11384,7 @@ module.exports = require('./cjs/react-dom.development.js');
                     }
                 } else if (typeof nextProp === 'number') {
                     if (domElement.textContent !== '' + nextProp) {
-                        if (rawProps[SUPPRESS_HYDRATION_WARNING] !== true) checkForUnmatchedText(domElement.textContent, nextProp, isConcurrentMode, shouldWarnDev);
+                        if (!suppressHydrationWarning) checkForUnmatchedText(domElement.textContent, nextProp, isConcurrentMode, shouldWarnDev);
                         updatePayload = [
                             CHILDREN,
                             '' + nextProp
@@ -11411,7 +11400,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 // Validate that the properties correspond to their expected values.
                 var serverValue = void 0;
                 var propertyInfo = isCustomComponentTag && enableCustomElementPropertySupport ? null : getPropertyInfo(propKey);
-                if (rawProps[SUPPRESS_HYDRATION_WARNING] === true) ;
+                if (suppressHydrationWarning) ;
                 else if (propKey === SUPPRESS_CONTENT_EDITABLE_WARNING || propKey === SUPPRESS_HYDRATION_WARNING || // TODO: Only ignore them on controlled tags.
                 propKey === 'value' || propKey === 'checked' || propKey === 'selected') ;
                 else if (propKey === DANGEROUSLY_SET_INNER_HTML) {
@@ -11465,8 +11454,9 @@ module.exports = require('./cjs/react-dom.development.js');
                 }
             }
         }
-        if (shouldWarnDev) {
-            if (extraAttributeNames.size > 0 && rawProps[SUPPRESS_HYDRATION_WARNING] !== true) // $FlowFixMe - Should be inferred as not undefined.
+        if (shouldWarnDev) // $FlowFixMe - Should be inferred as not undefined.
+        {
+            if (extraAttributeNames.size > 0 && !suppressHydrationWarning) // $FlowFixMe - Should be inferred as not undefined.
             warnForExtraAttributes(extraAttributeNames);
         }
         switch(tag){
@@ -11866,13 +11856,13 @@ module.exports = require('./cjs/react-dom.development.js');
             error1('validateDOMNesting(...): %s cannot appear as a child of <%s>.%s%s', tagDisplayName, ancestorTag, whitespaceInfo, info);
         } else error1("validateDOMNesting(...): %s cannot appear as a descendant of <%s>.", tagDisplayName, ancestorTag);
     };
-    var SUPPRESS_HYDRATION_WARNING$1 = 'suppressHydrationWarning';
+    var SUPPRESS_HYDRATION_WARNING$1;
+    SUPPRESS_HYDRATION_WARNING$1 = 'suppressHydrationWarning';
     var SUSPENSE_START_DATA = '$';
     var SUSPENSE_END_DATA = '/$';
     var SUSPENSE_PENDING_START_DATA = '$?';
     var SUSPENSE_FALLBACK_START_DATA = '$!';
     var STYLE$1 = 'style';
-    var eventsEnabled = null;
     var selectionInformation = null;
     function getRootHostContext(rootContainerInstance) {
         var type;
@@ -11912,16 +11902,12 @@ module.exports = require('./cjs/react-dom.development.js');
         return instance;
     }
     function prepareForCommit(containerInfo) {
-        eventsEnabled = isEnabled();
         selectionInformation = getSelectionInformation();
         var activeInstance = null;
-        setEnabled(false);
         return activeInstance;
     }
     function resetAfterCommit(containerInfo) {
         restoreSelection(selectionInformation);
-        setEnabled(eventsEnabled);
-        eventsEnabled = null;
         selectionInformation = null;
     }
     function createInstance(type, props, rootContainerInstance, hostContext, internalInstanceHandle) {
@@ -12257,8 +12243,8 @@ module.exports = require('./cjs/react-dom.development.js');
             else warnForDeletedHydratableText(parentNode, instance);
         }
     }
-    function didNotHydrateInstance(parentType, parentProps, parentInstance, instance, isConcurrentMode) {
-        if (isConcurrentMode || parentProps[SUPPRESS_HYDRATION_WARNING$1] !== true) {
+    function didNotHydrateInstance(parentType, parentProps, parentInstance, instance) {
+        if (parentProps[SUPPRESS_HYDRATION_WARNING$1] !== true) {
             if (instance.nodeType === ELEMENT_NODE) warnForDeletedHydratableElement(parentInstance, instance);
             else if (instance.nodeType === COMMENT_NODE) ;
             else warnForDeletedHydratableText(parentInstance, instance);
@@ -12280,11 +12266,14 @@ module.exports = require('./cjs/react-dom.development.js');
         var parentNode = parentInstance.parentNode;
         if (parentNode !== null) warnForInsertedHydratedText(parentNode, text);
     }
-    function didNotFindHydratableInstance(parentType, parentProps, parentInstance, type, props, isConcurrentMode) {
-        if (isConcurrentMode || parentProps[SUPPRESS_HYDRATION_WARNING$1] !== true) warnForInsertedHydratedElement(parentInstance, type);
+    function didNotFindHydratableInstance(parentType, parentProps, parentInstance, type, props) {
+        if (parentProps[SUPPRESS_HYDRATION_WARNING$1] !== true) warnForInsertedHydratedElement(parentInstance, type);
     }
-    function didNotFindHydratableTextInstance(parentType, parentProps, parentInstance, text, isConcurrentMode) {
-        if (isConcurrentMode || parentProps[SUPPRESS_HYDRATION_WARNING$1] !== true) warnForInsertedHydratedText(parentInstance, text);
+    function didNotFindHydratableTextInstance(parentType, parentProps, parentInstance, text) {
+        if (parentProps[SUPPRESS_HYDRATION_WARNING$1] !== true) warnForInsertedHydratedText(parentInstance, text);
+    }
+    function didNotFindHydratableSuspenseInstance(parentType, parentProps, parentInstance) {
+        parentProps[SUPPRESS_HYDRATION_WARNING$1];
     }
     function errorHydratingContainer(parentContainer) {
         // TODO: This gets logged by onRecoverableError, too, so we should be
@@ -13044,9 +13033,6 @@ module.exports = require('./cjs/react-dom.development.js');
             queue
         ];
         else interleavedQueues.push(queue);
-    }
-    function hasInterleavedUpdates() {
-        return interleavedQueues !== null;
     }
     function enqueueInterleavedUpdates() {
         // Transfer the interleaved updates onto the main queue. Each queue has a
@@ -14068,15 +14054,14 @@ module.exports = require('./cjs/react-dom.development.js');
     // This may have been an insertion or a hydration.
     var hydrationParentFiber = null;
     var nextHydratableInstance = null;
-    var isHydrating1 = false; // This flag allows for warning supression when we expect there to be mismatches
-    // due to earlier mismatches or a suspended fiber.
-    var didSuspendOrErrorDEV = false; // Hydration errors that were thrown inside this boundary
+    var isHydrating1 = false;
+    var didSuspend1 = false; // Hydration errors that were thrown inside this boundary
     var hydrationErrors = null;
     function warnIfHydrating() {
         if (isHydrating1) error1('We should not be hydrating here. This is a bug in React. Please file a bug.');
     }
-    function markDidThrowWhileHydratingDEV() {
-        didSuspendOrErrorDEV = true;
+    function markDidSuspendWhileHydratingDEV() {
+        didSuspend1 = true;
     }
     function enterHydrationState(fiber) {
         var parentInstance = fiber.stateNode.containerInfo;
@@ -14084,7 +14069,7 @@ module.exports = require('./cjs/react-dom.development.js');
         hydrationParentFiber = fiber;
         isHydrating1 = true;
         hydrationErrors = null;
-        didSuspendOrErrorDEV = false;
+        didSuspend1 = false;
         return true;
     }
     function reenterHydrationStateFromDehydratedSuspenseInstance(fiber, suspenseInstance, treeContext) {
@@ -14092,7 +14077,7 @@ module.exports = require('./cjs/react-dom.development.js');
         hydrationParentFiber = fiber;
         isHydrating1 = true;
         hydrationErrors = null;
-        didSuspendOrErrorDEV = false;
+        didSuspend1 = false;
         if (treeContext !== null) restoreSuspendedTreeContext(fiber, treeContext);
         return true;
     }
@@ -14102,8 +14087,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 didNotHydrateInstanceWithinContainer(returnFiber.stateNode.containerInfo, instance);
                 break;
             case HostComponent:
-                var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                didNotHydrateInstance(returnFiber.type, returnFiber.memoizedProps, returnFiber.stateNode, instance, isConcurrentMode);
+                didNotHydrateInstance(returnFiber.type, returnFiber.memoizedProps, returnFiber.stateNode, instance);
                 break;
             case SuspenseComponent:
                 var suspenseState = returnFiber.memoizedState;
@@ -14125,7 +14109,7 @@ module.exports = require('./cjs/react-dom.development.js');
         } else deletions.push(childToDelete);
     }
     function warnNonhydratedInstance(returnFiber, fiber) {
-        if (didSuspendOrErrorDEV) // Inside a boundary that already suspended. We're currently rendering the
+        if (didSuspend1) // Inside a boundary that already suspended. We're currently rendering the
         // siblings of a suspended node. The mismatch may be due to the missing
         // data, so it's probably a false positive.
         return;
@@ -14152,13 +14136,14 @@ module.exports = require('./cjs/react-dom.development.js');
                     case HostComponent:
                         var _type = fiber.type;
                         var _props = fiber.pendingProps;
-                        var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                        didNotFindHydratableInstance(parentType, parentProps, parentInstance, _type, _props, isConcurrentMode);
+                        didNotFindHydratableInstance(parentType, parentProps, parentInstance, _type);
                         break;
                     case HostText:
                         var _text = fiber.pendingProps;
-                        var _isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                        didNotFindHydratableTextInstance(parentType, parentProps, parentInstance, _text, _isConcurrentMode);
+                        didNotFindHydratableTextInstance(parentType, parentProps, parentInstance, _text);
+                        break;
+                    case SuspenseComponent:
+                        didNotFindHydratableSuspenseInstance(parentType, parentProps);
                         break;
                 }
                 break;
@@ -14277,7 +14262,7 @@ module.exports = require('./cjs/react-dom.development.js');
     }
     function prepareToHydrateHostInstance(fiber, rootContainerInstance, hostContext) {
         var instance = fiber.stateNode;
-        var shouldWarnIfMismatchDev = !didSuspendOrErrorDEV;
+        var shouldWarnIfMismatchDev = !didSuspend1;
         var updatePayload = hydrateInstance(instance, fiber.type, fiber.memoizedProps, rootContainerInstance, hostContext, fiber, shouldWarnIfMismatchDev); // TODO: Type this specific to this type of component.
         fiber.updateQueue = updatePayload; // If the update payload indicates that there is a change or if there
         // is a new ref we mark this as an update.
@@ -14292,19 +14277,20 @@ module.exports = require('./cjs/react-dom.development.js');
             // We assume that prepareToHydrateHostTextInstance is called in a context where the
             // hydration parent is the parent host component of this host text.
             var returnFiber = hydrationParentFiber;
-            if (returnFiber !== null) switch(returnFiber.tag){
-                case HostRoot:
-                    var parentContainer = returnFiber.stateNode.containerInfo;
-                    var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                    didNotMatchHydratedContainerTextInstance(parentContainer, textInstance, textContent, isConcurrentMode);
-                    break;
-                case HostComponent:
-                    var parentType = returnFiber.type;
-                    var parentProps = returnFiber.memoizedProps;
-                    var parentInstance = returnFiber.stateNode;
-                    var _isConcurrentMode2 = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                    didNotMatchHydratedTextInstance(parentType, parentProps, parentInstance, textInstance, textContent, _isConcurrentMode2);
-                    break;
+            if (returnFiber !== null) {
+                var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
+                switch(returnFiber.tag){
+                    case HostRoot:
+                        var parentContainer = returnFiber.stateNode.containerInfo;
+                        didNotMatchHydratedContainerTextInstance(parentContainer, textInstance, textContent, isConcurrentMode);
+                        break;
+                    case HostComponent:
+                        var parentType = returnFiber.type;
+                        var parentProps = returnFiber.memoizedProps;
+                        var parentInstance = returnFiber.stateNode;
+                        didNotMatchHydratedTextInstance(parentType, parentProps, parentInstance, textInstance, textContent, isConcurrentMode);
+                        break;
+                }
             }
         }
         return shouldUpdate;
@@ -14372,7 +14358,7 @@ module.exports = require('./cjs/react-dom.development.js');
         hydrationParentFiber = null;
         nextHydratableInstance = null;
         isHydrating1 = false;
-        didSuspendOrErrorDEV = false;
+        didSuspend1 = false;
     }
     function upgradeHydrationErrorsToRecoverable() {
         if (hydrationErrors !== null) {
@@ -16040,61 +16026,49 @@ module.exports = require('./cjs/react-dom.development.js');
         return nextValue;
     }
     function mountDeferredValue(value) {
-        var hook = mountWorkInProgressHook();
-        hook.memoizedState = value;
-        return value;
+        var _mountState = mountState(value), prevValue = _mountState[0], setValue = _mountState[1];
+        mountEffect(function() {
+            var prevTransition = ReactCurrentBatchConfig$2.transition;
+            ReactCurrentBatchConfig$2.transition = {};
+            try {
+                setValue(value);
+            } finally{
+                ReactCurrentBatchConfig$2.transition = prevTransition;
+            }
+        }, [
+            value
+        ]);
+        return prevValue;
     }
     function updateDeferredValue(value) {
-        var hook = updateWorkInProgressHook();
-        var resolvedCurrentHook = currentHook1;
-        var prevValue = resolvedCurrentHook.memoizedState;
-        return updateDeferredValueImpl(hook, prevValue, value);
+        var _updateState = updateState(), prevValue = _updateState[0], setValue = _updateState[1];
+        updateEffect(function() {
+            var prevTransition = ReactCurrentBatchConfig$2.transition;
+            ReactCurrentBatchConfig$2.transition = {};
+            try {
+                setValue(value);
+            } finally{
+                ReactCurrentBatchConfig$2.transition = prevTransition;
+            }
+        }, [
+            value
+        ]);
+        return prevValue;
     }
     function rerenderDeferredValue(value) {
-        var hook = updateWorkInProgressHook();
-        if (currentHook1 === null) {
-            // This is a rerender during a mount.
-            hook.memoizedState = value;
-            return value;
-        } else {
-            // This is a rerender during an update.
-            var prevValue = currentHook1.memoizedState;
-            return updateDeferredValueImpl(hook, prevValue, value);
-        }
-    }
-    function updateDeferredValueImpl(hook, prevValue, value) {
-        var shouldDeferValue = !includesOnlyNonUrgentLanes(renderLanes1);
-        if (shouldDeferValue) {
-            // This is an urgent update. If the value has changed, keep using the
-            // previous value and spawn a deferred render to update it later.
-            if (!objectIs(value, prevValue)) {
-                // Schedule a deferred render
-                var deferredLane = claimNextTransitionLane();
-                currentlyRenderingFiber$1.lanes = mergeLanes(currentlyRenderingFiber$1.lanes, deferredLane);
-                markSkippedUpdateLanes(deferredLane); // Set this to true to indicate that the rendered value is inconsistent
-                // from the latest value. The name "baseState" doesn't really match how we
-                // use it because we're reusing a state hook field instead of creating a
-                // new one.
-                hook.baseState = true;
-            } // Reuse the previous value
-            return prevValue;
-        } else {
-            // This is not an urgent update, so we can use the latest value regardless
-            // of what it is. No need to defer it.
-            // However, if we're currently inside a spawned render, then we need to mark
-            // this as an update to prevent the fiber from bailing out.
-            //
-            // `baseState` is true when the current value is different from the rendered
-            // value. The name doesn't really match how we use it because we're reusing
-            // a state hook field instead of creating a new one.
-            if (hook.baseState) {
-                // Flip this back to false.
-                hook.baseState = false;
-                markWorkInProgressReceivedUpdate();
+        var _rerenderState = rerenderState(), prevValue = _rerenderState[0], setValue = _rerenderState[1];
+        updateEffect(function() {
+            var prevTransition = ReactCurrentBatchConfig$2.transition;
+            ReactCurrentBatchConfig$2.transition = {};
+            try {
+                setValue(value);
+            } finally{
+                ReactCurrentBatchConfig$2.transition = prevTransition;
             }
-            hook.memoizedState = value;
-            return value;
-        }
+        }, [
+            value
+        ]);
+        return prevValue;
     }
     function startTransition(setPending, callback, options) {
         var previousPriority = getCurrentUpdatePriority();
@@ -16118,7 +16092,7 @@ module.exports = require('./cjs/react-dom.development.js');
         }
     }
     function mountTransition() {
-        var _mountState = mountState(false), isPending = _mountState[0], setPending = _mountState[1]; // The `start` method never changes.
+        var _mountState2 = mountState(false), isPending = _mountState2[0], setPending = _mountState2[1]; // The `start` method never changes.
         var start = startTransition.bind(null, setPending);
         var hook = mountWorkInProgressHook();
         hook.memoizedState = start;
@@ -16128,7 +16102,7 @@ module.exports = require('./cjs/react-dom.development.js');
         ];
     }
     function updateTransition() {
-        var _updateState = updateState(), isPending = _updateState[0];
+        var _updateState2 = updateState(), isPending = _updateState2[0];
         var hook = updateWorkInProgressHook();
         var start = hook.memoizedState;
         return [
@@ -16137,7 +16111,7 @@ module.exports = require('./cjs/react-dom.development.js');
         ];
     }
     function rerenderTransition() {
-        var _rerenderState = rerenderState(), isPending = _rerenderState[0];
+        var _rerenderState2 = rerenderState(), isPending = _rerenderState2[0];
         var hook = updateWorkInProgressHook();
         var start = hook.memoizedState;
         return [
@@ -17540,7 +17514,6 @@ module.exports = require('./cjs/react-dom.development.js');
             // This is a wakeable. The component suspended.
             var wakeable = value;
             resetSuspendedComponent(sourceFiber);
-            if (getIsHydrating() && sourceFiber.mode & ConcurrentMode) markDidThrowWhileHydratingDEV();
             var suspenseBoundary = getNearestSuspenseBoundaryToCapture(returnFiber);
             if (suspenseBoundary !== null) {
                 suspenseBoundary.flags &= ~ForceClientRender;
@@ -17572,7 +17545,7 @@ module.exports = require('./cjs/react-dom.development.js');
             }
         } else // This is a regular error, not a Suspense wakeable.
         if (getIsHydrating() && sourceFiber.mode & ConcurrentMode) {
-            markDidThrowWhileHydratingDEV();
+            markDidSuspendWhileHydratingDEV();
             var _suspenseBoundary = getNearestSuspenseBoundaryToCapture(returnFiber); // If the error was thrown during hydration, we may be able to recover by
             // discarding the dehydrated content and switching to a client render.
             // Instead of surfacing the error, find the nearest Suspense boundary
@@ -17999,8 +17972,7 @@ module.exports = require('./cjs/react-dom.development.js');
                     var _prevState = current.memoizedState;
                     prevDidTimeout = _prevState !== null;
                 }
-                // a passive effect, which is when we process the transitions
-                if (nextDidTimeout !== prevDidTimeout) // an effect to toggle the subtree's visibility. When we switch from
+                // an effect to toggle the subtree's visibility. When we switch from
                 // fallback -> primary, the inner Offscreen fiber schedules this effect
                 // as part of its normal complete phase. But when we switch from
                 // primary -> fallback, the inner Offscreen fiber does not have a complete
@@ -18010,28 +17982,26 @@ module.exports = require('./cjs/react-dom.development.js');
                 // logic applies: when re-connecting, the Offscreen fiber's complete
                 // phase will handle scheduling the effect. It's only when the fallback
                 // is active that we have to do anything special.
-                {
-                    if (nextDidTimeout) {
-                        var _offscreenFiber2 = workInProgress.child;
-                        _offscreenFiber2.flags |= Visibility; // TODO: This will still suspend a synchronous tree if anything
-                        // in the concurrent tree already suspended during this render.
-                        // This is a known bug.
-                        if ((workInProgress.mode & ConcurrentMode) !== NoMode) {
-                            // TODO: Move this back to throwException because this is too late
-                            // if this is a large tree which is common for initial loads. We
-                            // don't know if we should restart a render or not until we get
-                            // this marker, and this is too late.
-                            // If this render already had a ping or lower pri updates,
-                            // and this is the first time we know we're going to suspend we
-                            // should be able to immediately restart from within throwException.
-                            var hasInvisibleChildContext = current === null && (workInProgress.memoizedProps.unstable_avoidThisFallback !== true || !enableSuspenseAvoidThisFallback);
-                            if (hasInvisibleChildContext || hasSuspenseContext(suspenseStackCursor.current, InvisibleParentSuspenseContext)) // If this was in an invisible tree or a new render, then showing
-                            // this boundary is ok.
-                            renderDidSuspend();
-                            else // Otherwise, we're going to have to hide content so we should
-                            // suspend for longer if possible.
-                            renderDidSuspendDelayIfPossible();
-                        }
+                if (nextDidTimeout && !prevDidTimeout) {
+                    var _offscreenFiber = workInProgress.child;
+                    _offscreenFiber.flags |= Visibility; // TODO: This will still suspend a synchronous tree if anything
+                    // in the concurrent tree already suspended during this render.
+                    // This is a known bug.
+                    if ((workInProgress.mode & ConcurrentMode) !== NoMode) {
+                        // TODO: Move this back to throwException because this is too late
+                        // if this is a large tree which is common for initial loads. We
+                        // don't know if we should restart a render or not until we get
+                        // this marker, and this is too late.
+                        // If this render already had a ping or lower pri updates,
+                        // and this is the first time we know we're going to suspend we
+                        // should be able to immediately restart from within throwException.
+                        var hasInvisibleChildContext = current === null && (workInProgress.memoizedProps.unstable_avoidThisFallback !== true || !enableSuspenseAvoidThisFallback);
+                        if (hasInvisibleChildContext || hasSuspenseContext(suspenseStackCursor.current, InvisibleParentSuspenseContext)) // If this was in an invisible tree or a new render, then showing
+                        // this boundary is ok.
+                        renderDidSuspend();
+                        else // Otherwise, we're going to have to hide content so we should
+                        // suspend for longer if possible.
+                        renderDidSuspendDelayIfPossible();
                     }
                 }
                 var wakeables = workInProgress.updateQueue;
@@ -18401,22 +18371,7 @@ module.exports = require('./cjs/react-dom.development.js');
         if (current !== null) {
             var prevProps = current.memoizedProps;
             if (shallowEqual(prevProps, nextProps) && current.ref === workInProgress.ref && workInProgress.type === current.type) {
-                didReceiveUpdate = false; // The props are shallowly equal. Reuse the previous props object, like we
-                // would during a normal fiber bailout.
-                //
-                // We don't have strong guarantees that the props object is referentially
-                // equal during updates where we can't bail out anyway — like if the props
-                // are shallowly equal, but there's a local state or context update in the
-                // same batch.
-                //
-                // However, as a principle, we should aim to make the behavior consistent
-                // across different ways of memoizing a component. For example, React.memo
-                // has a different internal Fiber layout if you pass a normal function
-                // component (SimpleMemoComponent) versus if you pass a different type
-                // like forwardRef (MemoComponent). But this is an implementation detail.
-                // Wrapping a component in forwardRef (or React.lazy, etc) shouldn't
-                // affect whether the props object is reused during a bailout.
-                workInProgress.pendingProps = nextProps = prevProps;
+                didReceiveUpdate = false;
                 if (!checkScheduledUpdateOrContext(current, renderLanes)) {
                     // The pending lanes were cleared at the beginning of beginWork. We're
                     // about to bail out, but there might be other lanes that weren't
@@ -18448,11 +18403,9 @@ module.exports = require('./cjs/react-dom.development.js');
             // Rendering a hidden tree.
             if ((workInProgress.mode & ConcurrentMode) === NoMode) {
                 // In legacy sync mode, don't defer the subtree. Render it now.
-                // TODO: Consider how Offscreen should work with transitions in the future
                 var nextState = {
                     baseLanes: NoLanes,
-                    cachePool: null,
-                    transitions: null
+                    cachePool: null
                 };
                 workInProgress.memoizedState = nextState;
                 pushRenderLanes(workInProgress, renderLanes);
@@ -18468,8 +18421,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 workInProgress.lanes = workInProgress.childLanes = laneToLanes(OffscreenLane);
                 var _nextState = {
                     baseLanes: nextBaseLanes,
-                    cachePool: spawnedCachePool,
-                    transitions: null
+                    cachePool: spawnedCachePool
                 };
                 workInProgress.memoizedState = _nextState;
                 workInProgress.updateQueue = null;
@@ -18482,8 +18434,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 // Rendering at offscreen, so we can clear the base lanes.
                 var _nextState2 = {
                     baseLanes: NoLanes,
-                    cachePool: null,
-                    transitions: null
+                    cachePool: null
                 };
                 workInProgress.memoizedState = _nextState2; // Push the lanes that were skipped when we bailed out.
                 var subtreeRenderLanes = prevState !== null ? prevState.baseLanes : renderLanes;
@@ -18711,7 +18662,6 @@ module.exports = require('./cjs/react-dom.development.js');
                 element: nextChildren,
                 isDehydrated: false,
                 cache: nextState.cache,
-                pendingSuspenseBoundaries: nextState.pendingSuspenseBoundaries,
                 transitions: nextState.transitions
             };
             var updateQueue = workInProgress.updateQueue; // `baseState` can always be the last state because the root doesn't
@@ -18978,16 +18928,14 @@ module.exports = require('./cjs/react-dom.development.js');
     function mountSuspenseOffscreenState(renderLanes) {
         return {
             baseLanes: renderLanes,
-            cachePool: getSuspendedCache(),
-            transitions: null
+            cachePool: getSuspendedCache()
         };
     }
     function updateSuspenseOffscreenState(prevOffscreenState, renderLanes) {
         var cachePool = null;
         return {
             baseLanes: mergeLanes(prevOffscreenState.baseLanes, renderLanes),
-            cachePool: cachePool,
-            transitions: prevOffscreenState.transitions
+            cachePool: cachePool
         };
     } // TODO: Probably should inline this back
     function shouldRemainOnFallback(suspenseContext, current, workInProgress, renderLanes) {
@@ -19068,8 +19016,6 @@ module.exports = require('./cjs/react-dom.development.js');
             // a fallback.
             var prevState = current.memoizedState;
             if (prevState !== null) {
-                // The current tree is already showing a fallback
-                // Special path for hydration
                 var _dehydrated = prevState.dehydrated;
                 if (_dehydrated !== null) {
                     if (!didSuspend) return updateDehydratedSuspenseComponent(current, workInProgress, _dehydrated, prevState, renderLanes);
@@ -19121,7 +19067,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 var _primaryChildFragment5 = workInProgress.child;
                 var _prevOffscreenState = current.child.memoizedState;
                 _primaryChildFragment5.memoizedState = _prevOffscreenState === null ? mountSuspenseOffscreenState(renderLanes) : updateSuspenseOffscreenState(_prevOffscreenState, renderLanes);
-                _primaryChildFragment5.childLanes = getRemainingWorkInPrimaryTree(current, renderLanes);
+                _primaryChildFragment5.childLanes = getRemainingWorkInPrimaryTree(current, renderLanes); // Skip the primary children, and continue working on the
                 // fallback children.
                 workInProgress.memoizedState = SUSPENDED_MARKER;
                 return _fallbackChildFragment2;
@@ -19783,7 +19729,7 @@ module.exports = require('./cjs/react-dom.development.js');
                         workInProgress.flags |= DidCapture; // We should never render the children of a dehydrated boundary until we
                         // upgrade it. We return null instead of bailoutOnAlreadyFinishedWork.
                         return null;
-                    } // If this boundary is currently timed out, we need to decide
+                    }
                     // whether to retry the primary children, or to skip over it and
                     // go straight to the fallback. Check the priority of the primary
                     // child fragment.
@@ -19989,7 +19935,6 @@ module.exports = require('./cjs/react-dom.development.js');
                 }
                 return null;
             case HostRoot:
-                var root = workInProgress.stateNode;
                 popHostContainer(workInProgress);
                 popTopLevelContextObject(workInProgress);
                 resetWorkInProgressVersions();
@@ -20052,7 +19997,6 @@ module.exports = require('./cjs/react-dom.development.js');
                 if (childContextTypes !== null && childContextTypes !== undefined) popContext(interruptedWork);
                 break;
             case HostRoot:
-                var root = interruptedWork.stateNode;
                 popHostContainer(interruptedWork);
                 popTopLevelContextObject(interruptedWork);
                 resetWorkInProgressVersions();
@@ -20110,6 +20054,7 @@ module.exports = require('./cjs/react-dom.development.js');
         try {
             commitHookEffectListMount(Layout, current);
         } catch (error) {
+            reportUncaughtErrorInDEV(error);
             captureCommitPhaseError(current, nearestMountedAncestor, error);
         }
     } // Capture errors so they don't interrupt unmounting.
@@ -20117,6 +20062,7 @@ module.exports = require('./cjs/react-dom.development.js');
         try {
             callComponentWillUnmountWithTimer(current, instance);
         } catch (error) {
+            reportUncaughtErrorInDEV(error);
             captureCommitPhaseError(current, nearestMountedAncestor, error);
         }
     } // Capture errors so they don't interrupt mounting.
@@ -20124,6 +20070,7 @@ module.exports = require('./cjs/react-dom.development.js');
         try {
             instance.componentDidMount();
         } catch (error) {
+            reportUncaughtErrorInDEV(error);
             captureCommitPhaseError(current, nearestMountedAncestor, error);
         }
     } // Capture errors so they don't interrupt mounting.
@@ -20131,6 +20078,7 @@ module.exports = require('./cjs/react-dom.development.js');
         try {
             commitAttachRef(current);
         } catch (error) {
+            reportUncaughtErrorInDEV(error);
             captureCommitPhaseError(current, nearestMountedAncestor, error);
         }
     }
@@ -20148,6 +20096,7 @@ module.exports = require('./cjs/react-dom.development.js');
                     }
                     else retVal = ref(null);
                 } catch (error) {
+                    reportUncaughtErrorInDEV(error);
                     captureCommitPhaseError(current, nearestMountedAncestor, error);
                 }
                 if (typeof retVal === 'function') error1("Unexpected return value from a callback ref in %s. A callback ref should not return a function.", getComponentNameFromFiber(current));
@@ -20158,6 +20107,7 @@ module.exports = require('./cjs/react-dom.development.js');
         try {
             destroy();
         } catch (error) {
+            reportUncaughtErrorInDEV(error);
             captureCommitPhaseError(current, nearestMountedAncestor, error);
         }
     }
@@ -20177,7 +20127,7 @@ module.exports = require('./cjs/react-dom.development.js');
             var fiber = nextEffect; // This phase is only used for beforeActiveInstanceBlur.
             var child = fiber.child;
             if ((fiber.subtreeFlags & BeforeMutationMask) !== NoFlags && child !== null) {
-                child.return = fiber;
+                ensureCorrectReturnPointer(child, fiber);
                 nextEffect = child;
             } else commitBeforeMutationEffects_complete();
         }
@@ -20189,12 +20139,13 @@ module.exports = require('./cjs/react-dom.development.js');
             try {
                 commitBeforeMutationEffectsOnFiber(fiber);
             } catch (error) {
+                reportUncaughtErrorInDEV(error);
                 captureCommitPhaseError(fiber, fiber.return, error);
             }
             resetCurrentFiber();
             var sibling = fiber.sibling;
             if (sibling !== null) {
-                sibling.return = fiber.return;
+                ensureCorrectReturnPointer(sibling, fiber.return);
                 nextEffect = sibling;
                 return;
             }
@@ -20258,9 +20209,7 @@ module.exports = require('./cjs/react-dom.development.js');
                     if (destroy !== undefined) {
                         if ((flags & Passive$1) !== NoFlags$1) markComponentPassiveEffectUnmountStarted(finishedWork);
                         else if ((flags & Layout) !== NoFlags$1) markComponentLayoutEffectUnmountStarted(finishedWork);
-                        if ((flags & Insertion) !== NoFlags$1) setIsRunningInsertionEffect(true);
                         safelyCallDestroy(finishedWork, nearestMountedAncestor, destroy);
-                        if ((flags & Insertion) !== NoFlags$1) setIsRunningInsertionEffect(false);
                         if ((flags & Passive$1) !== NoFlags$1) markComponentPassiveEffectUnmountStopped();
                         else if ((flags & Layout) !== NoFlags$1) markComponentLayoutEffectUnmountStopped();
                     }
@@ -20280,9 +20229,7 @@ module.exports = require('./cjs/react-dom.development.js');
                     if ((flags & Passive$1) !== NoFlags$1) markComponentPassiveEffectMountStarted(finishedWork);
                     else if ((flags & Layout) !== NoFlags$1) markComponentLayoutEffectMountStarted(finishedWork);
                     var create = effect.create;
-                    if ((flags & Insertion) !== NoFlags$1) setIsRunningInsertionEffect(true);
                     effect.destroy = create();
-                    if ((flags & Insertion) !== NoFlags$1) setIsRunningInsertionEffect(false);
                     if ((flags & Passive$1) !== NoFlags$1) markComponentPassiveEffectMountStopped();
                     else if ((flags & Layout) !== NoFlags$1) markComponentLayoutEffectMountStopped();
                     var destroy = effect.destroy;
@@ -20507,21 +20454,15 @@ module.exports = require('./cjs/react-dom.development.js');
             if (node.tag === HostComponent) {
                 if (hostSubtreeRoot === null) {
                     hostSubtreeRoot = node;
-                    try {
-                        var instance = node.stateNode;
-                        if (isHidden) hideInstance(instance);
-                        else unhideInstance(node.stateNode, node.memoizedProps);
-                    } catch (error) {
-                        captureCommitPhaseError(finishedWork, finishedWork.return, error);
-                    }
+                    var instance = node.stateNode;
+                    if (isHidden) hideInstance(instance);
+                    else unhideInstance(node.stateNode, node.memoizedProps);
                 }
             } else if (node.tag === HostText) {
-                if (hostSubtreeRoot === null) try {
+                if (hostSubtreeRoot === null) {
                     var _instance3 = node.stateNode;
                     if (isHidden) hideTextInstance(_instance3);
                     else unhideTextInstance(_instance3, node.memoizedProps);
-                } catch (error) {
-                    captureCommitPhaseError(finishedWork, finishedWork.return, error);
                 }
             } else if ((node.tag === OffscreenComponent || node.tag === LegacyHiddenComponent) && node.memoizedState !== null && node !== finishedWork) ;
             else if (node.child !== null) {
@@ -20566,6 +20507,96 @@ module.exports = require('./cjs/react-dom.development.js');
                 if (!ref.hasOwnProperty('current')) error1("Unexpected ref object provided for %s. Use either a ref-setter function or React.createRef().", getComponentNameFromFiber(finishedWork));
                 ref.current = instanceToUse;
             }
+        }
+    }
+    function commitDetachRef(current) {
+        var currentRef = current.ref;
+        if (currentRef !== null) {
+            if (typeof currentRef === 'function') {
+                if (current.mode & ProfileMode) try {
+                    startLayoutEffectTimer();
+                    currentRef(null);
+                } finally{
+                    recordLayoutEffectDuration(current);
+                }
+                else currentRef(null);
+            } else currentRef.current = null;
+        }
+    } // User-originating errors (lifecycles and refs) should not interrupt
+    // deletion, so don't let them throw. Host-originating errors should
+    // interrupt deletion, so it's okay
+    function commitUnmount(finishedRoot, current, nearestMountedAncestor) {
+        onCommitUnmount(current);
+        switch(current.tag){
+            case FunctionComponent:
+            case ForwardRef:
+            case MemoComponent:
+            case SimpleMemoComponent:
+                var updateQueue = current.updateQueue;
+                if (updateQueue !== null) {
+                    var lastEffect = updateQueue.lastEffect;
+                    if (lastEffect !== null) {
+                        var firstEffect = lastEffect.next;
+                        var effect = firstEffect;
+                        do {
+                            var _effect = effect, destroy = _effect.destroy, tag = _effect.tag;
+                            if (destroy !== undefined) {
+                                if ((tag & Insertion) !== NoFlags$1) safelyCallDestroy(current, nearestMountedAncestor, destroy);
+                                else if ((tag & Layout) !== NoFlags$1) {
+                                    markComponentLayoutEffectUnmountStarted(current);
+                                    if (current.mode & ProfileMode) {
+                                        startLayoutEffectTimer();
+                                        safelyCallDestroy(current, nearestMountedAncestor, destroy);
+                                        recordLayoutEffectDuration(current);
+                                    } else safelyCallDestroy(current, nearestMountedAncestor, destroy);
+                                    markComponentLayoutEffectUnmountStopped();
+                                }
+                            }
+                            effect = effect.next;
+                        }while (effect !== firstEffect)
+                    }
+                }
+                return;
+            case ClassComponent:
+                safelyDetachRef(current, nearestMountedAncestor);
+                var instance = current.stateNode;
+                if (typeof instance.componentWillUnmount === 'function') safelyCallComponentWillUnmount(current, nearestMountedAncestor, instance);
+                return;
+            case HostComponent:
+                safelyDetachRef(current, nearestMountedAncestor);
+                return;
+            case HostPortal:
+                unmountHostComponents(finishedRoot, current, nearestMountedAncestor);
+                return;
+            case DehydratedFragment:
+                return;
+            case ScopeComponent:
+                return;
+        }
+    }
+    function commitNestedUnmounts(finishedRoot, root, nearestMountedAncestor) {
+        // While we're inside a removed host node we don't want to call
+        // removeChild on the inner nodes because they're removed by the top
+        // call anyway. We also want to call componentWillUnmount on all
+        // composites before this host node is removed from the tree. Therefore
+        // we do an inner loop while we're still inside the host node.
+        var node = root;
+        while(true){
+            commitUnmount(finishedRoot, node, nearestMountedAncestor); // Visit children because they may contain more composite or host nodes.
+            // Skip portals because commitUnmount() currently visits them recursively.
+            if (node.child !== null && // If we don't use mutation we drill down into portals here instead.
+            node.tag !== HostPortal) {
+                node.child.return = node;
+                node = node.child;
+                continue;
+            }
+            if (node === root) return;
+            while(node.sibling === null){
+                if (node.return === null || node.return === root) return;
+                node = node.return;
+            }
+            node.sibling.return = node.return;
+            node = node.sibling;
         }
     }
     function detachFiberMutation(fiber) {
@@ -20735,163 +20766,151 @@ module.exports = require('./cjs/react-dom.development.js');
                 }
             }
         }
-    } // These are tracked on the stack as we recursively traverse a
-    // deleted subtree.
-    // TODO: Update these during the whole mutation phase, not just during
-    // a deletion.
-    var hostParent = null;
-    var hostParentIsContainer = false;
-    function commitDeletionEffects(root, returnFiber, deletedFiber) {
+    }
+    function unmountHostComponents(finishedRoot, current, nearestMountedAncestor) {
         // We only have the top Fiber that was deleted but we need to recurse down its
         // children to find all the terminal nodes.
-        // Recursively delete all host nodes from the parent, detach refs, clean
-        // up mounted layout effects, and call componentWillUnmount.
-        // We only need to remove the topmost host child in each branch. But then we
-        // still need to keep traversing to unmount effects, refs, and cWU. TODO: We
-        // could split this into two separate traversals functions, where the second
-        // one doesn't include any removeChild logic. This is maybe the same
-        // function as "disappearLayoutEffects" (or whatever that turns into after
-        // the layout phase is refactored to use recursion).
-        // Before starting, find the nearest host parent on the stack so we know
-        // which instance/container to remove the children from.
-        // TODO: Instead of searching up the fiber return path on every deletion, we
-        // can track the nearest host component on the JS stack as we traverse the
-        // tree during the commit phase. This would make insertions faster, too.
-        var parent = returnFiber;
-        findParent: while(parent !== null){
-            switch(parent.tag){
-                case HostComponent:
-                    hostParent = parent.stateNode;
-                    hostParentIsContainer = false;
-                    break findParent;
-                case HostRoot:
-                    hostParent = parent.stateNode.containerInfo;
-                    hostParentIsContainer = true;
-                    break findParent;
-                case HostPortal:
-                    hostParent = parent.stateNode.containerInfo;
-                    hostParentIsContainer = true;
-                    break findParent;
+        var node = current; // Each iteration, currentParent is populated with node's host parent if not
+        // currentParentIsValid.
+        var currentParentIsValid = false; // Note: these two variables *must* always be updated together.
+        var currentParent;
+        var currentParentIsContainer;
+        while(true){
+            if (!currentParentIsValid) {
+                var parent = node.return;
+                findParent: while(true){
+                    if (parent === null) throw new Error("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue.");
+                    var parentStateNode = parent.stateNode;
+                    switch(parent.tag){
+                        case HostComponent:
+                            currentParent = parentStateNode;
+                            currentParentIsContainer = false;
+                            break findParent;
+                        case HostRoot:
+                            currentParent = parentStateNode.containerInfo;
+                            currentParentIsContainer = true;
+                            break findParent;
+                        case HostPortal:
+                            currentParent = parentStateNode.containerInfo;
+                            currentParentIsContainer = true;
+                            break findParent;
+                    }
+                    parent = parent.return;
+                }
+                currentParentIsValid = true;
             }
-            parent = parent.return;
-        }
-        if (hostParent === null) throw new Error("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue.");
-        commitDeletionEffectsOnFiber(root, returnFiber, deletedFiber);
-        hostParent = null;
-        hostParentIsContainer = false;
-        detachFiberMutation(deletedFiber);
-    }
-    function recursivelyTraverseDeletionEffects(finishedRoot, nearestMountedAncestor, parent) {
-        // TODO: Use a static flag to skip trees that don't have unmount effects
-        var child = parent.child;
-        while(child !== null){
-            commitDeletionEffectsOnFiber(finishedRoot, nearestMountedAncestor, child);
-            child = child.sibling;
-        }
-    }
-    function commitDeletionEffectsOnFiber(finishedRoot, nearestMountedAncestor, deletedFiber) {
-        onCommitUnmount(deletedFiber); // The cases in this outer switch modify the stack before they traverse
-        // into their subtree. There are simpler cases in the inner switch
-        // that don't modify the stack.
-        switch(deletedFiber.tag){
-            case HostComponent:
-                if (!offscreenSubtreeWasHidden) safelyDetachRef(deletedFiber, nearestMountedAncestor);
-                 // Intentional fallthrough to next branch
-            // eslint-disable-next-line-no-fallthrough
-            case HostText:
-                var prevHostParent = hostParent;
-                var prevHostParentIsContainer = hostParentIsContainer;
-                hostParent = null;
-                recursivelyTraverseDeletionEffects(finishedRoot, nearestMountedAncestor, deletedFiber);
-                hostParent = prevHostParent;
-                hostParentIsContainer = prevHostParentIsContainer;
-                if (hostParent !== null) {
-                    // Now that all the child effects have unmounted, we can remove the
-                    // node from the tree.
-                    if (hostParentIsContainer) removeChildFromContainer(hostParent, deletedFiber.stateNode);
-                    else removeChild(hostParent, deletedFiber.stateNode);
+            if (node.tag === HostComponent || node.tag === HostText) {
+                commitNestedUnmounts(finishedRoot, node, nearestMountedAncestor); // After all the children have unmounted, it is now safe to remove the
+                // node from the tree.
+                if (currentParentIsContainer) removeChildFromContainer(currentParent, node.stateNode);
+                else removeChild(currentParent, node.stateNode);
+                 // Don't visit children because we already visited them.
+            } else if (node.tag === DehydratedFragment) {
+                if (currentParentIsContainer) clearSuspenseBoundaryFromContainer(currentParent, node.stateNode);
+                else clearSuspenseBoundary(currentParent, node.stateNode);
+            } else if (node.tag === HostPortal) {
+                if (node.child !== null) {
+                    // When we go into a portal, it becomes the parent to remove from.
+                    // We will reassign it back when we pop the portal on the way up.
+                    currentParent = node.stateNode.containerInfo;
+                    currentParentIsContainer = true; // Visit children because portals might contain host components.
+                    node.child.return = node;
+                    node = node.child;
+                    continue;
                 }
-                return;
-            case DehydratedFragment:
-                if (hostParent !== null) {
-                    if (hostParentIsContainer) clearSuspenseBoundaryFromContainer(hostParent, deletedFiber.stateNode);
-                    else clearSuspenseBoundary(hostParent, deletedFiber.stateNode);
+            } else {
+                commitUnmount(finishedRoot, node, nearestMountedAncestor); // Visit children because we may find more host components below.
+                if (node.child !== null) {
+                    node.child.return = node;
+                    node = node.child;
+                    continue;
                 }
-                return;
-            case HostPortal:
-                // When we go into a portal, it becomes the parent to remove from.
-                var _prevHostParent = hostParent;
-                var _prevHostParentIsContainer = hostParentIsContainer;
-                hostParent = deletedFiber.stateNode.containerInfo;
-                hostParentIsContainer = true;
-                recursivelyTraverseDeletionEffects(finishedRoot, nearestMountedAncestor, deletedFiber);
-                hostParent = _prevHostParent;
-                hostParentIsContainer = _prevHostParentIsContainer;
-                return;
+            }
+            if (node === current) return;
+            while(node.sibling === null){
+                if (node.return === null || node.return === current) return;
+                node = node.return;
+                if (node.tag === HostPortal) // When we go out of the portal, we need to restore the parent.
+                // Since we don't keep a stack of them, we will search for it.
+                currentParentIsValid = false;
+            }
+            node.sibling.return = node.return;
+            node = node.sibling;
+        }
+    }
+    function commitDeletion(finishedRoot, current, nearestMountedAncestor) {
+        // Recursively delete all host nodes from the parent.
+        // Detach refs and call componentWillUnmount() on the whole subtree.
+        unmountHostComponents(finishedRoot, current, nearestMountedAncestor);
+        detachFiberMutation(current);
+    }
+    function commitWork(current, finishedWork) {
+        switch(finishedWork.tag){
             case FunctionComponent:
             case ForwardRef:
             case MemoComponent:
             case SimpleMemoComponent:
-                if (!offscreenSubtreeWasHidden) {
-                    var updateQueue = deletedFiber.updateQueue;
-                    if (updateQueue !== null) {
-                        var lastEffect = updateQueue.lastEffect;
-                        if (lastEffect !== null) {
-                            var firstEffect = lastEffect.next;
-                            var effect = firstEffect;
-                            do {
-                                var _effect = effect, destroy = _effect.destroy, tag = _effect.tag;
-                                if (destroy !== undefined) {
-                                    if ((tag & Insertion) !== NoFlags$1) safelyCallDestroy(deletedFiber, nearestMountedAncestor, destroy);
-                                    else if ((tag & Layout) !== NoFlags$1) {
-                                        markComponentLayoutEffectUnmountStarted(deletedFiber);
-                                        if (deletedFiber.mode & ProfileMode) {
-                                            startLayoutEffectTimer();
-                                            safelyCallDestroy(deletedFiber, nearestMountedAncestor, destroy);
-                                            recordLayoutEffectDuration(deletedFiber);
-                                        } else safelyCallDestroy(deletedFiber, nearestMountedAncestor, destroy);
-                                        markComponentLayoutEffectUnmountStopped();
-                                    }
-                                }
-                                effect = effect.next;
-                            }while (effect !== firstEffect)
-                        }
-                    }
+                commitHookEffectListUnmount(Insertion | HasEffect, finishedWork, finishedWork.return);
+                commitHookEffectListMount(Insertion | HasEffect, finishedWork); // Layout effects are destroyed during the mutation phase so that all
+                // destroy functions for all fibers are called before any create functions.
+                // This prevents sibling component effects from interfering with each other,
+                // e.g. a destroy function in one component should never override a ref set
+                // by a create function in another component during the same commit.
+                if (finishedWork.mode & ProfileMode) try {
+                    startLayoutEffectTimer();
+                    commitHookEffectListUnmount(Layout | HasEffect, finishedWork, finishedWork.return);
+                } finally{
+                    recordLayoutEffectDuration(finishedWork);
                 }
-                recursivelyTraverseDeletionEffects(finishedRoot, nearestMountedAncestor, deletedFiber);
+                else commitHookEffectListUnmount(Layout | HasEffect, finishedWork, finishedWork.return);
                 return;
             case ClassComponent:
-                if (!offscreenSubtreeWasHidden) {
-                    safelyDetachRef(deletedFiber, nearestMountedAncestor);
-                    var instance = deletedFiber.stateNode;
-                    if (typeof instance.componentWillUnmount === 'function') safelyCallComponentWillUnmount(deletedFiber, nearestMountedAncestor, instance);
+                return;
+            case HostComponent:
+                var instance = finishedWork.stateNode;
+                if (instance != null) {
+                    // Commit the work prepared earlier.
+                    var newProps = finishedWork.memoizedProps; // For hydration we reuse the update path but we treat the oldProps
+                    // as the newProps. The updatePayload will contain the real change in
+                    // this case.
+                    var oldProps = current !== null ? current.memoizedProps : newProps;
+                    var type = finishedWork.type; // TODO: Type the updateQueue to be specific to host components.
+                    var updatePayload = finishedWork.updateQueue;
+                    finishedWork.updateQueue = null;
+                    if (updatePayload !== null) commitUpdate(instance, updatePayload, type, oldProps, newProps);
                 }
-                recursivelyTraverseDeletionEffects(finishedRoot, nearestMountedAncestor, deletedFiber);
                 return;
-            case ScopeComponent:
-                recursivelyTraverseDeletionEffects(finishedRoot, nearestMountedAncestor, deletedFiber);
+            case HostText:
+                if (finishedWork.stateNode === null) throw new Error("This should have a text node initialized. This error is likely caused by a bug in React. Please file an issue.");
+                var textInstance = finishedWork.stateNode;
+                var newText = finishedWork.memoizedProps; // For hydration we reuse the update path but we treat the oldProps
+                // as the newProps. The updatePayload will contain the real change in
+                // this case.
+                var oldText = current !== null ? current.memoizedProps : newText;
+                commitTextUpdate(textInstance, oldText, newText);
                 return;
-            case OffscreenComponent:
-                if (deletedFiber.mode & ConcurrentMode) {
-                    // If this offscreen component is hidden, we already unmounted it. Before
-                    // deleting the children, track that it's already unmounted so that we
-                    // don't attempt to unmount the effects again.
-                    // TODO: If the tree is hidden, in most cases we should be able to skip
-                    // over the nested children entirely. An exception is we haven't yet found
-                    // the topmost host node to delete, which we already track on the stack.
-                    // But the other case is portals, which need to be detached no matter how
-                    // deeply they are nested. We should use a subtree flag to track whether a
-                    // subtree includes a nested portal.
-                    var prevOffscreenSubtreeWasHidden = offscreenSubtreeWasHidden;
-                    offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden || deletedFiber.memoizedState !== null;
-                    recursivelyTraverseDeletionEffects(finishedRoot, nearestMountedAncestor, deletedFiber);
-                    offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden;
-                } else recursivelyTraverseDeletionEffects(finishedRoot, nearestMountedAncestor, deletedFiber);
-                break;
-            default:
-                recursivelyTraverseDeletionEffects(finishedRoot, nearestMountedAncestor, deletedFiber);
+            case HostRoot:
+                if (current !== null) {
+                    var _prevRootState = current.memoizedState;
+                    if (_prevRootState.isDehydrated) {
+                        var _root = finishedWork.stateNode;
+                        commitHydratedContainer(_root.containerInfo);
+                    }
+                }
+                return;
+            case Profiler:
+                return;
+            case SuspenseComponent:
+                commitSuspenseCallback(finishedWork);
+                attachSuspenseRetryListeners(finishedWork);
+                return;
+            case SuspenseListComponent:
+                attachSuspenseRetryListeners(finishedWork);
+                return;
+            case IncompleteClassComponent:
                 return;
         }
+        throw new Error("This unit of work tag should not have side-effects. This error is likely caused by a bug in React. Please file an issue.");
     }
     function commitSuspenseCallback(finishedWork) {
         // TODO: Move this to passive phase
@@ -20934,243 +20953,137 @@ module.exports = require('./cjs/react-dom.development.js');
             });
         }
     } // This function detects when a Suspense boundary goes from visible to hidden.
-    function commitMutationEffects(root, finishedWork, committedLanes) {
+    function commitResetTextContent(current) {
+        resetTextContent(current.stateNode);
+    }
+    function commitMutationEffects(root, firstChild, committedLanes) {
         inProgressLanes = committedLanes;
         inProgressRoot = root;
-        setCurrentFiber(finishedWork);
-        commitMutationEffectsOnFiber(finishedWork, root);
-        setCurrentFiber(finishedWork);
+        nextEffect = firstChild;
+        commitMutationEffects_begin(root, committedLanes);
         inProgressLanes = null;
         inProgressRoot = null;
     }
-    function recursivelyTraverseMutationEffects(root, parentFiber, lanes) {
-        // Deletions effects can be scheduled on any fiber type. They need to happen
-        // before the children effects hae fired.
-        var deletions = parentFiber.deletions;
-        if (deletions !== null) for(var i = 0; i < deletions.length; i++){
-            var childToDelete = deletions[i];
+    function commitMutationEffects_begin(root, lanes) {
+        while(nextEffect !== null){
+            var fiber = nextEffect; // TODO: Should wrap this in flags check, too, as optimization
+            var deletions = fiber.deletions;
+            if (deletions !== null) for(var i = 0; i < deletions.length; i++){
+                var childToDelete = deletions[i];
+                try {
+                    commitDeletion(root, childToDelete, fiber);
+                } catch (error) {
+                    reportUncaughtErrorInDEV(error);
+                    captureCommitPhaseError(childToDelete, fiber, error);
+                }
+            }
+            var child = fiber.child;
+            if ((fiber.subtreeFlags & MutationMask) !== NoFlags && child !== null) {
+                ensureCorrectReturnPointer(child, fiber);
+                nextEffect = child;
+            } else commitMutationEffects_complete(root, lanes);
+        }
+    }
+    function commitMutationEffects_complete(root, lanes) {
+        while(nextEffect !== null){
+            var fiber = nextEffect;
+            setCurrentFiber(fiber);
             try {
-                commitDeletionEffects(root, parentFiber, childToDelete);
+                commitMutationEffectsOnFiber(fiber, root, lanes);
             } catch (error) {
-                captureCommitPhaseError(childToDelete, parentFiber, error);
+                reportUncaughtErrorInDEV(error);
+                captureCommitPhaseError(fiber, fiber.return, error);
             }
-        }
-        var prevDebugFiber = getCurrentFiber();
-        if (parentFiber.subtreeFlags & MutationMask) {
-            var child = parentFiber.child;
-            while(child !== null){
-                setCurrentFiber(child);
-                commitMutationEffectsOnFiber(child, root);
-                child = child.sibling;
+            resetCurrentFiber();
+            var sibling = fiber.sibling;
+            if (sibling !== null) {
+                ensureCorrectReturnPointer(sibling, fiber.return);
+                nextEffect = sibling;
+                return;
             }
+            nextEffect = fiber.return;
         }
-        setCurrentFiber(prevDebugFiber);
     }
     function commitMutationEffectsOnFiber(finishedWork, root, lanes) {
-        var current = finishedWork.alternate;
-        var flags = finishedWork.flags; // The effect flag should be checked *after* we refine the type of fiber,
-        // because the fiber tag is more specific. An exception is any flag related
-        // to reconcilation, because those can be set on all fiber types.
-        switch(finishedWork.tag){
-            case FunctionComponent:
-            case ForwardRef:
-            case MemoComponent:
-            case SimpleMemoComponent:
-                recursivelyTraverseMutationEffects(root, finishedWork);
-                commitReconciliationEffects(finishedWork);
-                if (flags & Update) {
-                    try {
-                        commitHookEffectListUnmount(Insertion | HasEffect, finishedWork, finishedWork.return);
-                        commitHookEffectListMount(Insertion | HasEffect, finishedWork);
-                    } catch (error) {
-                        captureCommitPhaseError(finishedWork, finishedWork.return, error);
-                    } // Layout effects are destroyed during the mutation phase so that all
-                    // destroy functions for all fibers are called before any create functions.
-                    // This prevents sibling component effects from interfering with each other,
-                    // e.g. a destroy function in one component should never override a ref set
-                    // by a create function in another component during the same commit.
-                    if (finishedWork.mode & ProfileMode) {
-                        try {
-                            startLayoutEffectTimer();
-                            commitHookEffectListUnmount(Layout | HasEffect, finishedWork, finishedWork.return);
-                        } catch (error) {
-                            captureCommitPhaseError(finishedWork, finishedWork.return, error);
-                        }
-                        recordLayoutEffectDuration(finishedWork);
-                    } else try {
-                        commitHookEffectListUnmount(Layout | HasEffect, finishedWork, finishedWork.return);
-                    } catch (error2) {
-                        captureCommitPhaseError(finishedWork, finishedWork.return, error2);
-                    }
-                }
-                return;
-            case ClassComponent:
-                recursivelyTraverseMutationEffects(root, finishedWork);
-                commitReconciliationEffects(finishedWork);
-                if (flags & Ref) {
-                    if (current !== null) safelyDetachRef(current, current.return);
-                }
-                return;
-            case HostComponent:
-                recursivelyTraverseMutationEffects(root, finishedWork);
-                commitReconciliationEffects(finishedWork);
-                if (flags & Ref) {
-                    if (current !== null) safelyDetachRef(current, current.return);
-                }
-                // TODO: ContentReset gets cleared by the children during the commit
-                // phase. This is a refactor hazard because it means we must read
-                // flags the flags after `commitReconciliationEffects` has already run;
-                // the order matters. We should refactor so that ContentReset does not
-                // rely on mutating the flag during commit. Like by setting a flag
-                // during the render phase instead.
-                if (finishedWork.flags & ContentReset) {
-                    var instance = finishedWork.stateNode;
-                    try {
-                        resetTextContent(instance);
-                    } catch (error) {
-                        captureCommitPhaseError(finishedWork, finishedWork.return, error);
-                    }
-                }
-                if (flags & Update) {
-                    var _instance4 = finishedWork.stateNode;
-                    if (_instance4 != null) {
-                        // Commit the work prepared earlier.
-                        var newProps = finishedWork.memoizedProps; // For hydration we reuse the update path but we treat the oldProps
-                        // as the newProps. The updatePayload will contain the real change in
-                        // this case.
-                        var oldProps = current !== null ? current.memoizedProps : newProps;
-                        var type = finishedWork.type; // TODO: Type the updateQueue to be specific to host components.
-                        var updatePayload = finishedWork.updateQueue;
-                        finishedWork.updateQueue = null;
-                        if (updatePayload !== null) try {
-                            commitUpdate(_instance4, updatePayload, type, oldProps, newProps, finishedWork);
-                        } catch (error) {
-                            captureCommitPhaseError(finishedWork, finishedWork.return, error);
-                        }
-                    }
-                }
-                return;
-            case HostText:
-                recursivelyTraverseMutationEffects(root, finishedWork);
-                commitReconciliationEffects(finishedWork);
-                if (flags & Update) {
-                    if (finishedWork.stateNode === null) throw new Error("This should have a text node initialized. This error is likely caused by a bug in React. Please file an issue.");
-                    var textInstance = finishedWork.stateNode;
-                    var newText = finishedWork.memoizedProps; // For hydration we reuse the update path but we treat the oldProps
-                    // as the newProps. The updatePayload will contain the real change in
-                    // this case.
-                    var oldText = current !== null ? current.memoizedProps : newText;
-                    try {
-                        commitTextUpdate(textInstance, oldText, newText);
-                    } catch (error) {
-                        captureCommitPhaseError(finishedWork, finishedWork.return, error);
-                    }
-                }
-                return;
-            case HostRoot:
-                recursivelyTraverseMutationEffects(root, finishedWork);
-                commitReconciliationEffects(finishedWork);
-                if (flags & Update) {
-                    if (current !== null) {
-                        var prevRootState = current.memoizedState;
-                        if (prevRootState.isDehydrated) try {
-                            commitHydratedContainer(root.containerInfo);
-                        } catch (error) {
-                            captureCommitPhaseError(finishedWork, finishedWork.return, error);
-                        }
-                    }
-                }
-                return;
-            case HostPortal:
-                recursivelyTraverseMutationEffects(root, finishedWork);
-                commitReconciliationEffects(finishedWork);
-                return;
+        // TODO: The factoring of this phase could probably be improved. Consider
+        // switching on the type of work before checking the flags. That's what
+        // we do in all the other phases. I think this one is only different
+        // because of the shared reconciliation logic below.
+        var flags = finishedWork.flags;
+        if (flags & ContentReset) commitResetTextContent(finishedWork);
+        if (flags & Ref) {
+            var current = finishedWork.alternate;
+            if (current !== null) commitDetachRef(current);
+        }
+        if (flags & Visibility) switch(finishedWork.tag){
             case SuspenseComponent:
-                recursivelyTraverseMutationEffects(root, finishedWork);
-                commitReconciliationEffects(finishedWork);
-                var offscreenFiber = finishedWork.child;
-                if (offscreenFiber.flags & Visibility) {
-                    var newState = offscreenFiber.memoizedState;
-                    var isHidden = newState !== null;
-                    if (isHidden) {
-                        var wasHidden = offscreenFiber.alternate !== null && offscreenFiber.alternate.memoizedState !== null;
-                        if (!wasHidden) // TODO: Move to passive phase
-                        markCommitTimeOfFallback();
-                    }
+                var newState = finishedWork.memoizedState;
+                var isHidden = newState !== null;
+                if (isHidden) {
+                    var _current = finishedWork.alternate;
+                    var wasHidden = _current !== null && _current.memoizedState !== null;
+                    if (!wasHidden) // TODO: Move to passive phase
+                    markCommitTimeOfFallback();
                 }
-                if (flags & Update) {
-                    try {
-                        commitSuspenseCallback(finishedWork);
-                    } catch (error) {
-                        captureCommitPhaseError(finishedWork, finishedWork.return, error);
-                    }
-                    attachSuspenseRetryListeners(finishedWork);
-                }
-                return;
+                break;
             case OffscreenComponent:
-                var _wasHidden = current !== null && current.memoizedState !== null;
-                if (finishedWork.mode & ConcurrentMode) {
-                    // Before committing the children, track on the stack whether this
-                    // offscreen subtree was already hidden, so that we don't unmount the
-                    // effects again.
-                    var prevOffscreenSubtreeWasHidden = offscreenSubtreeWasHidden;
-                    offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden || _wasHidden;
-                    recursivelyTraverseMutationEffects(root, finishedWork);
-                    offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden;
-                } else recursivelyTraverseMutationEffects(root, finishedWork);
-                commitReconciliationEffects(finishedWork);
-                if (flags & Visibility) {
-                    var _newState = finishedWork.memoizedState;
-                    var _isHidden = _newState !== null;
-                    var offscreenBoundary = finishedWork;
-                    // TODO: This needs to run whenever there's an insertion or update
-                    // inside a hidden Offscreen tree.
-                    hideOrUnhideAllChildren(offscreenBoundary, _isHidden);
-                    if (_isHidden) {
-                        if (!_wasHidden) {
-                            if ((offscreenBoundary.mode & ConcurrentMode) !== NoMode) {
-                                nextEffect = offscreenBoundary;
-                                var offscreenChild = offscreenBoundary.child;
-                                while(offscreenChild !== null){
-                                    nextEffect = offscreenChild;
-                                    disappearLayoutEffects_begin(offscreenChild);
-                                    offscreenChild = offscreenChild.sibling;
-                                }
+                var _newState = finishedWork.memoizedState;
+                var _isHidden = _newState !== null;
+                var _current2 = finishedWork.alternate;
+                var _wasHidden = _current2 !== null && _current2.memoizedState !== null;
+                var offscreenBoundary = finishedWork;
+                // TODO: This needs to run whenever there's an insertion or update
+                // inside a hidden Offscreen tree.
+                hideOrUnhideAllChildren(offscreenBoundary, _isHidden);
+                if (_isHidden) {
+                    if (!_wasHidden) {
+                        if ((offscreenBoundary.mode & ConcurrentMode) !== NoMode) {
+                            nextEffect = offscreenBoundary;
+                            var offscreenChild = offscreenBoundary.child;
+                            while(offscreenChild !== null){
+                                nextEffect = offscreenChild;
+                                disappearLayoutEffects_begin(offscreenChild);
+                                offscreenChild = offscreenChild.sibling;
                             }
                         }
                     }
                 }
-                return;
-            case SuspenseListComponent:
-                recursivelyTraverseMutationEffects(root, finishedWork);
-                commitReconciliationEffects(finishedWork);
-                if (flags & Update) attachSuspenseRetryListeners(finishedWork);
-                return;
-            case ScopeComponent:
-                return;
-            default:
-                recursivelyTraverseMutationEffects(root, finishedWork);
-                commitReconciliationEffects(finishedWork);
-                return;
+                break;
         }
-    }
-    function commitReconciliationEffects(finishedWork) {
-        // Placement effects (insertions, reorders) can be scheduled on any fiber
-        // type. They needs to happen after the children effects have fired, but
-        // before the effects on this fiber have fired.
-        var flags = finishedWork.flags;
-        if (flags & Placement) {
-            try {
-                commitPlacement(finishedWork);
-            } catch (error) {
-                captureCommitPhaseError(finishedWork, finishedWork.return, error);
-            } // Clear the "placement" from effect tag so that we know that this is
-            // inserted, before any life-cycles like componentDidMount gets called.
-            // TODO: findDOMNode doesn't rely on this any more but isMounted does
-            // and isMounted is deprecated anyway so we should be able to kill this.
-            finishedWork.flags &= ~Placement;
+         // The following switch statement is only concerned about placement,
+        // updates, and deletions. To avoid needing to add a case for every possible
+        // bitmap value, we remove the secondary effects from the effect tag and
+        // switch on that value.
+        var primaryFlags = flags & (Placement | Update | Hydrating);
+        switch(primaryFlags){
+            case Placement:
+                commitPlacement(finishedWork); // Clear the "placement" from effect tag so that we know that this is
+                // inserted, before any life-cycles like componentDidMount gets called.
+                // TODO: findDOMNode doesn't rely on this any more but isMounted does
+                // and isMounted is deprecated anyway so we should be able to kill this.
+                finishedWork.flags &= ~Placement;
+                break;
+            case PlacementAndUpdate:
+                // Placement
+                commitPlacement(finishedWork); // Clear the "placement" from effect tag so that we know that this is
+                // inserted, before any life-cycles like componentDidMount gets called.
+                finishedWork.flags &= ~Placement; // Update
+                var _current3 = finishedWork.alternate;
+                commitWork(_current3, finishedWork);
+                break;
+            case Hydrating:
+                finishedWork.flags &= ~Hydrating;
+                break;
+            case HydratingAndUpdate:
+                finishedWork.flags &= ~Hydrating; // Update
+                var _current4 = finishedWork.alternate;
+                commitWork(_current4, finishedWork);
+                break;
+            case Update:
+                var _current5 = finishedWork.alternate;
+                commitWork(_current5, finishedWork);
+                break;
         }
-        if (flags & Hydrating) finishedWork.flags &= ~Hydrating;
     }
     function commitLayoutEffects(finishedWork, root, committedLanes) {
         inProgressLanes = committedLanes;
@@ -21223,7 +21136,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 }
             }
             if ((fiber.subtreeFlags & LayoutMask) !== NoFlags && firstChild !== null) {
-                firstChild.return = fiber;
+                ensureCorrectReturnPointer(firstChild, fiber);
                 nextEffect = firstChild;
             } else commitLayoutMountEffects_complete(subtreeRoot, root, committedLanes);
         }
@@ -21237,6 +21150,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 try {
                     commitLayoutEffectOnFiber(root, current, fiber, committedLanes);
                 } catch (error) {
+                    reportUncaughtErrorInDEV(error);
                     captureCommitPhaseError(fiber, fiber.return, error);
                 }
                 resetCurrentFiber();
@@ -21247,7 +21161,7 @@ module.exports = require('./cjs/react-dom.development.js');
             }
             var sibling = fiber.sibling;
             if (sibling !== null) {
-                sibling.return = fiber.return;
+                ensureCorrectReturnPointer(sibling, fiber.return);
                 nextEffect = sibling;
                 return;
             }
@@ -21340,6 +21254,7 @@ module.exports = require('./cjs/react-dom.development.js');
             try {
                 reappearLayoutEffectsOnFiber(fiber);
             } catch (error) {
+                reportUncaughtErrorInDEV(error);
                 captureCommitPhaseError(fiber, fiber.return, error);
             }
             resetCurrentFiber();
@@ -21358,28 +21273,29 @@ module.exports = require('./cjs/react-dom.development.js');
             nextEffect = fiber.return;
         }
     }
-    function commitPassiveMountEffects(root, finishedWork, committedLanes, committedTransitions) {
+    function commitPassiveMountEffects(root, finishedWork) {
         nextEffect = finishedWork;
-        commitPassiveMountEffects_begin(finishedWork, root, committedLanes, committedTransitions);
+        commitPassiveMountEffects_begin(finishedWork, root);
     }
-    function commitPassiveMountEffects_begin(subtreeRoot, root, committedLanes, committedTransitions) {
+    function commitPassiveMountEffects_begin(subtreeRoot, root) {
         while(nextEffect !== null){
             var fiber = nextEffect;
             var firstChild = fiber.child;
             if ((fiber.subtreeFlags & PassiveMask) !== NoFlags && firstChild !== null) {
-                firstChild.return = fiber;
+                ensureCorrectReturnPointer(firstChild, fiber);
                 nextEffect = firstChild;
-            } else commitPassiveMountEffects_complete(subtreeRoot, root, committedLanes, committedTransitions);
+            } else commitPassiveMountEffects_complete(subtreeRoot, root);
         }
     }
-    function commitPassiveMountEffects_complete(subtreeRoot, root, committedLanes, committedTransitions) {
+    function commitPassiveMountEffects_complete(subtreeRoot, root) {
         while(nextEffect !== null){
             var fiber = nextEffect;
             if ((fiber.flags & Passive) !== NoFlags) {
                 setCurrentFiber(fiber);
                 try {
-                    commitPassiveMountOnFiber(root, fiber, committedLanes, committedTransitions);
+                    commitPassiveMountOnFiber(root, fiber);
                 } catch (error) {
+                    reportUncaughtErrorInDEV(error);
                     captureCommitPhaseError(fiber, fiber.return, error);
                 }
                 resetCurrentFiber();
@@ -21390,14 +21306,14 @@ module.exports = require('./cjs/react-dom.development.js');
             }
             var sibling = fiber.sibling;
             if (sibling !== null) {
-                sibling.return = fiber.return;
+                ensureCorrectReturnPointer(sibling, fiber.return);
                 nextEffect = sibling;
                 return;
             }
             nextEffect = fiber.return;
         }
     }
-    function commitPassiveMountOnFiber(finishedRoot, finishedWork, committedLanes, committedTransitions) {
+    function commitPassiveMountOnFiber(finishedRoot, finishedWork) {
         switch(finishedWork.tag){
             case FunctionComponent:
             case ForwardRef:
@@ -21456,7 +21372,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 }
             }
             if ((fiber.subtreeFlags & PassiveMask) !== NoFlags && child !== null) {
-                child.return = fiber;
+                ensureCorrectReturnPointer(child, fiber);
                 nextEffect = child;
             } else commitPassiveUnmountEffects_complete();
         }
@@ -21471,7 +21387,7 @@ module.exports = require('./cjs/react-dom.development.js');
             }
             var sibling = fiber.sibling;
             if (sibling !== null) {
-                sibling.return = fiber.return;
+                ensureCorrectReturnPointer(sibling, fiber.return);
                 nextEffect = sibling;
                 return;
             }
@@ -21501,7 +21417,7 @@ module.exports = require('./cjs/react-dom.development.js');
             var child = fiber.child; // TODO: Only traverse subtree if it has a PassiveStatic flag. (But, if we
             // do this, still need to handle `deletedTreeCleanUpLevel` correctly.)
             if (child !== null) {
-                child.return = fiber;
+                ensureCorrectReturnPointer(child, fiber);
                 nextEffect = child;
             } else commitPassiveUnmountEffectsInsideOfDeletedTree_complete(deletedSubtreeRoot);
         }
@@ -21520,7 +21436,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 return;
             }
             if (sibling !== null) {
-                sibling.return = returnFiber;
+                ensureCorrectReturnPointer(sibling, returnFiber);
                 nextEffect = sibling;
                 return;
             }
@@ -21539,6 +21455,15 @@ module.exports = require('./cjs/react-dom.development.js');
                 } else commitHookEffectListUnmount(Passive$1, current, nearestMountedAncestor);
                 break;
         }
+    }
+    var didWarnWrongReturnPointer = false;
+    function ensureCorrectReturnPointer(fiber, expectedReturnFiber) {
+        if (!didWarnWrongReturnPointer && fiber.return !== expectedReturnFiber) {
+            didWarnWrongReturnPointer = true;
+            error1("Internal React error: Return pointer is inconsistent with parent.");
+        }
+        // anything, by checking the warning logs for the above invariant
+        fiber.return = expectedReturnFiber;
     } // TODO: Reuse reappearLayoutEffects traversal here?
     function invokeLayoutEffectMountInDEV(fiber) {
         // We don't need to re-check StrictEffectsMode here.
@@ -21550,6 +21475,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 try {
                     commitHookEffectListMount(Layout | HasEffect, fiber);
                 } catch (error) {
+                    reportUncaughtErrorInDEV(error);
                     captureCommitPhaseError(fiber, fiber.return, error);
                 }
                 break;
@@ -21557,8 +21483,9 @@ module.exports = require('./cjs/react-dom.development.js');
                 var instance = fiber.stateNode;
                 try {
                     instance.componentDidMount();
-                } catch (error3) {
-                    captureCommitPhaseError(fiber, fiber.return, error3);
+                } catch (error2) {
+                    reportUncaughtErrorInDEV(error2);
+                    captureCommitPhaseError(fiber, fiber.return, error2);
                 }
                 break;
         }
@@ -21573,6 +21500,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 try {
                     commitHookEffectListMount(Passive$1 | HasEffect, fiber);
                 } catch (error) {
+                    reportUncaughtErrorInDEV(error);
                     captureCommitPhaseError(fiber, fiber.return, error);
                 }
                 break;
@@ -21588,6 +21516,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 try {
                     commitHookEffectListUnmount(Layout | HasEffect, fiber, fiber.return);
                 } catch (error) {
+                    reportUncaughtErrorInDEV(error);
                     captureCommitPhaseError(fiber, fiber.return, error);
                 }
                 break;
@@ -21607,6 +21536,7 @@ module.exports = require('./cjs/react-dom.development.js');
                 try {
                     commitHookEffectListUnmount(Passive$1 | HasEffect, fiber, fiber.return);
                 } catch (error) {
+                    reportUncaughtErrorInDEV(error);
                     captureCommitPhaseError(fiber, fiber.return, error);
                 }
         }
@@ -21692,7 +21622,6 @@ module.exports = require('./cjs/react-dom.development.js');
     var workInProgressRootRenderTargetTime = Infinity; // How long a render is supposed to take before we start following CPU
     // suspense heuristics and opt out of rendering more content.
     var RENDER_TIMEOUT_MS = 500;
-    var workInProgressTransitions = null;
     function resetRenderTimer() {
         workInProgressRootRenderTargetTime = now() + RENDER_TIMEOUT_MS;
     }
@@ -21706,20 +21635,15 @@ module.exports = require('./cjs/react-dom.development.js');
     var rootWithPendingPassiveEffects = null;
     var pendingPassiveEffectsLanes = NoLanes;
     var pendingPassiveProfilerEffects = [];
-    var pendingPassiveTransitions = null; // Use these to prevent an infinite loop of nested updates
     var NESTED_UPDATE_LIMIT = 50;
     var nestedUpdateCount = 0;
     var rootWithNestedUpdates = null;
-    var isFlushingPassiveEffects = false;
-    var didScheduleUpdateDuringPassiveEffects = false;
     var NESTED_PASSIVE_UPDATE_LIMIT = 50;
-    var nestedPassiveUpdateCount = 0;
-    var rootWithPassiveNestedUpdates = null; // If two updates are scheduled within the same event, we should treat their
+    var nestedPassiveUpdateCount = 0; // If two updates are scheduled within the same event, we should treat their
     // event times as simultaneous, even if the actual clock time has advanced
     // between the first and second call.
     var currentEventTime = NoTimestamp;
     var currentEventTransitionLane = NoLanes;
-    var isRunningInsertionEffect = false;
     function getWorkInProgressRoot() {
         return workInProgressRoot;
     }
@@ -21791,10 +21715,9 @@ module.exports = require('./cjs/react-dom.development.js');
     }
     function scheduleUpdateOnFiber(fiber, lane, eventTime) {
         checkForNestedUpdates();
-        if (isRunningInsertionEffect) error1('useInsertionEffect must not schedule updates.');
         var root = markUpdateLaneFromFiberToRoot(fiber, lane);
         if (root === null) return null;
-        if (isFlushingPassiveEffects) didScheduleUpdateDuringPassiveEffects = true;
+         // Mark that the root has a pending update.
         markRootUpdated(root, lane, eventTime);
         if ((executionContext & RenderContext) !== NoLanes && root === workInProgressRoot) // This update was dispatched during the render phase. This is a mistake
         // if the update originates from user space (with the exception of local
@@ -21876,11 +21799,7 @@ module.exports = require('./cjs/react-dom.development.js');
     function isInterleavedUpdate(fiber, lane) {
         return(// Requires some refactoring. Not a big deal though since it's rare for
         // concurrent apps to have more than a single root.
-        (workInProgressRoot !== null || // we should treat this as an interleaved update, too. This is also a
-        // defensive coding measure in case a new update comes in between when
-        // rendering has finished and when the interleaved updates are transferred
-        // to the main queue.
-        hasInterleavedUpdates()) && (fiber.mode & ConcurrentMode) !== NoMode && // then don't treat this as an interleaved update. This pattern is
+        workInProgressRoot !== null && (fiber.mode & ConcurrentMode) !== NoMode && // then don't treat this as an interleaved update. This pattern is
         // accompanied by a warning but we haven't fully deprecated it yet. We can
         // remove once the deferRenderPhaseUpdateToNextBatch flag is enabled.
         (executionContext & RenderContext) === NoContext);
@@ -22110,7 +22029,7 @@ module.exports = require('./cjs/react-dom.development.js');
             case RootErrored:
                 // We should have already attempted to retry this tree. If we reached
                 // this point, it errored again. Commit it.
-                commitRoot(root, workInProgressRootRecoverableErrors, workInProgressTransitions);
+                commitRoot(root, workInProgressRootRecoverableErrors);
                 break;
             case RootSuspended:
                 markRootSuspended$1(root, lanes); // We have an acceptable loading state. We need to figure out if we
@@ -22134,11 +22053,11 @@ module.exports = require('./cjs/react-dom.development.js');
                         } // The render is suspended, it hasn't timed out, and there's no
                         // lower priority work to do. Instead of committing the fallback
                         // immediately, wait for more data to arrive.
-                        root.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root, workInProgressRootRecoverableErrors, workInProgressTransitions), msUntilTimeout);
+                        root.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root, workInProgressRootRecoverableErrors), msUntilTimeout);
                         break;
                     }
                 } // The work expired. Commit immediately.
-                commitRoot(root, workInProgressRootRecoverableErrors, workInProgressTransitions);
+                commitRoot(root, workInProgressRootRecoverableErrors);
                 break;
             case RootSuspendedWithDelay:
                 markRootSuspended$1(root, lanes);
@@ -22157,15 +22076,15 @@ module.exports = require('./cjs/react-dom.development.js');
                     if (_msUntilTimeout > 10) {
                         // Instead of committing the fallback immediately, wait for more data
                         // to arrive.
-                        root.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root, workInProgressRootRecoverableErrors, workInProgressTransitions), _msUntilTimeout);
+                        root.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root, workInProgressRootRecoverableErrors), _msUntilTimeout);
                         break;
                     }
                 } // Commit the placeholder.
-                commitRoot(root, workInProgressRootRecoverableErrors, workInProgressTransitions);
+                commitRoot(root, workInProgressRootRecoverableErrors);
                 break;
             case RootCompleted:
                 // The work completed. Ready to commit.
-                commitRoot(root, workInProgressRootRecoverableErrors, workInProgressTransitions);
+                commitRoot(root, workInProgressRootRecoverableErrors);
                 break;
             default:
                 throw new Error('Unknown root exit status.');
@@ -22258,7 +22177,7 @@ module.exports = require('./cjs/react-dom.development.js');
         var finishedWork = root.current.alternate;
         root.finishedWork = finishedWork;
         root.finishedLanes = lanes;
-        commitRoot(root, workInProgressRootRecoverableErrors, workInProgressTransitions); // Before exiting, make sure there's a callback scheduled for the next
+        commitRoot(root, workInProgressRootRecoverableErrors); // Before exiting, make sure there's a callback scheduled for the next
         // pending level.
         ensureRootIsScheduled(root, now());
         return null;
@@ -22487,7 +22406,6 @@ module.exports = require('./cjs/react-dom.development.js');
                 // That way we can keep the current update and future updates separate.
                 movePendingFibersToMemoized(root, lanes);
             }
-            workInProgressTransitions = getTransitionsForLanes();
             prepareFreshStack(root, lanes);
         }
         markRenderStarted(lanes);
@@ -22528,7 +22446,6 @@ module.exports = require('./cjs/react-dom.development.js');
                 // That way we can keep the current update and future updates separate.
                 movePendingFibersToMemoized(root, lanes);
             }
-            workInProgressTransitions = getTransitionsForLanes();
             resetRenderTimer();
             prepareFreshStack(root, lanes);
         }
@@ -22648,7 +22565,7 @@ module.exports = require('./cjs/react-dom.development.js');
         }while (completedWork !== null) // We've reached the root.
         if (workInProgressRootExitStatus === RootInProgress) workInProgressRootExitStatus = RootCompleted;
     }
-    function commitRoot(root, recoverableErrors, transitions) {
+    function commitRoot(root, recoverableErrors) {
         // TODO: This no longer makes any sense. We already wrap the mutation and
         // layout phases. Should be able to remove.
         var previousUpdateLanePriority = getCurrentUpdatePriority();
@@ -22656,14 +22573,14 @@ module.exports = require('./cjs/react-dom.development.js');
         try {
             ReactCurrentBatchConfig$3.transition = null;
             setCurrentUpdatePriority(DiscreteEventPriority);
-            commitRootImpl(root, recoverableErrors, transitions, previousUpdateLanePriority);
+            commitRootImpl(root, recoverableErrors, previousUpdateLanePriority);
         } finally{
             ReactCurrentBatchConfig$3.transition = prevTransition;
             setCurrentUpdatePriority(previousUpdateLanePriority);
         }
         return null;
     }
-    function commitRootImpl(root, recoverableErrors, transitions, renderPriorityLevel) {
+    function commitRootImpl(root, recoverableErrors, renderPriorityLevel) {
         do // `flushPassiveEffects` will call `flushSyncUpdateQueue` at the end, which
         // means `flushPassiveEffects` will sometimes result in additional
         // passive effects. So we need to keep flushing in a loop until there are
@@ -22704,12 +22621,6 @@ module.exports = require('./cjs/react-dom.development.js');
         if ((finishedWork.subtreeFlags & PassiveMask) !== NoFlags || (finishedWork.flags & PassiveMask) !== NoFlags) {
             if (!rootDoesHavePassiveEffects) {
                 rootDoesHavePassiveEffects = true;
-                // to store it in pendingPassiveTransitions until they get processed
-                // We need to pass this through as an argument to commitRoot
-                // because workInProgressTransitions might have changed between
-                // the previous render and commit if we throttle the commit
-                // with setTimeout
-                pendingPassiveTransitions = transitions;
                 scheduleCallback$1(NormalPriority, function() {
                     flushPassiveEffects(); // This render triggered passive effects: release the root cache pool
                     // *after* passive effects fire to avoid freeing a cache pool that may
@@ -22767,9 +22678,6 @@ module.exports = require('./cjs/react-dom.development.js');
             rootDoesHavePassiveEffects = false;
             rootWithPendingPassiveEffects = root;
             pendingPassiveEffectsLanes = lanes;
-        } else {
-            nestedPassiveUpdateCount = 0;
-            rootWithPassiveNestedUpdates = null;
         } // Read this again, since an effect might have updated it
         remainingLanes = root.pendingLanes; // Check if there's remaining work on this root
         // TODO: This is part of the `componentDidCatch` implementation. Its purpose
@@ -22864,9 +22772,6 @@ module.exports = require('./cjs/react-dom.development.js');
     }
     function flushPassiveEffectsImpl() {
         if (rootWithPendingPassiveEffects === null) return false;
-         // Cache and clear the transitions flag
-        var transitions = pendingPassiveTransitions;
-        pendingPassiveTransitions = null;
         var root = rootWithPendingPassiveEffects;
         var lanes = pendingPassiveEffectsLanes;
         rootWithPendingPassiveEffects = null; // TODO: This is sometimes out of sync with rootWithPendingPassiveEffects.
@@ -22874,13 +22779,11 @@ module.exports = require('./cjs/react-dom.development.js');
         // because it's only used for profiling), but it's a refactor hazard.
         pendingPassiveEffectsLanes = NoLanes;
         if ((executionContext & (RenderContext | CommitContext)) !== NoContext) throw new Error('Cannot flush passive effects while already rendering.');
-        isFlushingPassiveEffects = true;
-        didScheduleUpdateDuringPassiveEffects = false;
         markPassiveEffectsStarted(lanes);
         var prevExecutionContext = executionContext;
         executionContext |= CommitContext;
         commitPassiveUnmountEffects(root.current);
-        commitPassiveMountEffects(root, root.current, lanes, transitions); // TODO: Move to commitPassiveMountEffects
+        commitPassiveMountEffects(root, root.current); // TODO: Move to commitPassiveMountEffects
         var profilerEffects = pendingPassiveProfilerEffects;
         pendingPassiveProfilerEffects = [];
         for(var i = 0; i < profilerEffects.length; i++){
@@ -22890,18 +22793,9 @@ module.exports = require('./cjs/react-dom.development.js');
         markPassiveEffectsStopped();
         commitDoubleInvokeEffectsInDEV(root.current, true);
         executionContext = prevExecutionContext;
-        flushSyncCallbacks();
-        // If additional passive effects were scheduled, increment a counter. If this
+        flushSyncCallbacks(); // If additional passive effects were scheduled, increment a counter. If this
         // exceeds the limit, we'll fire a warning.
-        if (didScheduleUpdateDuringPassiveEffects) {
-            if (root === rootWithPassiveNestedUpdates) nestedPassiveUpdateCount++;
-            else {
-                nestedPassiveUpdateCount = 0;
-                rootWithPassiveNestedUpdates = root;
-            }
-        } else nestedPassiveUpdateCount = 0;
-        isFlushingPassiveEffects = false;
-        didScheduleUpdateDuringPassiveEffects = false;
+        nestedPassiveUpdateCount = rootWithPendingPassiveEffects === null ? 0 : nestedPassiveUpdateCount + 1; // TODO: Move to commitPassiveMountEffects
         onPostCommitRoot(root);
         var stateNode = root.current.stateNode;
         stateNode.effectDuration = 0;
@@ -22936,8 +22830,6 @@ module.exports = require('./cjs/react-dom.development.js');
         }
     }
     function captureCommitPhaseError(sourceFiber, nearestMountedAncestor, error$1) {
-        reportUncaughtErrorInDEV(error$1);
-        setIsRunningInsertionEffect(false);
         if (sourceFiber.tag === HostRoot) {
             // Error was thrown at the root. There is no parent, so the root
             // itself should capture it.
@@ -23060,7 +22952,6 @@ module.exports = require('./cjs/react-dom.development.js');
         }
         if (nestedPassiveUpdateCount > NESTED_PASSIVE_UPDATE_LIMIT) {
             nestedPassiveUpdateCount = 0;
-            rootWithPassiveNestedUpdates = null;
             error1("Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.");
         }
     }
@@ -23236,9 +23127,6 @@ module.exports = require('./cjs/react-dom.development.js');
     }
     function warnIfSuspenseResolutionNotWrappedWithActDEV(root) {
         if (root.tag !== LegacyRoot && isConcurrentActEnvironment() && ReactCurrentActQueue$1.current === null) error1("A suspended resource finished loading inside a test, but the event was not wrapped in act(...).\n\nWhen testing, code that resolves suspended data should be wrapped into act(...):\n\nact(() => {\n  /* finish loading suspended data */\n});\n/* assert on the output */\n\nThis ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act");
-    }
-    function setIsRunningInsertionEffect(isRunning) {
-        isRunningInsertionEffect = isRunning;
     }
     /* eslint-disable react-internal/prod-error-codes */ var resolveFamily = null; // $FlowFixMe Flow gets confused by a WeakSet feature check below.
     var failedBoundaries = null;
@@ -23934,14 +23822,13 @@ module.exports = require('./cjs/react-dom.development.js');
             isDehydrated: hydrate,
             cache: null,
             // not enabled yet
-            transitions: null,
-            pendingSuspenseBoundaries: null
+            transitions: null
         };
         uninitializedFiber.memoizedState = _initialState;
         initializeUpdateQueue(uninitializedFiber);
         return root;
     }
-    var ReactVersion = '18.1.0';
+    var ReactVersion = '18.0.0-fc46dba67-20220329';
     function createPortal(children, containerInfo, implementation) {
         var key = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
         checkKeyStringCoercion(key);
@@ -24580,11 +24467,11 @@ module.exports = require('./cjs/react-dom.development.js');
         ]
     };
     function createRoot$1(container, options) {
-        if (!Internals.usingClientEntryPoint && true) error1('You are importing createRoot from "react-dom" which is not supported. You should instead import it from "react-dom/client".');
+        if (!Internals.usingClientEntryPoint) error1('You are importing createRoot from "react-dom" which is not supported. You should instead import it from "react-dom/client".');
         return createRoot(container, options);
     }
     function hydrateRoot$1(container, initialChildren, options) {
-        if (!Internals.usingClientEntryPoint && true) error1('You are importing hydrateRoot from "react-dom" which is not supported. You should instead import it from "react-dom/client".');
+        if (!Internals.usingClientEntryPoint) error1('You are importing hydrateRoot from "react-dom" which is not supported. You should instead import it from "react-dom/client".');
         return hydrateRoot(container, initialChildren, options);
     } // Overload the definition to the two valid signatures.
     // Warning, this opts-out of checking the function body.
@@ -25095,68 +24982,28 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-var _loginView = require("../login-view/login-view");
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
-var _registerView = require("../register-view/register-view");
-var _mainViewScss = require("./main-view.scss");
 class MainView extends _reactDefault.default.Component {
     constructor(){
         super();
         this.state = {
             movies: [],
-            selectedMovie: null,
-            user: null,
-            isRegistered: false
+            selectedMovie: null
         };
     }
-    // code executed right after the component is added to the DOM.
-    componentDidMount() {
-        _axiosDefault.default.get('https://my-flix-93462.herokuapp.com/movies').then((response)=>{
-            this.setState({
-                movies: response.data
-            });
-        }).catch((error)=>{
-            console.error(error);
-        });
-    }
-    componentDidUpdate() {
-    // code executed right after component's state or props are changed.
-    }
-    componentWillUnmount() {
-    // code executed just before the moment the component gets removed from the DOM.
-    }
-    /* 
-  When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*
-  */ setSelectedMovie(newSelectedMovie) {
+    setSelectedMovie(newSelectedMovie) {
         this.setState({
             selectedMovie: newSelectedMovie
         });
     }
-    /*
-  When a user successfully logs in, this function updates the `user` property in state to that *particular user*
-  */ onLoggedIn(user) {
-        this.setState({
-            user
-        });
-    }
     render() {
-        let { movies , selectedMovie , user: user1  } = this.state;
-        /*
-    If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*
-    */ if (!user1) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_loginView.LoginView, {
-            onLoggedIn: (user)=>this.onLoggedIn(user)
-        }, void 0, false, {
-            fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 68,
-            columnNumber: 14
-        }, this);
-        // Before the movies have been loaded
+        let { movies , selectedMovie  } = this.state;
         if (movies.length === 0) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
             className: "main-view"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 71,
+            lineNumber: 23,
             columnNumber: 37
         }, this);
         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -25168,7 +25015,7 @@ class MainView extends _reactDefault.default.Component {
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 79,
+                lineNumber: 28,
                 columnNumber: 11
             }, this) : movies.map((movie1)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieCard.MovieCard, {
                     movie: movie1,
@@ -25177,15 +25024,28 @@ class MainView extends _reactDefault.default.Component {
                     }
                 }, movie1._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 87,
+                    lineNumber: 36,
                     columnNumber: 13
                 }, this)
             )
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 74,
+            lineNumber: 26,
             columnNumber: 7
         }, this);
+    }
+    componentDidMount() {
+        // code executed right after the component is added to the DOM.
+        _axiosDefault.default.get('https://my-flix-93462.herokuapp.com/movies').then((response)=>{
+            this.setState({
+                movies: response.data
+            });
+        }).catch((error)=>{
+            console.error(error);
+        });
+    }
+    componentWillUnmount() {
+    // code executed just before the moment the component gets removed from the DOM.
     }
 }
 
@@ -25194,7 +25054,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../login-view/login-view":"9YtA0","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./main-view.scss":"eBaMl","../register-view/register-view":"6jAr6"}],"jo6P5":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"jo6P5":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"63MyY"}],"63MyY":[function(require,module,exports) {
@@ -25227,15 +25087,10 @@ var axios = createInstance(defaults);
 // Expose Axios class to allow class inheritance
 axios.Axios = Axios;
 // Expose Cancel & CancelToken
-axios.CanceledError = require('./cancel/CanceledError');
+axios.Cancel = require('./cancel/Cancel');
 axios.CancelToken = require('./cancel/CancelToken');
 axios.isCancel = require('./cancel/isCancel');
 axios.VERSION = require('./env/data').version;
-axios.toFormData = require('./helpers/toFormData');
-// Expose AxiosError class
-axios.AxiosError = require('../lib/core/AxiosError');
-// alias for CanceledError for backward compatibility
-axios.Cancel = axios.CanceledError;
 // Expose all/spread
 axios.all = function all(promises) {
     return Promise.all(promises);
@@ -25247,25 +25102,11 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./utils":"5By4s","./helpers/bind":"haRQb","./core/Axios":"cpqD8","./core/mergeConfig":"b85oP","./defaults":"hXfHM","./cancel/CanceledError":"9PwCG","./cancel/CancelToken":"45wzn","./cancel/isCancel":"a0VmF","./env/data":"h29L9","./helpers/toFormData":"ajoez","../lib/core/AxiosError":"3u8Tl","./helpers/spread":"dyQ8N","./helpers/isAxiosError":"eyiLq"}],"5By4s":[function(require,module,exports) {
+},{"./utils":"5By4s","./helpers/bind":"haRQb","./core/Axios":"cpqD8","./core/mergeConfig":"b85oP","./defaults":"hXfHM","./cancel/Cancel":"kjMy2","./cancel/CancelToken":"45wzn","./cancel/isCancel":"a0VmF","./env/data":"h29L9","./helpers/spread":"dyQ8N","./helpers/isAxiosError":"eyiLq"}],"5By4s":[function(require,module,exports) {
 'use strict';
 var bind = require('./helpers/bind');
 // utils is a library of generic helper functions non-specific to axios
 var toString = Object.prototype.toString;
-// eslint-disable-next-line func-names
-var kindOf = function(cache) {
-    // eslint-disable-next-line func-names
-    return function(thing) {
-        var str = toString.call(thing);
-        return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
-    };
-}(Object.create(null));
-function kindOfTest(type) {
-    type = type.toLowerCase();
-    return function isKindOf(thing) {
-        return kindOf(thing) === type;
-    };
-}
 /**
  * Determine if a value is an Array
  *
@@ -25293,10 +25134,19 @@ function kindOfTest(type) {
 /**
  * Determine if a value is an ArrayBuffer
  *
- * @function
  * @param {Object} val The value to test
  * @returns {boolean} True if value is an ArrayBuffer, otherwise false
- */ var isArrayBuffer = kindOfTest('ArrayBuffer');
+ */ function isArrayBuffer(val) {
+    return toString.call(val) === '[object ArrayBuffer]';
+}
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */ function isFormData(val) {
+    return toString.call(val) === '[object FormData]';
+}
 /**
  * Determine if a value is a view on an ArrayBuffer
  *
@@ -25338,38 +25188,34 @@ function kindOfTest(type) {
  * @param {Object} val The value to test
  * @return {boolean} True if value is a plain Object, otherwise false
  */ function isPlainObject(val) {
-    if (kindOf(val) !== 'object') return false;
+    if (toString.call(val) !== '[object Object]') return false;
     var prototype = Object.getPrototypeOf(val);
     return prototype === null || prototype === Object.prototype;
 }
 /**
  * Determine if a value is a Date
  *
- * @function
  * @param {Object} val The value to test
  * @returns {boolean} True if value is a Date, otherwise false
- */ var isDate = kindOfTest('Date');
+ */ function isDate(val) {
+    return toString.call(val) === '[object Date]';
+}
 /**
  * Determine if a value is a File
  *
- * @function
  * @param {Object} val The value to test
  * @returns {boolean} True if value is a File, otherwise false
- */ var isFile = kindOfTest('File');
+ */ function isFile(val) {
+    return toString.call(val) === '[object File]';
+}
 /**
  * Determine if a value is a Blob
  *
- * @function
  * @param {Object} val The value to test
  * @returns {boolean} True if value is a Blob, otherwise false
- */ var isBlob = kindOfTest('Blob');
-/**
- * Determine if a value is a FileList
- *
- * @function
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a File, otherwise false
- */ var isFileList = kindOfTest('FileList');
+ */ function isBlob(val) {
+    return toString.call(val) === '[object Blob]';
+}
 /**
  * Determine if a value is a Function
  *
@@ -25387,20 +25233,13 @@ function kindOfTest(type) {
     return isObject(val) && isFunction(val.pipe);
 }
 /**
- * Determine if a value is a FormData
- *
- * @param {Object} thing The value to test
- * @returns {boolean} True if value is an FormData, otherwise false
- */ function isFormData(thing) {
-    var pattern = '[object FormData]';
-    return thing && (typeof FormData === 'function' && thing instanceof FormData || toString.call(thing) === pattern || isFunction(thing.toString) && thing.toString() === pattern);
-}
-/**
  * Determine if a value is a URLSearchParams object
- * @function
+ *
  * @param {Object} val The value to test
  * @returns {boolean} True if value is a URLSearchParams object, otherwise false
- */ var isURLSearchParams = kindOfTest('URLSearchParams');
+ */ function isURLSearchParams(val) {
+    return toString.call(val) === '[object URLSearchParams]';
+}
 /**
  * Trim excess whitespace off the beginning and end of a string
  *
@@ -25502,75 +25341,6 @@ function kindOfTest(type) {
     if (content.charCodeAt(0) === 0xFEFF) content = content.slice(1);
     return content;
 }
-/**
- * Inherit the prototype methods from one constructor into another
- * @param {function} constructor
- * @param {function} superConstructor
- * @param {object} [props]
- * @param {object} [descriptors]
- */ function inherits(constructor, superConstructor, props, descriptors) {
-    constructor.prototype = Object.create(superConstructor.prototype, descriptors);
-    constructor.prototype.constructor = constructor;
-    props && Object.assign(constructor.prototype, props);
-}
-/**
- * Resolve object with deep prototype chain to a flat object
- * @param {Object} sourceObj source object
- * @param {Object} [destObj]
- * @param {Function} [filter]
- * @returns {Object}
- */ function toFlatObject(sourceObj, destObj, filter) {
-    var props;
-    var i;
-    var prop;
-    var merged = {};
-    destObj = destObj || {};
-    do {
-        props = Object.getOwnPropertyNames(sourceObj);
-        i = props.length;
-        while(i-- > 0){
-            prop = props[i];
-            if (!merged[prop]) {
-                destObj[prop] = sourceObj[prop];
-                merged[prop] = true;
-            }
-        }
-        sourceObj = Object.getPrototypeOf(sourceObj);
-    }while (sourceObj && (!filter || filter(sourceObj, destObj)) && sourceObj !== Object.prototype)
-    return destObj;
-}
-/*
- * determines whether a string ends with the characters of a specified string
- * @param {String} str
- * @param {String} searchString
- * @param {Number} [position= 0]
- * @returns {boolean}
- */ function endsWith(str, searchString, position) {
-    str = String(str);
-    if (position === undefined || position > str.length) position = str.length;
-    position -= searchString.length;
-    var lastIndex = str.indexOf(searchString, position);
-    return lastIndex !== -1 && lastIndex === position;
-}
-/**
- * Returns new array from array like object
- * @param {*} [thing]
- * @returns {Array}
- */ function toArray(thing) {
-    if (!thing) return null;
-    var i = thing.length;
-    if (isUndefined(i)) return null;
-    var arr = new Array(i);
-    while(i-- > 0)arr[i] = thing[i];
-    return arr;
-}
-// eslint-disable-next-line func-names
-var isTypedArray = function(TypedArray) {
-    // eslint-disable-next-line func-names
-    return function(thing) {
-        return TypedArray && thing instanceof TypedArray;
-    };
-}(typeof Uint8Array !== 'undefined' && Object.getPrototypeOf(Uint8Array));
 module.exports = {
     isArray: isArray,
     isArrayBuffer: isArrayBuffer,
@@ -25593,15 +25363,7 @@ module.exports = {
     merge: merge,
     extend: extend,
     trim: trim,
-    stripBOM: stripBOM,
-    inherits: inherits,
-    toFlatObject: toFlatObject,
-    kindOf: kindOf,
-    kindOfTest: kindOfTest,
-    endsWith: endsWith,
-    toArray: toArray,
-    isTypedArray: isTypedArray,
-    isFileList: isFileList
+    stripBOM: stripBOM
 };
 
 },{"./helpers/bind":"haRQb"}],"haRQb":[function(require,module,exports) {
@@ -25621,7 +25383,6 @@ var buildURL = require('../helpers/buildURL');
 var InterceptorManager = require('./InterceptorManager');
 var dispatchRequest = require('./dispatchRequest');
 var mergeConfig = require('./mergeConfig');
-var buildFullPath = require('./buildFullPath');
 var validator = require('../helpers/validator');
 var validators = validator.validators;
 /**
@@ -25701,8 +25462,7 @@ var validators = validator.validators;
 };
 Axios.prototype.getUri = function getUri(config) {
     config = mergeConfig(this.defaults, config);
-    var fullPath = buildFullPath(config.baseURL, config.url);
-    return buildURL(fullPath, config.params, config.paramsSerializer);
+    return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
 };
 // Provide aliases for supported request methods
 utils.forEach([
@@ -25724,24 +25484,17 @@ utils.forEach([
     'put',
     'patch'
 ], function forEachMethodWithData(method) {
-    /*eslint func-names:0*/ function generateHTTPMethod(isForm) {
-        return function httpMethod(url, data, config) {
-            return this.request(mergeConfig(config || {}, {
-                method: method,
-                headers: isForm ? {
-                    'Content-Type': 'multipart/form-data'
-                } : {},
-                url: url,
-                data: data
-            }));
-        };
-    }
-    Axios.prototype[method] = generateHTTPMethod();
-    Axios.prototype[method + 'Form'] = generateHTTPMethod(true);
+    /*eslint func-names:0*/ Axios.prototype[method] = function(url, data, config) {
+        return this.request(mergeConfig(config || {}, {
+            method: method,
+            url: url,
+            data: data
+        }));
+    };
 });
 module.exports = Axios;
 
-},{"./../utils":"5By4s","../helpers/buildURL":"3bwC2","./InterceptorManager":"1VRIM","./dispatchRequest":"6sjJ6","./mergeConfig":"b85oP","./buildFullPath":"1I5TW","../helpers/validator":"9vgkY"}],"3bwC2":[function(require,module,exports) {
+},{"./../utils":"5By4s","../helpers/buildURL":"3bwC2","./InterceptorManager":"1VRIM","./dispatchRequest":"6sjJ6","./mergeConfig":"b85oP","../helpers/validator":"9vgkY"}],"3bwC2":[function(require,module,exports) {
 'use strict';
 var utils = require('./../utils');
 function encode(val) {
@@ -25831,12 +25584,12 @@ var utils = require('./../utils');
 var transformData = require('./transformData');
 var isCancel = require('../cancel/isCancel');
 var defaults = require('../defaults');
-var CanceledError = require('../cancel/CanceledError');
+var Cancel = require('../cancel/Cancel');
 /**
- * Throws a `CanceledError` if cancellation has been requested.
+ * Throws a `Cancel` if cancellation has been requested.
  */ function throwIfCancellationRequested(config) {
     if (config.cancelToken) config.cancelToken.throwIfRequested();
-    if (config.signal && config.signal.aborted) throw new CanceledError();
+    if (config.signal && config.signal.aborted) throw new Cancel('canceled');
 }
 /**
  * Dispatch a request to the server using the configured adapter.
@@ -25878,7 +25631,7 @@ var CanceledError = require('../cancel/CanceledError');
     });
 };
 
-},{"./../utils":"5By4s","./transformData":"eRqJY","../cancel/isCancel":"a0VmF","../defaults":"hXfHM","../cancel/CanceledError":"9PwCG"}],"eRqJY":[function(require,module,exports) {
+},{"./../utils":"5By4s","./transformData":"eRqJY","../cancel/isCancel":"a0VmF","../defaults":"hXfHM","../cancel/Cancel":"kjMy2"}],"eRqJY":[function(require,module,exports) {
 'use strict';
 var utils = require('./../utils');
 var defaults = require('../defaults');
@@ -25902,9 +25655,8 @@ var defaults = require('../defaults');
 var process = require("process");
 var utils = require('../utils');
 var normalizeHeaderName = require('../helpers/normalizeHeaderName');
-var AxiosError = require('../core/AxiosError');
+var enhanceError = require('../core/enhanceError');
 var transitionalDefaults = require('./transitional');
-var toFormData = require('../helpers/toFormData');
 var DEFAULT_CONTENT_TYPE = {
     'Content-Type': 'application/x-www-form-urlencoded'
 };
@@ -25941,15 +25693,7 @@ var defaults = {
                 setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
                 return data.toString();
             }
-            var isObjectPayload = utils.isObject(data);
-            var contentType = headers && headers['Content-Type'];
-            var isFileList;
-            if ((isFileList = utils.isFileList(data)) || isObjectPayload && contentType === 'multipart/form-data') {
-                var _FormData = this.env && this.env.FormData;
-                return toFormData(isFileList ? {
-                    'files[]': data
-                } : data, _FormData && new _FormData());
-            } else if (isObjectPayload || contentType === 'application/json') {
+            if (utils.isObject(data) || headers && headers['Content-Type'] === 'application/json') {
                 setContentTypeIfUnset(headers, 'application/json');
                 return stringifySafely(data);
             }
@@ -25966,7 +25710,7 @@ var defaults = {
                 return JSON.parse(data);
             } catch (e) {
                 if (strictJSONParsing) {
-                    if (e.name === 'SyntaxError') throw AxiosError.from(e, AxiosError.ERR_BAD_RESPONSE, this, null, this.response);
+                    if (e.name === 'SyntaxError') throw enhanceError(e, this, 'E_JSON_PARSE');
                     throw e;
                 }
             }
@@ -25981,9 +25725,6 @@ var defaults = {
     xsrfHeaderName: 'X-XSRF-TOKEN',
     maxContentLength: -1,
     maxBodyLength: -1,
-    env: {
-        FormData: require('./env/FormData')
-    },
     validateStatus: function validateStatus(status) {
         return status >= 200 && status < 300;
     },
@@ -26009,7 +25750,7 @@ utils.forEach([
 });
 module.exports = defaults;
 
-},{"process":"d5jf4","../utils":"5By4s","../helpers/normalizeHeaderName":"adBZo","../core/AxiosError":"3u8Tl","./transitional":"lM32f","../helpers/toFormData":"ajoez","../adapters/xhr":"ldm57","../adapters/http":"ldm57","./env/FormData":"aFlee"}],"d5jf4":[function(require,module,exports) {
+},{"process":"d5jf4","../utils":"5By4s","../helpers/normalizeHeaderName":"adBZo","../core/enhanceError":"itUQr","./transitional":"lM32f","../adapters/xhr":"ldm57","../adapters/http":"ldm57"}],"d5jf4":[function(require,module,exports) {
 // shim for using process in browser
 var process = module.exports = {};
 // cached from whatever global is present so that test runners that stub it
@@ -26166,29 +25907,24 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
     });
 };
 
-},{"../utils":"5By4s"}],"3u8Tl":[function(require,module,exports) {
+},{"../utils":"5By4s"}],"itUQr":[function(require,module,exports) {
 'use strict';
-var utils = require('../utils');
 /**
- * Create an Error with the specified message, config, error code, request and response.
+ * Update an Error with the specified config, error code, and response.
  *
- * @param {string} message The error message.
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
  * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [config] The config.
  * @param {Object} [request] The request.
  * @param {Object} [response] The response.
- * @returns {Error} The created error.
- */ function AxiosError(message, code, config, request, response) {
-    Error.call(this);
-    this.message = message;
-    this.name = 'AxiosError';
-    code && (this.code = code);
-    config && (this.config = config);
-    request && (this.request = request);
-    response && (this.response = response);
-}
-utils.inherits(AxiosError, Error, {
-    toJSON: function toJSON() {
+ * @returns {Error} The error.
+ */ module.exports = function enhanceError(error, config, code, request, response) {
+    error.config = config;
+    if (code) error.code = code;
+    error.request = request;
+    error.response = response;
+    error.isAxiosError = true;
+    error.toJSON = function toJSON() {
         return {
             // Standard
             message: this.message,
@@ -26206,1694 +25942,16 @@ utils.inherits(AxiosError, Error, {
             code: this.code,
             status: this.response && this.response.status ? this.response.status : null
         };
-    }
-});
-var prototype = AxiosError.prototype;
-var descriptors = {};
-[
-    'ERR_BAD_OPTION_VALUE',
-    'ERR_BAD_OPTION',
-    'ECONNABORTED',
-    'ETIMEDOUT',
-    'ERR_NETWORK',
-    'ERR_FR_TOO_MANY_REDIRECTS',
-    'ERR_DEPRECATED',
-    'ERR_BAD_RESPONSE',
-    'ERR_BAD_REQUEST',
-    'ERR_CANCELED'
-].forEach(function(code) {
-    descriptors[code] = {
-        value: code
     };
-});
-Object.defineProperties(AxiosError, descriptors);
-Object.defineProperty(prototype, 'isAxiosError', {
-    value: true
-});
-// eslint-disable-next-line func-names
-AxiosError.from = function(error, code, config, request, response, customProps) {
-    var axiosError = Object.create(prototype);
-    utils.toFlatObject(error, axiosError, function filter(obj) {
-        return obj !== Error.prototype;
-    });
-    AxiosError.call(axiosError, error.message, code, config, request, response);
-    axiosError.name = error.name;
-    customProps && Object.assign(axiosError, customProps);
-    return axiosError;
+    return error;
 };
-module.exports = AxiosError;
 
-},{"../utils":"5By4s"}],"lM32f":[function(require,module,exports) {
+},{}],"lM32f":[function(require,module,exports) {
 'use strict';
 module.exports = {
     silentJSONParsing: true,
     forcedJSONParsing: true,
     clarifyTimeoutError: false
-};
-
-},{}],"ajoez":[function(require,module,exports) {
-'use strict';
-var Buffer = require("buffer").Buffer;
-var utils = require('../utils');
-/**
- * Convert a data object to FormData
- * @param {Object} obj
- * @param {?Object} [formData]
- * @returns {Object}
- **/ function toFormData(obj, formData) {
-    // eslint-disable-next-line no-param-reassign
-    formData = formData || new FormData();
-    var stack = [];
-    function convertValue(value) {
-        if (value === null) return '';
-        if (utils.isDate(value)) return value.toISOString();
-        if (utils.isArrayBuffer(value) || utils.isTypedArray(value)) return typeof Blob === 'function' ? new Blob([
-            value
-        ]) : Buffer.from(value);
-        return value;
-    }
-    function build(data, parentKey) {
-        if (utils.isPlainObject(data) || utils.isArray(data)) {
-            if (stack.indexOf(data) !== -1) throw Error('Circular reference detected in ' + parentKey);
-            stack.push(data);
-            utils.forEach(data, function each(value, key) {
-                if (utils.isUndefined(value)) return;
-                var fullKey = parentKey ? parentKey + '.' + key : key;
-                var arr;
-                if (value && !parentKey && typeof value === 'object') {
-                    if (utils.endsWith(key, '{}')) // eslint-disable-next-line no-param-reassign
-                    value = JSON.stringify(value);
-                    else if (utils.endsWith(key, '[]') && (arr = utils.toArray(value))) {
-                        // eslint-disable-next-line func-names
-                        arr.forEach(function(el) {
-                            !utils.isUndefined(el) && formData.append(fullKey, convertValue(el));
-                        });
-                        return;
-                    }
-                }
-                build(value, fullKey);
-            });
-            stack.pop();
-        } else formData.append(parentKey, convertValue(data));
-    }
-    build(obj);
-    return formData;
-}
-module.exports = toFormData;
-
-},{"buffer":"fCgem","../utils":"5By4s"}],"fCgem":[function(require,module,exports) {
-/*!
- * The buffer module from node.js, for the browser.
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */ /* eslint-disable no-proto */ 'use strict';
-const base64 = require('base64-js');
-const ieee754 = require('ieee754');
-const customInspectSymbol = typeof Symbol === 'function' && typeof Symbol['for'] === 'function' // eslint-disable-line dot-notation
- ? Symbol['for']('nodejs.util.inspect.custom') // eslint-disable-line dot-notation
- : null;
-exports.Buffer = Buffer;
-exports.SlowBuffer = SlowBuffer;
-exports.INSPECT_MAX_BYTES = 50;
-const K_MAX_LENGTH = 0x7fffffff;
-exports.kMaxLength = K_MAX_LENGTH;
-/**
- * If `Buffer.TYPED_ARRAY_SUPPORT`:
- *   === true    Use Uint8Array implementation (fastest)
- *   === false   Print warning and recommend using `buffer` v4.x which has an Object
- *               implementation (most compatible, even IE6)
- *
- * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
- * Opera 11.6+, iOS 4.2+.
- *
- * We report that the browser does not support typed arrays if the are not subclassable
- * using __proto__. Firefox 4-29 lacks support for adding new properties to `Uint8Array`
- * (See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438). IE 10 lacks support
- * for __proto__ and has a buggy typed array implementation.
- */ Buffer.TYPED_ARRAY_SUPPORT = typedArraySupport();
-if (!Buffer.TYPED_ARRAY_SUPPORT && typeof console !== 'undefined' && typeof console.error === 'function') console.error("This browser lacks typed array (Uint8Array) support which is required by `buffer` v5.x. Use `buffer` v4.x if you require old browser support.");
-function typedArraySupport() {
-    // Can typed array instances can be augmented?
-    try {
-        const arr = new Uint8Array(1);
-        const proto = {
-            foo: function() {
-                return 42;
-            }
-        };
-        Object.setPrototypeOf(proto, Uint8Array.prototype);
-        Object.setPrototypeOf(arr, proto);
-        return arr.foo() === 42;
-    } catch (e) {
-        return false;
-    }
-}
-Object.defineProperty(Buffer.prototype, 'parent', {
-    enumerable: true,
-    get: function() {
-        if (!Buffer.isBuffer(this)) return undefined;
-        return this.buffer;
-    }
-});
-Object.defineProperty(Buffer.prototype, 'offset', {
-    enumerable: true,
-    get: function() {
-        if (!Buffer.isBuffer(this)) return undefined;
-        return this.byteOffset;
-    }
-});
-function createBuffer(length) {
-    if (length > K_MAX_LENGTH) throw new RangeError('The value "' + length + '" is invalid for option "size"');
-    // Return an augmented `Uint8Array` instance
-    const buf = new Uint8Array(length);
-    Object.setPrototypeOf(buf, Buffer.prototype);
-    return buf;
-}
-/**
- * The Buffer constructor returns instances of `Uint8Array` that have their
- * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
- * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
- * and the `Uint8Array` methods. Square bracket notation works as expected -- it
- * returns a single octet.
- *
- * The `Uint8Array` prototype remains unmodified.
- */ function Buffer(arg, encodingOrOffset, length) {
-    // Common case.
-    if (typeof arg === 'number') {
-        if (typeof encodingOrOffset === 'string') throw new TypeError('The "string" argument must be of type string. Received type number');
-        return allocUnsafe(arg);
-    }
-    return from(arg, encodingOrOffset, length);
-}
-Buffer.poolSize = 8192 // not used by this implementation
-;
-function from(value, encodingOrOffset, length) {
-    if (typeof value === 'string') return fromString(value, encodingOrOffset);
-    if (ArrayBuffer.isView(value)) return fromArrayView(value);
-    if (value == null) throw new TypeError("The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type " + typeof value);
-    if (isInstance(value, ArrayBuffer) || value && isInstance(value.buffer, ArrayBuffer)) return fromArrayBuffer(value, encodingOrOffset, length);
-    if (typeof SharedArrayBuffer !== 'undefined' && (isInstance(value, SharedArrayBuffer) || value && isInstance(value.buffer, SharedArrayBuffer))) return fromArrayBuffer(value, encodingOrOffset, length);
-    if (typeof value === 'number') throw new TypeError('The "value" argument must not be of type number. Received type number');
-    const valueOf = value.valueOf && value.valueOf();
-    if (valueOf != null && valueOf !== value) return Buffer.from(valueOf, encodingOrOffset, length);
-    const b = fromObject(value);
-    if (b) return b;
-    if (typeof Symbol !== 'undefined' && Symbol.toPrimitive != null && typeof value[Symbol.toPrimitive] === 'function') return Buffer.from(value[Symbol.toPrimitive]('string'), encodingOrOffset, length);
-    throw new TypeError("The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type " + typeof value);
-}
-/**
- * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
- * if value is a number.
- * Buffer.from(str[, encoding])
- * Buffer.from(array)
- * Buffer.from(buffer)
- * Buffer.from(arrayBuffer[, byteOffset[, length]])
- **/ Buffer.from = function(value, encodingOrOffset, length) {
-    return from(value, encodingOrOffset, length);
-};
-// Note: Change prototype *after* Buffer.from is defined to workaround Chrome bug:
-// https://github.com/feross/buffer/pull/148
-Object.setPrototypeOf(Buffer.prototype, Uint8Array.prototype);
-Object.setPrototypeOf(Buffer, Uint8Array);
-function assertSize(size) {
-    if (typeof size !== 'number') throw new TypeError('"size" argument must be of type number');
-    else if (size < 0) throw new RangeError('The value "' + size + '" is invalid for option "size"');
-}
-function alloc(size, fill, encoding) {
-    assertSize(size);
-    if (size <= 0) return createBuffer(size);
-    if (fill !== undefined) // Only pay attention to encoding if it's a string. This
-    // prevents accidentally sending in a number that would
-    // be interpreted as a start offset.
-    return typeof encoding === 'string' ? createBuffer(size).fill(fill, encoding) : createBuffer(size).fill(fill);
-    return createBuffer(size);
-}
-/**
- * Creates a new filled Buffer instance.
- * alloc(size[, fill[, encoding]])
- **/ Buffer.alloc = function(size, fill, encoding) {
-    return alloc(size, fill, encoding);
-};
-function allocUnsafe(size) {
-    assertSize(size);
-    return createBuffer(size < 0 ? 0 : checked(size) | 0);
-}
-/**
- * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
- * */ Buffer.allocUnsafe = function(size) {
-    return allocUnsafe(size);
-};
-/**
- * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
- */ Buffer.allocUnsafeSlow = function(size) {
-    return allocUnsafe(size);
-};
-function fromString(string, encoding) {
-    if (typeof encoding !== 'string' || encoding === '') encoding = 'utf8';
-    if (!Buffer.isEncoding(encoding)) throw new TypeError('Unknown encoding: ' + encoding);
-    const length = byteLength(string, encoding) | 0;
-    let buf = createBuffer(length);
-    const actual = buf.write(string, encoding);
-    if (actual !== length) // Writing a hex string, for example, that contains invalid characters will
-    // cause everything after the first invalid character to be ignored. (e.g.
-    // 'abxxcd' will be treated as 'ab')
-    buf = buf.slice(0, actual);
-    return buf;
-}
-function fromArrayLike(array) {
-    const length = array.length < 0 ? 0 : checked(array.length) | 0;
-    const buf = createBuffer(length);
-    for(let i = 0; i < length; i += 1)buf[i] = array[i] & 255;
-    return buf;
-}
-function fromArrayView(arrayView) {
-    if (isInstance(arrayView, Uint8Array)) {
-        const copy = new Uint8Array(arrayView);
-        return fromArrayBuffer(copy.buffer, copy.byteOffset, copy.byteLength);
-    }
-    return fromArrayLike(arrayView);
-}
-function fromArrayBuffer(array, byteOffset, length) {
-    if (byteOffset < 0 || array.byteLength < byteOffset) throw new RangeError('"offset" is outside of buffer bounds');
-    if (array.byteLength < byteOffset + (length || 0)) throw new RangeError('"length" is outside of buffer bounds');
-    let buf;
-    if (byteOffset === undefined && length === undefined) buf = new Uint8Array(array);
-    else if (length === undefined) buf = new Uint8Array(array, byteOffset);
-    else buf = new Uint8Array(array, byteOffset, length);
-    // Return an augmented `Uint8Array` instance
-    Object.setPrototypeOf(buf, Buffer.prototype);
-    return buf;
-}
-function fromObject(obj) {
-    if (Buffer.isBuffer(obj)) {
-        const len = checked(obj.length) | 0;
-        const buf = createBuffer(len);
-        if (buf.length === 0) return buf;
-        obj.copy(buf, 0, 0, len);
-        return buf;
-    }
-    if (obj.length !== undefined) {
-        if (typeof obj.length !== 'number' || numberIsNaN(obj.length)) return createBuffer(0);
-        return fromArrayLike(obj);
-    }
-    if (obj.type === 'Buffer' && Array.isArray(obj.data)) return fromArrayLike(obj.data);
-}
-function checked(length) {
-    // Note: cannot use `length < K_MAX_LENGTH` here because that fails when
-    // length is NaN (which is otherwise coerced to zero.)
-    if (length >= K_MAX_LENGTH) throw new RangeError("Attempt to allocate Buffer larger than maximum size: 0x" + K_MAX_LENGTH.toString(16) + ' bytes');
-    return length | 0;
-}
-function SlowBuffer(length) {
-    if (+length != length) length = 0;
-    return Buffer.alloc(+length);
-}
-Buffer.isBuffer = function isBuffer(b) {
-    return b != null && b._isBuffer === true && b !== Buffer.prototype // so Buffer.isBuffer(Buffer.prototype) will be false
-    ;
-};
-Buffer.compare = function compare(a, b) {
-    if (isInstance(a, Uint8Array)) a = Buffer.from(a, a.offset, a.byteLength);
-    if (isInstance(b, Uint8Array)) b = Buffer.from(b, b.offset, b.byteLength);
-    if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) throw new TypeError('The "buf1", "buf2" arguments must be one of type Buffer or Uint8Array');
-    if (a === b) return 0;
-    let x = a.length;
-    let y = b.length;
-    for(let i = 0, len = Math.min(x, y); i < len; ++i)if (a[i] !== b[i]) {
-        x = a[i];
-        y = b[i];
-        break;
-    }
-    if (x < y) return -1;
-    if (y < x) return 1;
-    return 0;
-};
-Buffer.isEncoding = function isEncoding(encoding) {
-    switch(String(encoding).toLowerCase()){
-        case 'hex':
-        case 'utf8':
-        case 'utf-8':
-        case 'ascii':
-        case 'latin1':
-        case 'binary':
-        case 'base64':
-        case 'ucs2':
-        case 'ucs-2':
-        case 'utf16le':
-        case 'utf-16le':
-            return true;
-        default:
-            return false;
-    }
-};
-Buffer.concat = function concat(list, length) {
-    if (!Array.isArray(list)) throw new TypeError('"list" argument must be an Array of Buffers');
-    if (list.length === 0) return Buffer.alloc(0);
-    let i;
-    if (length === undefined) {
-        length = 0;
-        for(i = 0; i < list.length; ++i)length += list[i].length;
-    }
-    const buffer = Buffer.allocUnsafe(length);
-    let pos = 0;
-    for(i = 0; i < list.length; ++i){
-        let buf = list[i];
-        if (isInstance(buf, Uint8Array)) {
-            if (pos + buf.length > buffer.length) {
-                if (!Buffer.isBuffer(buf)) buf = Buffer.from(buf);
-                buf.copy(buffer, pos);
-            } else Uint8Array.prototype.set.call(buffer, buf, pos);
-        } else if (!Buffer.isBuffer(buf)) throw new TypeError('"list" argument must be an Array of Buffers');
-        else buf.copy(buffer, pos);
-        pos += buf.length;
-    }
-    return buffer;
-};
-function byteLength(string, encoding) {
-    if (Buffer.isBuffer(string)) return string.length;
-    if (ArrayBuffer.isView(string) || isInstance(string, ArrayBuffer)) return string.byteLength;
-    if (typeof string !== 'string') throw new TypeError('The "string" argument must be one of type string, Buffer, or ArrayBuffer. Received type ' + typeof string);
-    const len = string.length;
-    const mustMatch = arguments.length > 2 && arguments[2] === true;
-    if (!mustMatch && len === 0) return 0;
-    // Use a for loop to avoid recursion
-    let loweredCase = false;
-    for(;;)switch(encoding){
-        case 'ascii':
-        case 'latin1':
-        case 'binary':
-            return len;
-        case 'utf8':
-        case 'utf-8':
-            return utf8ToBytes(string).length;
-        case 'ucs2':
-        case 'ucs-2':
-        case 'utf16le':
-        case 'utf-16le':
-            return len * 2;
-        case 'hex':
-            return len >>> 1;
-        case 'base64':
-            return base64ToBytes(string).length;
-        default:
-            if (loweredCase) return mustMatch ? -1 : utf8ToBytes(string).length // assume utf8
-            ;
-            encoding = ('' + encoding).toLowerCase();
-            loweredCase = true;
-    }
-}
-Buffer.byteLength = byteLength;
-function slowToString(encoding, start, end) {
-    let loweredCase = false;
-    // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
-    // property of a typed array.
-    // This behaves neither like String nor Uint8Array in that we set start/end
-    // to their upper/lower bounds if the value passed is out of range.
-    // undefined is handled specially as per ECMA-262 6th Edition,
-    // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
-    if (start === undefined || start < 0) start = 0;
-    // Return early if start > this.length. Done here to prevent potential uint32
-    // coercion fail below.
-    if (start > this.length) return '';
-    if (end === undefined || end > this.length) end = this.length;
-    if (end <= 0) return '';
-    // Force coercion to uint32. This will also coerce falsey/NaN values to 0.
-    end >>>= 0;
-    start >>>= 0;
-    if (end <= start) return '';
-    if (!encoding) encoding = 'utf8';
-    while(true)switch(encoding){
-        case 'hex':
-            return hexSlice(this, start, end);
-        case 'utf8':
-        case 'utf-8':
-            return utf8Slice(this, start, end);
-        case 'ascii':
-            return asciiSlice(this, start, end);
-        case 'latin1':
-        case 'binary':
-            return latin1Slice(this, start, end);
-        case 'base64':
-            return base64Slice(this, start, end);
-        case 'ucs2':
-        case 'ucs-2':
-        case 'utf16le':
-        case 'utf-16le':
-            return utf16leSlice(this, start, end);
-        default:
-            if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding);
-            encoding = (encoding + '').toLowerCase();
-            loweredCase = true;
-    }
-}
-// This property is used by `Buffer.isBuffer` (and the `is-buffer` npm package)
-// to detect a Buffer instance. It's not possible to use `instanceof Buffer`
-// reliably in a browserify context because there could be multiple different
-// copies of the 'buffer' package in use. This method works even for Buffer
-// instances that were created from another copy of the `buffer` package.
-// See: https://github.com/feross/buffer/issues/154
-Buffer.prototype._isBuffer = true;
-function swap(b, n, m) {
-    const i = b[n];
-    b[n] = b[m];
-    b[m] = i;
-}
-Buffer.prototype.swap16 = function swap16() {
-    const len = this.length;
-    if (len % 2 !== 0) throw new RangeError('Buffer size must be a multiple of 16-bits');
-    for(let i = 0; i < len; i += 2)swap(this, i, i + 1);
-    return this;
-};
-Buffer.prototype.swap32 = function swap32() {
-    const len = this.length;
-    if (len % 4 !== 0) throw new RangeError('Buffer size must be a multiple of 32-bits');
-    for(let i = 0; i < len; i += 4){
-        swap(this, i, i + 3);
-        swap(this, i + 1, i + 2);
-    }
-    return this;
-};
-Buffer.prototype.swap64 = function swap64() {
-    const len = this.length;
-    if (len % 8 !== 0) throw new RangeError('Buffer size must be a multiple of 64-bits');
-    for(let i = 0; i < len; i += 8){
-        swap(this, i, i + 7);
-        swap(this, i + 1, i + 6);
-        swap(this, i + 2, i + 5);
-        swap(this, i + 3, i + 4);
-    }
-    return this;
-};
-Buffer.prototype.toString = function toString() {
-    const length = this.length;
-    if (length === 0) return '';
-    if (arguments.length === 0) return utf8Slice(this, 0, length);
-    return slowToString.apply(this, arguments);
-};
-Buffer.prototype.toLocaleString = Buffer.prototype.toString;
-Buffer.prototype.equals = function equals(b) {
-    if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer');
-    if (this === b) return true;
-    return Buffer.compare(this, b) === 0;
-};
-Buffer.prototype.inspect = function inspect() {
-    let str = '';
-    const max = exports.INSPECT_MAX_BYTES;
-    str = this.toString('hex', 0, max).replace(/(.{2})/g, '$1 ').trim();
-    if (this.length > max) str += ' ... ';
-    return '<Buffer ' + str + '>';
-};
-if (customInspectSymbol) Buffer.prototype[customInspectSymbol] = Buffer.prototype.inspect;
-Buffer.prototype.compare = function compare(target, start, end, thisStart, thisEnd) {
-    if (isInstance(target, Uint8Array)) target = Buffer.from(target, target.offset, target.byteLength);
-    if (!Buffer.isBuffer(target)) throw new TypeError('The "target" argument must be one of type Buffer or Uint8Array. Received type ' + typeof target);
-    if (start === undefined) start = 0;
-    if (end === undefined) end = target ? target.length : 0;
-    if (thisStart === undefined) thisStart = 0;
-    if (thisEnd === undefined) thisEnd = this.length;
-    if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) throw new RangeError('out of range index');
-    if (thisStart >= thisEnd && start >= end) return 0;
-    if (thisStart >= thisEnd) return -1;
-    if (start >= end) return 1;
-    start >>>= 0;
-    end >>>= 0;
-    thisStart >>>= 0;
-    thisEnd >>>= 0;
-    if (this === target) return 0;
-    let x = thisEnd - thisStart;
-    let y = end - start;
-    const len = Math.min(x, y);
-    const thisCopy = this.slice(thisStart, thisEnd);
-    const targetCopy = target.slice(start, end);
-    for(let i = 0; i < len; ++i)if (thisCopy[i] !== targetCopy[i]) {
-        x = thisCopy[i];
-        y = targetCopy[i];
-        break;
-    }
-    if (x < y) return -1;
-    if (y < x) return 1;
-    return 0;
-};
-// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
-// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
-//
-// Arguments:
-// - buffer - a Buffer to search
-// - val - a string, Buffer, or number
-// - byteOffset - an index into `buffer`; will be clamped to an int32
-// - encoding - an optional encoding, relevant is val is a string
-// - dir - true for indexOf, false for lastIndexOf
-function bidirectionalIndexOf(buffer, val, byteOffset, encoding, dir) {
-    // Empty buffer means no match
-    if (buffer.length === 0) return -1;
-    // Normalize byteOffset
-    if (typeof byteOffset === 'string') {
-        encoding = byteOffset;
-        byteOffset = 0;
-    } else if (byteOffset > 0x7fffffff) byteOffset = 0x7fffffff;
-    else if (byteOffset < -2147483648) byteOffset = -2147483648;
-    byteOffset = +byteOffset // Coerce to Number.
-    ;
-    if (numberIsNaN(byteOffset)) // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
-    byteOffset = dir ? 0 : buffer.length - 1;
-    // Normalize byteOffset: negative offsets start from the end of the buffer
-    if (byteOffset < 0) byteOffset = buffer.length + byteOffset;
-    if (byteOffset >= buffer.length) {
-        if (dir) return -1;
-        else byteOffset = buffer.length - 1;
-    } else if (byteOffset < 0) {
-        if (dir) byteOffset = 0;
-        else return -1;
-    }
-    // Normalize val
-    if (typeof val === 'string') val = Buffer.from(val, encoding);
-    // Finally, search either indexOf (if dir is true) or lastIndexOf
-    if (Buffer.isBuffer(val)) {
-        // Special case: looking for empty string/buffer always fails
-        if (val.length === 0) return -1;
-        return arrayIndexOf(buffer, val, byteOffset, encoding, dir);
-    } else if (typeof val === 'number') {
-        val = val & 0xFF // Search for a byte value [0-255]
-        ;
-        if (typeof Uint8Array.prototype.indexOf === 'function') {
-            if (dir) return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset);
-            else return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset);
-        }
-        return arrayIndexOf(buffer, [
-            val
-        ], byteOffset, encoding, dir);
-    }
-    throw new TypeError('val must be string, number or Buffer');
-}
-function arrayIndexOf(arr, val, byteOffset, encoding, dir) {
-    let indexSize = 1;
-    let arrLength = arr.length;
-    let valLength = val.length;
-    if (encoding !== undefined) {
-        encoding = String(encoding).toLowerCase();
-        if (encoding === 'ucs2' || encoding === 'ucs-2' || encoding === 'utf16le' || encoding === 'utf-16le') {
-            if (arr.length < 2 || val.length < 2) return -1;
-            indexSize = 2;
-            arrLength /= 2;
-            valLength /= 2;
-            byteOffset /= 2;
-        }
-    }
-    function read(buf, i) {
-        if (indexSize === 1) return buf[i];
-        else return buf.readUInt16BE(i * indexSize);
-    }
-    let i1;
-    if (dir) {
-        let foundIndex = -1;
-        for(i1 = byteOffset; i1 < arrLength; i1++)if (read(arr, i1) === read(val, foundIndex === -1 ? 0 : i1 - foundIndex)) {
-            if (foundIndex === -1) foundIndex = i1;
-            if (i1 - foundIndex + 1 === valLength) return foundIndex * indexSize;
-        } else {
-            if (foundIndex !== -1) i1 -= i1 - foundIndex;
-            foundIndex = -1;
-        }
-    } else {
-        if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength;
-        for(i1 = byteOffset; i1 >= 0; i1--){
-            let found = true;
-            for(let j = 0; j < valLength; j++)if (read(arr, i1 + j) !== read(val, j)) {
-                found = false;
-                break;
-            }
-            if (found) return i1;
-        }
-    }
-    return -1;
-}
-Buffer.prototype.includes = function includes(val, byteOffset, encoding) {
-    return this.indexOf(val, byteOffset, encoding) !== -1;
-};
-Buffer.prototype.indexOf = function indexOf(val, byteOffset, encoding) {
-    return bidirectionalIndexOf(this, val, byteOffset, encoding, true);
-};
-Buffer.prototype.lastIndexOf = function lastIndexOf(val, byteOffset, encoding) {
-    return bidirectionalIndexOf(this, val, byteOffset, encoding, false);
-};
-function hexWrite(buf, string, offset, length) {
-    offset = Number(offset) || 0;
-    const remaining = buf.length - offset;
-    if (!length) length = remaining;
-    else {
-        length = Number(length);
-        if (length > remaining) length = remaining;
-    }
-    const strLen = string.length;
-    if (length > strLen / 2) length = strLen / 2;
-    let i;
-    for(i = 0; i < length; ++i){
-        const parsed = parseInt(string.substr(i * 2, 2), 16);
-        if (numberIsNaN(parsed)) return i;
-        buf[offset + i] = parsed;
-    }
-    return i;
-}
-function utf8Write(buf, string, offset, length) {
-    return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length);
-}
-function asciiWrite(buf, string, offset, length) {
-    return blitBuffer(asciiToBytes(string), buf, offset, length);
-}
-function base64Write(buf, string, offset, length) {
-    return blitBuffer(base64ToBytes(string), buf, offset, length);
-}
-function ucs2Write(buf, string, offset, length) {
-    return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length);
-}
-Buffer.prototype.write = function write(string, offset, length, encoding) {
-    // Buffer#write(string)
-    if (offset === undefined) {
-        encoding = 'utf8';
-        length = this.length;
-        offset = 0;
-    // Buffer#write(string, encoding)
-    } else if (length === undefined && typeof offset === 'string') {
-        encoding = offset;
-        length = this.length;
-        offset = 0;
-    // Buffer#write(string, offset[, length][, encoding])
-    } else if (isFinite(offset)) {
-        offset = offset >>> 0;
-        if (isFinite(length)) {
-            length = length >>> 0;
-            if (encoding === undefined) encoding = 'utf8';
-        } else {
-            encoding = length;
-            length = undefined;
-        }
-    } else throw new Error('Buffer.write(string, encoding, offset[, length]) is no longer supported');
-    const remaining = this.length - offset;
-    if (length === undefined || length > remaining) length = remaining;
-    if (string.length > 0 && (length < 0 || offset < 0) || offset > this.length) throw new RangeError('Attempt to write outside buffer bounds');
-    if (!encoding) encoding = 'utf8';
-    let loweredCase = false;
-    for(;;)switch(encoding){
-        case 'hex':
-            return hexWrite(this, string, offset, length);
-        case 'utf8':
-        case 'utf-8':
-            return utf8Write(this, string, offset, length);
-        case 'ascii':
-        case 'latin1':
-        case 'binary':
-            return asciiWrite(this, string, offset, length);
-        case 'base64':
-            // Warning: maxLength not taken into account in base64Write
-            return base64Write(this, string, offset, length);
-        case 'ucs2':
-        case 'ucs-2':
-        case 'utf16le':
-        case 'utf-16le':
-            return ucs2Write(this, string, offset, length);
-        default:
-            if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding);
-            encoding = ('' + encoding).toLowerCase();
-            loweredCase = true;
-    }
-};
-Buffer.prototype.toJSON = function toJSON() {
-    return {
-        type: 'Buffer',
-        data: Array.prototype.slice.call(this._arr || this, 0)
-    };
-};
-function base64Slice(buf, start, end) {
-    if (start === 0 && end === buf.length) return base64.fromByteArray(buf);
-    else return base64.fromByteArray(buf.slice(start, end));
-}
-function utf8Slice(buf, start, end) {
-    end = Math.min(buf.length, end);
-    const res = [];
-    let i = start;
-    while(i < end){
-        const firstByte = buf[i];
-        let codePoint = null;
-        let bytesPerSequence = firstByte > 0xEF ? 4 : firstByte > 0xDF ? 3 : firstByte > 0xBF ? 2 : 1;
-        if (i + bytesPerSequence <= end) {
-            let secondByte, thirdByte, fourthByte, tempCodePoint;
-            switch(bytesPerSequence){
-                case 1:
-                    if (firstByte < 0x80) codePoint = firstByte;
-                    break;
-                case 2:
-                    secondByte = buf[i + 1];
-                    if ((secondByte & 0xC0) === 0x80) {
-                        tempCodePoint = (firstByte & 0x1F) << 0x6 | secondByte & 0x3F;
-                        if (tempCodePoint > 0x7F) codePoint = tempCodePoint;
-                    }
-                    break;
-                case 3:
-                    secondByte = buf[i + 1];
-                    thirdByte = buf[i + 2];
-                    if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
-                        tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | thirdByte & 0x3F;
-                        if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) codePoint = tempCodePoint;
-                    }
-                    break;
-                case 4:
-                    secondByte = buf[i + 1];
-                    thirdByte = buf[i + 2];
-                    fourthByte = buf[i + 3];
-                    if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
-                        tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | fourthByte & 0x3F;
-                        if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) codePoint = tempCodePoint;
-                    }
-            }
-        }
-        if (codePoint === null) {
-            // we did not generate a valid codePoint so insert a
-            // replacement char (U+FFFD) and advance only 1 byte
-            codePoint = 0xFFFD;
-            bytesPerSequence = 1;
-        } else if (codePoint > 0xFFFF) {
-            // encode to utf16 (surrogate pair dance)
-            codePoint -= 0x10000;
-            res.push(codePoint >>> 10 & 0x3FF | 0xD800);
-            codePoint = 0xDC00 | codePoint & 0x3FF;
-        }
-        res.push(codePoint);
-        i += bytesPerSequence;
-    }
-    return decodeCodePointsArray(res);
-}
-// Based on http://stackoverflow.com/a/22747272/680742, the browser with
-// the lowest limit is Chrome, with 0x10000 args.
-// We go 1 magnitude less, for safety
-const MAX_ARGUMENTS_LENGTH = 0x1000;
-function decodeCodePointsArray(codePoints) {
-    const len = codePoints.length;
-    if (len <= MAX_ARGUMENTS_LENGTH) return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
-    ;
-    // Decode in chunks to avoid "call stack size exceeded".
-    let res = '';
-    let i = 0;
-    while(i < len)res += String.fromCharCode.apply(String, codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH));
-    return res;
-}
-function asciiSlice(buf, start, end) {
-    let ret = '';
-    end = Math.min(buf.length, end);
-    for(let i = start; i < end; ++i)ret += String.fromCharCode(buf[i] & 0x7F);
-    return ret;
-}
-function latin1Slice(buf, start, end) {
-    let ret = '';
-    end = Math.min(buf.length, end);
-    for(let i = start; i < end; ++i)ret += String.fromCharCode(buf[i]);
-    return ret;
-}
-function hexSlice(buf, start, end) {
-    const len = buf.length;
-    if (!start || start < 0) start = 0;
-    if (!end || end < 0 || end > len) end = len;
-    let out = '';
-    for(let i = start; i < end; ++i)out += hexSliceLookupTable[buf[i]];
-    return out;
-}
-function utf16leSlice(buf, start, end) {
-    const bytes = buf.slice(start, end);
-    let res = '';
-    // If bytes.length is odd, the last 8 bits must be ignored (same as node.js)
-    for(let i = 0; i < bytes.length - 1; i += 2)res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256);
-    return res;
-}
-Buffer.prototype.slice = function slice(start, end) {
-    const len = this.length;
-    start = ~~start;
-    end = end === undefined ? len : ~~end;
-    if (start < 0) {
-        start += len;
-        if (start < 0) start = 0;
-    } else if (start > len) start = len;
-    if (end < 0) {
-        end += len;
-        if (end < 0) end = 0;
-    } else if (end > len) end = len;
-    if (end < start) end = start;
-    const newBuf = this.subarray(start, end);
-    // Return an augmented `Uint8Array` instance
-    Object.setPrototypeOf(newBuf, Buffer.prototype);
-    return newBuf;
-};
-/*
- * Need to make sure that buffer isn't trying to write out of bounds.
- */ function checkOffset(offset, ext, length) {
-    if (offset % 1 !== 0 || offset < 0) throw new RangeError('offset is not uint');
-    if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length');
-}
-Buffer.prototype.readUintLE = Buffer.prototype.readUIntLE = function readUIntLE(offset, byteLength1, noAssert) {
-    offset = offset >>> 0;
-    byteLength1 = byteLength1 >>> 0;
-    if (!noAssert) checkOffset(offset, byteLength1, this.length);
-    let val = this[offset];
-    let mul = 1;
-    let i = 0;
-    while(++i < byteLength1 && (mul *= 0x100))val += this[offset + i] * mul;
-    return val;
-};
-Buffer.prototype.readUintBE = Buffer.prototype.readUIntBE = function readUIntBE(offset, byteLength2, noAssert) {
-    offset = offset >>> 0;
-    byteLength2 = byteLength2 >>> 0;
-    if (!noAssert) checkOffset(offset, byteLength2, this.length);
-    let val = this[offset + --byteLength2];
-    let mul = 1;
-    while(byteLength2 > 0 && (mul *= 0x100))val += this[offset + --byteLength2] * mul;
-    return val;
-};
-Buffer.prototype.readUint8 = Buffer.prototype.readUInt8 = function readUInt8(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 1, this.length);
-    return this[offset];
-};
-Buffer.prototype.readUint16LE = Buffer.prototype.readUInt16LE = function readUInt16LE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 2, this.length);
-    return this[offset] | this[offset + 1] << 8;
-};
-Buffer.prototype.readUint16BE = Buffer.prototype.readUInt16BE = function readUInt16BE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 2, this.length);
-    return this[offset] << 8 | this[offset + 1];
-};
-Buffer.prototype.readUint32LE = Buffer.prototype.readUInt32LE = function readUInt32LE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 4, this.length);
-    return (this[offset] | this[offset + 1] << 8 | this[offset + 2] << 16) + this[offset + 3] * 0x1000000;
-};
-Buffer.prototype.readUint32BE = Buffer.prototype.readUInt32BE = function readUInt32BE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 4, this.length);
-    return this[offset] * 0x1000000 + (this[offset + 1] << 16 | this[offset + 2] << 8 | this[offset + 3]);
-};
-Buffer.prototype.readBigUInt64LE = defineBigIntMethod(function readBigUInt64LE(offset) {
-    offset = offset >>> 0;
-    validateNumber(offset, 'offset');
-    const first = this[offset];
-    const last = this[offset + 7];
-    if (first === undefined || last === undefined) boundsError(offset, this.length - 8);
-    const lo = first + this[++offset] * 256 + this[++offset] * 65536 + this[++offset] * 2 ** 24;
-    const hi = this[++offset] + this[++offset] * 256 + this[++offset] * 65536 + last * 2 ** 24;
-    return BigInt(lo) + (BigInt(hi) << BigInt(32));
-});
-Buffer.prototype.readBigUInt64BE = defineBigIntMethod(function readBigUInt64BE(offset) {
-    offset = offset >>> 0;
-    validateNumber(offset, 'offset');
-    const first = this[offset];
-    const last = this[offset + 7];
-    if (first === undefined || last === undefined) boundsError(offset, this.length - 8);
-    const hi = first * 2 ** 24 + this[++offset] * 65536 + this[++offset] * 256 + this[++offset];
-    const lo = this[++offset] * 2 ** 24 + this[++offset] * 65536 + this[++offset] * 256 + last;
-    return (BigInt(hi) << BigInt(32)) + BigInt(lo);
-});
-Buffer.prototype.readIntLE = function readIntLE(offset, byteLength3, noAssert) {
-    offset = offset >>> 0;
-    byteLength3 = byteLength3 >>> 0;
-    if (!noAssert) checkOffset(offset, byteLength3, this.length);
-    let val = this[offset];
-    let mul = 1;
-    let i = 0;
-    while(++i < byteLength3 && (mul *= 0x100))val += this[offset + i] * mul;
-    mul *= 0x80;
-    if (val >= mul) val -= Math.pow(2, 8 * byteLength3);
-    return val;
-};
-Buffer.prototype.readIntBE = function readIntBE(offset, byteLength4, noAssert) {
-    offset = offset >>> 0;
-    byteLength4 = byteLength4 >>> 0;
-    if (!noAssert) checkOffset(offset, byteLength4, this.length);
-    let i = byteLength4;
-    let mul = 1;
-    let val = this[offset + --i];
-    while(i > 0 && (mul *= 0x100))val += this[offset + --i] * mul;
-    mul *= 0x80;
-    if (val >= mul) val -= Math.pow(2, 8 * byteLength4);
-    return val;
-};
-Buffer.prototype.readInt8 = function readInt8(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 1, this.length);
-    if (!(this[offset] & 0x80)) return this[offset];
-    return (0xff - this[offset] + 1) * -1;
-};
-Buffer.prototype.readInt16LE = function readInt16LE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 2, this.length);
-    const val = this[offset] | this[offset + 1] << 8;
-    return val & 0x8000 ? val | 0xFFFF0000 : val;
-};
-Buffer.prototype.readInt16BE = function readInt16BE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 2, this.length);
-    const val = this[offset + 1] | this[offset] << 8;
-    return val & 0x8000 ? val | 0xFFFF0000 : val;
-};
-Buffer.prototype.readInt32LE = function readInt32LE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 4, this.length);
-    return this[offset] | this[offset + 1] << 8 | this[offset + 2] << 16 | this[offset + 3] << 24;
-};
-Buffer.prototype.readInt32BE = function readInt32BE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 4, this.length);
-    return this[offset] << 24 | this[offset + 1] << 16 | this[offset + 2] << 8 | this[offset + 3];
-};
-Buffer.prototype.readBigInt64LE = defineBigIntMethod(function readBigInt64LE(offset) {
-    offset = offset >>> 0;
-    validateNumber(offset, 'offset');
-    const first = this[offset];
-    const last = this[offset + 7];
-    if (first === undefined || last === undefined) boundsError(offset, this.length - 8);
-    const val = this[offset + 4] + this[offset + 5] * 256 + this[offset + 6] * 65536 + (last << 24 // Overflow
-    );
-    return (BigInt(val) << BigInt(32)) + BigInt(first + this[++offset] * 256 + this[++offset] * 65536 + this[++offset] * 2 ** 24);
-});
-Buffer.prototype.readBigInt64BE = defineBigIntMethod(function readBigInt64BE(offset) {
-    offset = offset >>> 0;
-    validateNumber(offset, 'offset');
-    const first = this[offset];
-    const last = this[offset + 7];
-    if (first === undefined || last === undefined) boundsError(offset, this.length - 8);
-    const val = (first << 24) + this[++offset] * 65536 + this[++offset] * 256 + this[++offset];
-    return (BigInt(val) << BigInt(32)) + BigInt(this[++offset] * 2 ** 24 + this[++offset] * 65536 + this[++offset] * 256 + last);
-});
-Buffer.prototype.readFloatLE = function readFloatLE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 4, this.length);
-    return ieee754.read(this, offset, true, 23, 4);
-};
-Buffer.prototype.readFloatBE = function readFloatBE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 4, this.length);
-    return ieee754.read(this, offset, false, 23, 4);
-};
-Buffer.prototype.readDoubleLE = function readDoubleLE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 8, this.length);
-    return ieee754.read(this, offset, true, 52, 8);
-};
-Buffer.prototype.readDoubleBE = function readDoubleBE(offset, noAssert) {
-    offset = offset >>> 0;
-    if (!noAssert) checkOffset(offset, 8, this.length);
-    return ieee754.read(this, offset, false, 52, 8);
-};
-function checkInt(buf, value, offset, ext, max, min) {
-    if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance');
-    if (value > max || value < min) throw new RangeError('"value" argument is out of bounds');
-    if (offset + ext > buf.length) throw new RangeError('Index out of range');
-}
-Buffer.prototype.writeUintLE = Buffer.prototype.writeUIntLE = function writeUIntLE(value, offset, byteLength5, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    byteLength5 = byteLength5 >>> 0;
-    if (!noAssert) {
-        const maxBytes = Math.pow(2, 8 * byteLength5) - 1;
-        checkInt(this, value, offset, byteLength5, maxBytes, 0);
-    }
-    let mul = 1;
-    let i = 0;
-    this[offset] = value & 0xFF;
-    while(++i < byteLength5 && (mul *= 0x100))this[offset + i] = value / mul & 0xFF;
-    return offset + byteLength5;
-};
-Buffer.prototype.writeUintBE = Buffer.prototype.writeUIntBE = function writeUIntBE(value, offset, byteLength6, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    byteLength6 = byteLength6 >>> 0;
-    if (!noAssert) {
-        const maxBytes = Math.pow(2, 8 * byteLength6) - 1;
-        checkInt(this, value, offset, byteLength6, maxBytes, 0);
-    }
-    let i = byteLength6 - 1;
-    let mul = 1;
-    this[offset + i] = value & 0xFF;
-    while(--i >= 0 && (mul *= 0x100))this[offset + i] = value / mul & 0xFF;
-    return offset + byteLength6;
-};
-Buffer.prototype.writeUint8 = Buffer.prototype.writeUInt8 = function writeUInt8(value, offset, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0);
-    this[offset] = value & 0xff;
-    return offset + 1;
-};
-Buffer.prototype.writeUint16LE = Buffer.prototype.writeUInt16LE = function writeUInt16LE(value, offset, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0);
-    this[offset] = value & 0xff;
-    this[offset + 1] = value >>> 8;
-    return offset + 2;
-};
-Buffer.prototype.writeUint16BE = Buffer.prototype.writeUInt16BE = function writeUInt16BE(value, offset, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0);
-    this[offset] = value >>> 8;
-    this[offset + 1] = value & 0xff;
-    return offset + 2;
-};
-Buffer.prototype.writeUint32LE = Buffer.prototype.writeUInt32LE = function writeUInt32LE(value, offset, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0);
-    this[offset + 3] = value >>> 24;
-    this[offset + 2] = value >>> 16;
-    this[offset + 1] = value >>> 8;
-    this[offset] = value & 0xff;
-    return offset + 4;
-};
-Buffer.prototype.writeUint32BE = Buffer.prototype.writeUInt32BE = function writeUInt32BE(value, offset, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0);
-    this[offset] = value >>> 24;
-    this[offset + 1] = value >>> 16;
-    this[offset + 2] = value >>> 8;
-    this[offset + 3] = value & 0xff;
-    return offset + 4;
-};
-function wrtBigUInt64LE(buf, value, offset, min, max) {
-    checkIntBI(value, min, max, buf, offset, 7);
-    let lo = Number(value & BigInt(0xffffffff));
-    buf[offset++] = lo;
-    lo = lo >> 8;
-    buf[offset++] = lo;
-    lo = lo >> 8;
-    buf[offset++] = lo;
-    lo = lo >> 8;
-    buf[offset++] = lo;
-    let hi = Number(value >> BigInt(32) & BigInt(0xffffffff));
-    buf[offset++] = hi;
-    hi = hi >> 8;
-    buf[offset++] = hi;
-    hi = hi >> 8;
-    buf[offset++] = hi;
-    hi = hi >> 8;
-    buf[offset++] = hi;
-    return offset;
-}
-function wrtBigUInt64BE(buf, value, offset, min, max) {
-    checkIntBI(value, min, max, buf, offset, 7);
-    let lo = Number(value & BigInt(0xffffffff));
-    buf[offset + 7] = lo;
-    lo = lo >> 8;
-    buf[offset + 6] = lo;
-    lo = lo >> 8;
-    buf[offset + 5] = lo;
-    lo = lo >> 8;
-    buf[offset + 4] = lo;
-    let hi = Number(value >> BigInt(32) & BigInt(0xffffffff));
-    buf[offset + 3] = hi;
-    hi = hi >> 8;
-    buf[offset + 2] = hi;
-    hi = hi >> 8;
-    buf[offset + 1] = hi;
-    hi = hi >> 8;
-    buf[offset] = hi;
-    return offset + 8;
-}
-Buffer.prototype.writeBigUInt64LE = defineBigIntMethod(function writeBigUInt64LE(value, offset = 0) {
-    return wrtBigUInt64LE(this, value, offset, BigInt(0), BigInt('0xffffffffffffffff'));
-});
-Buffer.prototype.writeBigUInt64BE = defineBigIntMethod(function writeBigUInt64BE(value, offset = 0) {
-    return wrtBigUInt64BE(this, value, offset, BigInt(0), BigInt('0xffffffffffffffff'));
-});
-Buffer.prototype.writeIntLE = function writeIntLE(value, offset, byteLength7, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) {
-        const limit = Math.pow(2, 8 * byteLength7 - 1);
-        checkInt(this, value, offset, byteLength7, limit - 1, -limit);
-    }
-    let i = 0;
-    let mul = 1;
-    let sub = 0;
-    this[offset] = value & 0xFF;
-    while(++i < byteLength7 && (mul *= 0x100)){
-        if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) sub = 1;
-        this[offset + i] = (value / mul >> 0) - sub & 0xFF;
-    }
-    return offset + byteLength7;
-};
-Buffer.prototype.writeIntBE = function writeIntBE(value, offset, byteLength8, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) {
-        const limit = Math.pow(2, 8 * byteLength8 - 1);
-        checkInt(this, value, offset, byteLength8, limit - 1, -limit);
-    }
-    let i = byteLength8 - 1;
-    let mul = 1;
-    let sub = 0;
-    this[offset + i] = value & 0xFF;
-    while(--i >= 0 && (mul *= 0x100)){
-        if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) sub = 1;
-        this[offset + i] = (value / mul >> 0) - sub & 0xFF;
-    }
-    return offset + byteLength8;
-};
-Buffer.prototype.writeInt8 = function writeInt8(value, offset, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -128);
-    if (value < 0) value = 0xff + value + 1;
-    this[offset] = value & 0xff;
-    return offset + 1;
-};
-Buffer.prototype.writeInt16LE = function writeInt16LE(value, offset, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -32768);
-    this[offset] = value & 0xff;
-    this[offset + 1] = value >>> 8;
-    return offset + 2;
-};
-Buffer.prototype.writeInt16BE = function writeInt16BE(value, offset, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -32768);
-    this[offset] = value >>> 8;
-    this[offset + 1] = value & 0xff;
-    return offset + 2;
-};
-Buffer.prototype.writeInt32LE = function writeInt32LE(value, offset, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -2147483648);
-    this[offset] = value & 0xff;
-    this[offset + 1] = value >>> 8;
-    this[offset + 2] = value >>> 16;
-    this[offset + 3] = value >>> 24;
-    return offset + 4;
-};
-Buffer.prototype.writeInt32BE = function writeInt32BE(value, offset, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -2147483648);
-    if (value < 0) value = 0xffffffff + value + 1;
-    this[offset] = value >>> 24;
-    this[offset + 1] = value >>> 16;
-    this[offset + 2] = value >>> 8;
-    this[offset + 3] = value & 0xff;
-    return offset + 4;
-};
-Buffer.prototype.writeBigInt64LE = defineBigIntMethod(function writeBigInt64LE(value, offset = 0) {
-    return wrtBigUInt64LE(this, value, offset, -BigInt('0x8000000000000000'), BigInt('0x7fffffffffffffff'));
-});
-Buffer.prototype.writeBigInt64BE = defineBigIntMethod(function writeBigInt64BE(value, offset = 0) {
-    return wrtBigUInt64BE(this, value, offset, -BigInt('0x8000000000000000'), BigInt('0x7fffffffffffffff'));
-});
-function checkIEEE754(buf, value, offset, ext, max, min) {
-    if (offset + ext > buf.length) throw new RangeError('Index out of range');
-    if (offset < 0) throw new RangeError('Index out of range');
-}
-function writeFloat(buf, value, offset, littleEndian, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -340282346638528860000000000000000000000);
-    ieee754.write(buf, value, offset, littleEndian, 23, 4);
-    return offset + 4;
-}
-Buffer.prototype.writeFloatLE = function writeFloatLE(value, offset, noAssert) {
-    return writeFloat(this, value, offset, true, noAssert);
-};
-Buffer.prototype.writeFloatBE = function writeFloatBE(value, offset, noAssert) {
-    return writeFloat(this, value, offset, false, noAssert);
-};
-function writeDouble(buf, value, offset, littleEndian, noAssert) {
-    value = +value;
-    offset = offset >>> 0;
-    if (!noAssert) checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000);
-    ieee754.write(buf, value, offset, littleEndian, 52, 8);
-    return offset + 8;
-}
-Buffer.prototype.writeDoubleLE = function writeDoubleLE(value, offset, noAssert) {
-    return writeDouble(this, value, offset, true, noAssert);
-};
-Buffer.prototype.writeDoubleBE = function writeDoubleBE(value, offset, noAssert) {
-    return writeDouble(this, value, offset, false, noAssert);
-};
-// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
-Buffer.prototype.copy = function copy(target, targetStart, start, end) {
-    if (!Buffer.isBuffer(target)) throw new TypeError('argument should be a Buffer');
-    if (!start) start = 0;
-    if (!end && end !== 0) end = this.length;
-    if (targetStart >= target.length) targetStart = target.length;
-    if (!targetStart) targetStart = 0;
-    if (end > 0 && end < start) end = start;
-    // Copy 0 bytes; we're done
-    if (end === start) return 0;
-    if (target.length === 0 || this.length === 0) return 0;
-    // Fatal error conditions
-    if (targetStart < 0) throw new RangeError('targetStart out of bounds');
-    if (start < 0 || start >= this.length) throw new RangeError('Index out of range');
-    if (end < 0) throw new RangeError('sourceEnd out of bounds');
-    // Are we oob?
-    if (end > this.length) end = this.length;
-    if (target.length - targetStart < end - start) end = target.length - targetStart + start;
-    const len = end - start;
-    if (this === target && typeof Uint8Array.prototype.copyWithin === 'function') // Use built-in when available, missing from IE11
-    this.copyWithin(targetStart, start, end);
-    else Uint8Array.prototype.set.call(target, this.subarray(start, end), targetStart);
-    return len;
-};
-// Usage:
-//    buffer.fill(number[, offset[, end]])
-//    buffer.fill(buffer[, offset[, end]])
-//    buffer.fill(string[, offset[, end]][, encoding])
-Buffer.prototype.fill = function fill(val, start, end, encoding) {
-    // Handle string cases:
-    if (typeof val === 'string') {
-        if (typeof start === 'string') {
-            encoding = start;
-            start = 0;
-            end = this.length;
-        } else if (typeof end === 'string') {
-            encoding = end;
-            end = this.length;
-        }
-        if (encoding !== undefined && typeof encoding !== 'string') throw new TypeError('encoding must be a string');
-        if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) throw new TypeError('Unknown encoding: ' + encoding);
-        if (val.length === 1) {
-            const code = val.charCodeAt(0);
-            if (encoding === 'utf8' && code < 128 || encoding === 'latin1') // Fast path: If `val` fits into a single byte, use that numeric value.
-            val = code;
-        }
-    } else if (typeof val === 'number') val = val & 255;
-    else if (typeof val === 'boolean') val = Number(val);
-    // Invalid ranges are not set to a default, so can range check early.
-    if (start < 0 || this.length < start || this.length < end) throw new RangeError('Out of range index');
-    if (end <= start) return this;
-    start = start >>> 0;
-    end = end === undefined ? this.length : end >>> 0;
-    if (!val) val = 0;
-    let i;
-    if (typeof val === 'number') for(i = start; i < end; ++i)this[i] = val;
-    else {
-        const bytes = Buffer.isBuffer(val) ? val : Buffer.from(val, encoding);
-        const len = bytes.length;
-        if (len === 0) throw new TypeError('The value "' + val + '" is invalid for argument "value"');
-        for(i = 0; i < end - start; ++i)this[i + start] = bytes[i % len];
-    }
-    return this;
-};
-// CUSTOM ERRORS
-// =============
-// Simplified versions from Node, changed for Buffer-only usage
-const errors = {};
-function E(sym, getMessage, Base) {
-    errors[sym] = class NodeError extends Base {
-        constructor(){
-            super();
-            Object.defineProperty(this, 'message', {
-                value: getMessage.apply(this, arguments),
-                writable: true,
-                configurable: true
-            });
-            // Add the error code to the name to include it in the stack trace.
-            this.name = `${this.name} [${sym}]`;
-            // Access the stack to generate the error message including the error code
-            // from the name.
-            this.stack // eslint-disable-line no-unused-expressions
-            ;
-            // Reset the name to the actual name.
-            delete this.name;
-        }
-        get code() {
-            return sym;
-        }
-        set code(value) {
-            Object.defineProperty(this, 'code', {
-                configurable: true,
-                enumerable: true,
-                value,
-                writable: true
-            });
-        }
-        toString() {
-            return `${this.name} [${sym}]: ${this.message}`;
-        }
-    };
-}
-E('ERR_BUFFER_OUT_OF_BOUNDS', function(name) {
-    if (name) return `${name} is outside of buffer bounds`;
-    return 'Attempt to access memory outside buffer bounds';
-}, RangeError);
-E('ERR_INVALID_ARG_TYPE', function(name, actual) {
-    return `The "${name}" argument must be of type number. Received type ${typeof actual}`;
-}, TypeError);
-E('ERR_OUT_OF_RANGE', function(str, range, input) {
-    let msg = `The value of "${str}" is out of range.`;
-    let received = input;
-    if (Number.isInteger(input) && Math.abs(input) > 2 ** 32) received = addNumericalSeparator(String(input));
-    else if (typeof input === 'bigint') {
-        received = String(input);
-        if (input > BigInt(2) ** BigInt(32) || input < -(BigInt(2) ** BigInt(32))) received = addNumericalSeparator(received);
-        received += 'n';
-    }
-    msg += ` It must be ${range}. Received ${received}`;
-    return msg;
-}, RangeError);
-function addNumericalSeparator(val) {
-    let res = '';
-    let i = val.length;
-    const start = val[0] === '-' ? 1 : 0;
-    for(; i >= start + 4; i -= 3)res = `_${val.slice(i - 3, i)}${res}`;
-    return `${val.slice(0, i)}${res}`;
-}
-// CHECK FUNCTIONS
-// ===============
-function checkBounds(buf, offset, byteLength9) {
-    validateNumber(offset, 'offset');
-    if (buf[offset] === undefined || buf[offset + byteLength9] === undefined) boundsError(offset, buf.length - (byteLength9 + 1));
-}
-function checkIntBI(value, min, max, buf, offset, byteLength10) {
-    if (value > max || value < min) {
-        const n = typeof min === 'bigint' ? 'n' : '';
-        let range;
-        if (byteLength10 > 3) {
-            if (min === 0 || min === BigInt(0)) range = `>= 0${n} and < 2${n} ** ${(byteLength10 + 1) * 8}${n}`;
-            else range = `>= -(2${n} ** ${(byteLength10 + 1) * 8 - 1}${n}) and < 2 ** ` + `${(byteLength10 + 1) * 8 - 1}${n}`;
-        } else range = `>= ${min}${n} and <= ${max}${n}`;
-        throw new errors.ERR_OUT_OF_RANGE('value', range, value);
-    }
-    checkBounds(buf, offset, byteLength10);
-}
-function validateNumber(value, name) {
-    if (typeof value !== 'number') throw new errors.ERR_INVALID_ARG_TYPE(name, 'number', value);
-}
-function boundsError(value, length, type) {
-    if (Math.floor(value) !== value) {
-        validateNumber(value, type);
-        throw new errors.ERR_OUT_OF_RANGE(type || 'offset', 'an integer', value);
-    }
-    if (length < 0) throw new errors.ERR_BUFFER_OUT_OF_BOUNDS();
-    throw new errors.ERR_OUT_OF_RANGE(type || 'offset', `>= ${type ? 1 : 0} and <= ${length}`, value);
-}
-// HELPER FUNCTIONS
-// ================
-const INVALID_BASE64_RE = /[^+/0-9A-Za-z-_]/g;
-function base64clean(str) {
-    // Node takes equal signs as end of the Base64 encoding
-    str = str.split('=')[0];
-    // Node strips out invalid characters like \n and \t from the string, base64-js does not
-    str = str.trim().replace(INVALID_BASE64_RE, '');
-    // Node converts strings with length < 2 to ''
-    if (str.length < 2) return '';
-    // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
-    while(str.length % 4 !== 0)str = str + '=';
-    return str;
-}
-function utf8ToBytes(string, units) {
-    units = units || Infinity;
-    let codePoint;
-    const length = string.length;
-    let leadSurrogate = null;
-    const bytes = [];
-    for(let i = 0; i < length; ++i){
-        codePoint = string.charCodeAt(i);
-        // is surrogate component
-        if (codePoint > 0xD7FF && codePoint < 0xE000) {
-            // last char was a lead
-            if (!leadSurrogate) {
-                // no lead yet
-                if (codePoint > 0xDBFF) {
-                    // unexpected trail
-                    if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD);
-                    continue;
-                } else if (i + 1 === length) {
-                    // unpaired lead
-                    if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD);
-                    continue;
-                }
-                // valid lead
-                leadSurrogate = codePoint;
-                continue;
-            }
-            // 2 leads in a row
-            if (codePoint < 0xDC00) {
-                if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD);
-                leadSurrogate = codePoint;
-                continue;
-            }
-            // valid surrogate pair
-            codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000;
-        } else if (leadSurrogate) // valid bmp char, but last char was a lead
-        {
-            if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD);
-        }
-        leadSurrogate = null;
-        // encode utf8
-        if (codePoint < 0x80) {
-            if ((units -= 1) < 0) break;
-            bytes.push(codePoint);
-        } else if (codePoint < 0x800) {
-            if ((units -= 2) < 0) break;
-            bytes.push(codePoint >> 0x6 | 0xC0, codePoint & 0x3F | 0x80);
-        } else if (codePoint < 0x10000) {
-            if ((units -= 3) < 0) break;
-            bytes.push(codePoint >> 0xC | 0xE0, codePoint >> 0x6 & 0x3F | 0x80, codePoint & 0x3F | 0x80);
-        } else if (codePoint < 0x110000) {
-            if ((units -= 4) < 0) break;
-            bytes.push(codePoint >> 0x12 | 0xF0, codePoint >> 0xC & 0x3F | 0x80, codePoint >> 0x6 & 0x3F | 0x80, codePoint & 0x3F | 0x80);
-        } else throw new Error('Invalid code point');
-    }
-    return bytes;
-}
-function asciiToBytes(str) {
-    const byteArray = [];
-    for(let i = 0; i < str.length; ++i)// Node's code seems to be doing this and not & 0x7F..
-    byteArray.push(str.charCodeAt(i) & 0xFF);
-    return byteArray;
-}
-function utf16leToBytes(str, units) {
-    let c, hi, lo;
-    const byteArray = [];
-    for(let i = 0; i < str.length; ++i){
-        if ((units -= 2) < 0) break;
-        c = str.charCodeAt(i);
-        hi = c >> 8;
-        lo = c % 256;
-        byteArray.push(lo);
-        byteArray.push(hi);
-    }
-    return byteArray;
-}
-function base64ToBytes(str) {
-    return base64.toByteArray(base64clean(str));
-}
-function blitBuffer(src, dst, offset, length) {
-    let i;
-    for(i = 0; i < length; ++i){
-        if (i + offset >= dst.length || i >= src.length) break;
-        dst[i + offset] = src[i];
-    }
-    return i;
-}
-// ArrayBuffer or Uint8Array objects from other contexts (i.e. iframes) do not pass
-// the `instanceof` check but they should be treated as of that type.
-// See: https://github.com/feross/buffer/issues/166
-function isInstance(obj, type) {
-    return obj instanceof type || obj != null && obj.constructor != null && obj.constructor.name != null && obj.constructor.name === type.name;
-}
-function numberIsNaN(obj) {
-    // For IE11 support
-    return obj !== obj // eslint-disable-line no-self-compare
-    ;
-}
-// Create lookup table for `toString('hex')`
-// See: https://github.com/feross/buffer/issues/219
-const hexSliceLookupTable = function() {
-    const alphabet = '0123456789abcdef';
-    const table = new Array(256);
-    for(let i = 0; i < 16; ++i){
-        const i16 = i * 16;
-        for(let j = 0; j < 16; ++j)table[i16 + j] = alphabet[i] + alphabet[j];
-    }
-    return table;
-}();
-// Return not function with Error if BigInt not supported
-function defineBigIntMethod(fn) {
-    return typeof BigInt === 'undefined' ? BufferBigIntNotDefined : fn;
-}
-function BufferBigIntNotDefined() {
-    throw new Error('BigInt not supported');
-}
-
-},{"base64-js":"eIiSV","ieee754":"cO95r"}],"eIiSV":[function(require,module,exports) {
-'use strict';
-exports.byteLength = byteLength;
-exports.toByteArray = toByteArray;
-exports.fromByteArray = fromByteArray;
-var lookup = [];
-var revLookup = [];
-var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array;
-var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-for(var i = 0, len = code.length; i < len; ++i){
-    lookup[i] = code[i];
-    revLookup[code.charCodeAt(i)] = i;
-}
-// Support decoding URL-safe base64 strings, as Node.js does.
-// See: https://en.wikipedia.org/wiki/Base64#URL_applications
-revLookup['-'.charCodeAt(0)] = 62;
-revLookup['_'.charCodeAt(0)] = 63;
-function getLens(b64) {
-    var len1 = b64.length;
-    if (len1 % 4 > 0) throw new Error('Invalid string. Length must be a multiple of 4');
-    // Trim off extra bytes after placeholder bytes are found
-    // See: https://github.com/beatgammit/base64-js/issues/42
-    var validLen = b64.indexOf('=');
-    if (validLen === -1) validLen = len1;
-    var placeHoldersLen = validLen === len1 ? 0 : 4 - validLen % 4;
-    return [
-        validLen,
-        placeHoldersLen
-    ];
-}
-// base64 is 4/3 + up to two characters of the original data
-function byteLength(b64) {
-    var lens = getLens(b64);
-    var validLen = lens[0];
-    var placeHoldersLen = lens[1];
-    return (validLen + placeHoldersLen) * 3 / 4 - placeHoldersLen;
-}
-function _byteLength(b64, validLen, placeHoldersLen) {
-    return (validLen + placeHoldersLen) * 3 / 4 - placeHoldersLen;
-}
-function toByteArray(b64) {
-    var tmp;
-    var lens = getLens(b64);
-    var validLen = lens[0];
-    var placeHoldersLen = lens[1];
-    var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen));
-    var curByte = 0;
-    // if there are placeholders, only get up to the last complete 4 chars
-    var len2 = placeHoldersLen > 0 ? validLen - 4 : validLen;
-    var i1;
-    for(i1 = 0; i1 < len2; i1 += 4){
-        tmp = revLookup[b64.charCodeAt(i1)] << 18 | revLookup[b64.charCodeAt(i1 + 1)] << 12 | revLookup[b64.charCodeAt(i1 + 2)] << 6 | revLookup[b64.charCodeAt(i1 + 3)];
-        arr[curByte++] = tmp >> 16 & 0xFF;
-        arr[curByte++] = tmp >> 8 & 0xFF;
-        arr[curByte++] = tmp & 0xFF;
-    }
-    if (placeHoldersLen === 2) {
-        tmp = revLookup[b64.charCodeAt(i1)] << 2 | revLookup[b64.charCodeAt(i1 + 1)] >> 4;
-        arr[curByte++] = tmp & 0xFF;
-    }
-    if (placeHoldersLen === 1) {
-        tmp = revLookup[b64.charCodeAt(i1)] << 10 | revLookup[b64.charCodeAt(i1 + 1)] << 4 | revLookup[b64.charCodeAt(i1 + 2)] >> 2;
-        arr[curByte++] = tmp >> 8 & 0xFF;
-        arr[curByte++] = tmp & 0xFF;
-    }
-    return arr;
-}
-function tripletToBase64(num) {
-    return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F];
-}
-function encodeChunk(uint8, start, end) {
-    var tmp;
-    var output = [];
-    for(var i2 = start; i2 < end; i2 += 3){
-        tmp = (uint8[i2] << 16 & 0xFF0000) + (uint8[i2 + 1] << 8 & 0xFF00) + (uint8[i2 + 2] & 0xFF);
-        output.push(tripletToBase64(tmp));
-    }
-    return output.join('');
-}
-function fromByteArray(uint8) {
-    var tmp;
-    var len3 = uint8.length;
-    var extraBytes = len3 % 3 // if we have 1 byte left, pad 2 bytes
-    ;
-    var parts = [];
-    var maxChunkLength = 16383 // must be multiple of 3
-    ;
-    // go through the array every three bytes, we'll deal with trailing stuff later
-    for(var i3 = 0, len2 = len3 - extraBytes; i3 < len2; i3 += maxChunkLength)parts.push(encodeChunk(uint8, i3, i3 + maxChunkLength > len2 ? len2 : i3 + maxChunkLength));
-    // pad the end with zeros, but make sure to not forget the extra bytes
-    if (extraBytes === 1) {
-        tmp = uint8[len3 - 1];
-        parts.push(lookup[tmp >> 2] + lookup[tmp << 4 & 0x3F] + '==');
-    } else if (extraBytes === 2) {
-        tmp = (uint8[len3 - 2] << 8) + uint8[len3 - 1];
-        parts.push(lookup[tmp >> 10] + lookup[tmp >> 4 & 0x3F] + lookup[tmp << 2 & 0x3F] + '=');
-    }
-    return parts.join('');
-}
-
-},{}],"cO95r":[function(require,module,exports) {
-/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */ exports.read = function(buffer, offset, isLE, mLen, nBytes) {
-    var e, m;
-    var eLen = nBytes * 8 - mLen - 1;
-    var eMax = (1 << eLen) - 1;
-    var eBias = eMax >> 1;
-    var nBits = -7;
-    var i = isLE ? nBytes - 1 : 0;
-    var d = isLE ? -1 : 1;
-    var s = buffer[offset + i];
-    i += d;
-    e = s & (1 << -nBits) - 1;
-    s >>= -nBits;
-    nBits += eLen;
-    for(; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8);
-    m = e & (1 << -nBits) - 1;
-    e >>= -nBits;
-    nBits += mLen;
-    for(; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8);
-    if (e === 0) e = 1 - eBias;
-    else if (e === eMax) return m ? NaN : (s ? -1 : 1) * Infinity;
-    else {
-        m = m + Math.pow(2, mLen);
-        e = e - eBias;
-    }
-    return (s ? -1 : 1) * m * Math.pow(2, e - mLen);
-};
-exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
-    var e, m, c;
-    var eLen = nBytes * 8 - mLen - 1;
-    var eMax = (1 << eLen) - 1;
-    var eBias = eMax >> 1;
-    var rt = mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0;
-    var i = isLE ? 0 : nBytes - 1;
-    var d = isLE ? 1 : -1;
-    var s = value < 0 || value === 0 && 1 / value < 0 ? 1 : 0;
-    value = Math.abs(value);
-    if (isNaN(value) || value === Infinity) {
-        m = isNaN(value) ? 1 : 0;
-        e = eMax;
-    } else {
-        e = Math.floor(Math.log(value) / Math.LN2);
-        if (value * (c = Math.pow(2, -e)) < 1) {
-            e--;
-            c *= 2;
-        }
-        if (e + eBias >= 1) value += rt / c;
-        else value += rt * Math.pow(2, 1 - eBias);
-        if (value * c >= 2) {
-            e++;
-            c /= 2;
-        }
-        if (e + eBias >= eMax) {
-            m = 0;
-            e = eMax;
-        } else if (e + eBias >= 1) {
-            m = (value * c - 1) * Math.pow(2, mLen);
-            e = e + eBias;
-        } else {
-            m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen);
-            e = 0;
-        }
-    }
-    for(; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8);
-    e = e << mLen | m;
-    eLen += mLen;
-    for(; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8);
-    buffer[offset + i - d] |= s * 128;
 };
 
 },{}],"ldm57":[function(require,module,exports) {
@@ -27905,9 +25963,9 @@ var buildURL = require('./../helpers/buildURL');
 var buildFullPath = require('../core/buildFullPath');
 var parseHeaders = require('./../helpers/parseHeaders');
 var isURLSameOrigin = require('./../helpers/isURLSameOrigin');
+var createError = require('../core/createError');
 var transitionalDefaults = require('../defaults/transitional');
-var AxiosError = require('../core/AxiosError');
-var CanceledError = require('../cancel/CanceledError');
+var Cancel = require('../cancel/Cancel');
 module.exports = function xhrAdapter(config) {
     return new Promise(function dispatchXhrRequest(resolve, reject) {
         var requestData = config.data;
@@ -27918,6 +25976,7 @@ module.exports = function xhrAdapter(config) {
             if (config.cancelToken) config.cancelToken.unsubscribe(onCanceled);
             if (config.signal) config.signal.removeEventListener('abort', onCanceled);
         }
+        if (utils.isFormData(requestData)) delete requestHeaders['Content-Type']; // Let the browser set it
         var request = new XMLHttpRequest();
         // HTTP basic authentication
         if (config.auth) {
@@ -27969,7 +26028,7 @@ module.exports = function xhrAdapter(config) {
         // Handle browser request cancellation (as opposed to a manual cancellation)
         request.onabort = function handleAbort() {
             if (!request) return;
-            reject(new AxiosError('Request aborted', AxiosError.ECONNABORTED, config, request));
+            reject(createError('Request aborted', config, 'ECONNABORTED', request));
             // Clean up request
             request = null;
         };
@@ -27977,7 +26036,7 @@ module.exports = function xhrAdapter(config) {
         request.onerror = function handleError() {
             // Real errors are hidden from us by the browser
             // onerror should only fire if it's a network error
-            reject(new AxiosError('Network Error', AxiosError.ERR_NETWORK, config, request, request));
+            reject(createError('Network Error', config, null, request));
             // Clean up request
             request = null;
         };
@@ -27986,7 +26045,7 @@ module.exports = function xhrAdapter(config) {
             var timeoutErrorMessage = config.timeout ? 'timeout of ' + config.timeout + 'ms exceeded' : 'timeout exceeded';
             var transitional = config.transitional || transitionalDefaults;
             if (config.timeoutErrorMessage) timeoutErrorMessage = config.timeoutErrorMessage;
-            reject(new AxiosError(timeoutErrorMessage, transitional.clarifyTimeoutError ? AxiosError.ETIMEDOUT : AxiosError.ECONNABORTED, config, request));
+            reject(createError(timeoutErrorMessage, config, transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED', request));
             // Clean up request
             request = null;
         };
@@ -28018,7 +26077,7 @@ module.exports = function xhrAdapter(config) {
             // eslint-disable-next-line func-names
             onCanceled = function(cancel) {
                 if (!request) return;
-                reject(!cancel || cancel && cancel.type ? new CanceledError() : cancel);
+                reject(!cancel || cancel && cancel.type ? new Cancel('canceled') : cancel);
                 request.abort();
                 request = null;
             };
@@ -28026,24 +26085,14 @@ module.exports = function xhrAdapter(config) {
             if (config.signal) config.signal.aborted ? onCanceled() : config.signal.addEventListener('abort', onCanceled);
         }
         if (!requestData) requestData = null;
-        var tokens = fullPath.split(':', 2);
-        var protocol = tokens.length > 1 && tokens[0];
-        if (protocol && [
-            'http',
-            'https',
-            'file'
-        ].indexOf(protocol) === -1) {
-            reject(new AxiosError('Unsupported protocol ' + protocol + ':', AxiosError.ERR_BAD_REQUEST, config));
-            return;
-        }
         // Send the request
         request.send(requestData);
     });
 };
 
-},{"./../utils":"5By4s","./../core/settle":"dD9aC","./../helpers/cookies":"4WJjt","./../helpers/buildURL":"3bwC2","../core/buildFullPath":"1I5TW","./../helpers/parseHeaders":"kqDd5","./../helpers/isURLSameOrigin":"lxXtv","../defaults/transitional":"lM32f","../core/AxiosError":"3u8Tl","../cancel/CanceledError":"9PwCG"}],"dD9aC":[function(require,module,exports) {
+},{"./../utils":"5By4s","./../core/settle":"dD9aC","./../helpers/cookies":"4WJjt","./../helpers/buildURL":"3bwC2","../core/buildFullPath":"1I5TW","./../helpers/parseHeaders":"kqDd5","./../helpers/isURLSameOrigin":"lxXtv","../core/createError":"5nVS9","../defaults/transitional":"lM32f","../cancel/Cancel":"kjMy2"}],"dD9aC":[function(require,module,exports) {
 'use strict';
-var AxiosError = require('./AxiosError');
+var createError = require('./createError');
 /**
  * Resolve or reject a Promise based on response status.
  *
@@ -28053,13 +26102,27 @@ var AxiosError = require('./AxiosError');
  */ module.exports = function settle(resolve, reject, response) {
     var validateStatus = response.config.validateStatus;
     if (!response.status || !validateStatus || validateStatus(response.status)) resolve(response);
-    else reject(new AxiosError('Request failed with status code ' + response.status, [
-        AxiosError.ERR_BAD_REQUEST,
-        AxiosError.ERR_BAD_RESPONSE
-    ][Math.floor(response.status / 100) - 4], response.config, response.request, response));
+    else reject(createError('Request failed with status code ' + response.status, response.config, null, response.request, response));
 };
 
-},{"./AxiosError":"3u8Tl"}],"4WJjt":[function(require,module,exports) {
+},{"./createError":"5nVS9"}],"5nVS9":[function(require,module,exports) {
+'use strict';
+var enhanceError = require('./enhanceError');
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */ module.exports = function createError(message, config, code, request, response) {
+    var error = new Error(message);
+    return enhanceError(error, config, code, request, response);
+};
+
+},{"./enhanceError":"itUQr"}],"4WJjt":[function(require,module,exports) {
 'use strict';
 var utils = require('./../utils');
 module.exports = utils.isStandardBrowserEnv() ? // Standard browser envs support document.cookie
@@ -28244,28 +26307,21 @@ function nonStandardBrowserEnv() {
     };
 }();
 
-},{"./../utils":"5By4s"}],"9PwCG":[function(require,module,exports) {
+},{"./../utils":"5By4s"}],"kjMy2":[function(require,module,exports) {
 'use strict';
-var AxiosError = require('../core/AxiosError');
-var utils = require('../utils');
 /**
- * A `CanceledError` is an object that is thrown when an operation is canceled.
+ * A `Cancel` is an object that is thrown when an operation is canceled.
  *
  * @class
  * @param {string=} message The message.
- */ function CanceledError(message) {
-    // eslint-disable-next-line no-eq-null,eqeqeq
-    AxiosError.call(this, message == null ? 'canceled' : message, AxiosError.ERR_CANCELED);
-    this.name = 'CanceledError';
+ */ function Cancel(message) {
+    this.message = message;
 }
-utils.inherits(CanceledError, AxiosError, {
-    __CANCEL__: true
-});
-module.exports = CanceledError;
-
-},{"../core/AxiosError":"3u8Tl","../utils":"5By4s"}],"aFlee":[function(require,module,exports) {
-// eslint-disable-next-line strict
-module.exports = null;
+Cancel.prototype.toString = function toString() {
+    return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+Cancel.prototype.__CANCEL__ = true;
+module.exports = Cancel;
 
 },{}],"a0VmF":[function(require,module,exports) {
 'use strict';
@@ -28332,7 +26388,6 @@ var utils = require('../utils');
         'decompress': defaultToConfig2,
         'maxContentLength': defaultToConfig2,
         'maxBodyLength': defaultToConfig2,
-        'beforeRedirect': defaultToConfig2,
         'transport': defaultToConfig2,
         'httpAgent': defaultToConfig2,
         'httpsAgent': defaultToConfig2,
@@ -28352,7 +26407,6 @@ var utils = require('../utils');
 },{"../utils":"5By4s"}],"9vgkY":[function(require,module,exports) {
 'use strict';
 var VERSION = require('../env/data').version;
-var AxiosError = require('../core/AxiosError');
 var validators = {};
 // eslint-disable-next-line func-names
 [
@@ -28380,7 +26434,7 @@ var deprecatedWarnings = {};
     }
     // eslint-disable-next-line func-names
     return function(value, opt, opts) {
-        if (validator === false) throw new AxiosError(formatMessage(opt, ' has been removed' + (version ? ' in ' + version : '')), AxiosError.ERR_DEPRECATED);
+        if (validator === false) throw new Error(formatMessage(opt, ' has been removed' + (version ? ' in ' + version : '')));
         if (version && !deprecatedWarnings[opt]) {
             deprecatedWarnings[opt] = true;
             // eslint-disable-next-line no-console
@@ -28395,7 +26449,7 @@ var deprecatedWarnings = {};
  * @param {object} schema
  * @param {boolean?} allowUnknown
  */ function assertOptions(options, schema, allowUnknown) {
-    if (typeof options !== 'object') throw new AxiosError('options must be an object', AxiosError.ERR_BAD_OPTION_VALUE);
+    if (typeof options !== 'object') throw new TypeError('options must be an object');
     var keys = Object.keys(options);
     var i = keys.length;
     while(i-- > 0){
@@ -28404,10 +26458,10 @@ var deprecatedWarnings = {};
         if (validator) {
             var value = options[opt];
             var result = value === undefined || validator(value, opt, options);
-            if (result !== true) throw new AxiosError('option ' + opt + ' must be ' + result, AxiosError.ERR_BAD_OPTION_VALUE);
+            if (result !== true) throw new TypeError('option ' + opt + ' must be ' + result);
             continue;
         }
-        if (allowUnknown !== true) throw new AxiosError('Unknown option ' + opt, AxiosError.ERR_BAD_OPTION);
+        if (allowUnknown !== true) throw Error('Unknown option ' + opt);
     }
 }
 module.exports = {
@@ -28415,14 +26469,14 @@ module.exports = {
     validators: validators
 };
 
-},{"../env/data":"h29L9","../core/AxiosError":"3u8Tl"}],"h29L9":[function(require,module,exports) {
+},{"../env/data":"h29L9"}],"h29L9":[function(require,module,exports) {
 module.exports = {
-    "version": "0.27.1"
+    "version": "0.26.1"
 };
 
 },{}],"45wzn":[function(require,module,exports) {
 'use strict';
-var CanceledError = require('./CanceledError');
+var Cancel = require('./Cancel');
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
  *
@@ -28459,12 +26513,12 @@ var CanceledError = require('./CanceledError');
     executor(function cancel(message) {
         if (token.reason) // Cancellation has already been requested
         return;
-        token.reason = new CanceledError(message);
+        token.reason = new Cancel(message);
         resolvePromise(token.reason);
     });
 }
 /**
- * Throws a `CanceledError` if cancellation has been requested.
+ * Throws a `Cancel` if cancellation has been requested.
  */ CancelToken.prototype.throwIfRequested = function throwIfRequested() {
     if (this.reason) throw this.reason;
 };
@@ -28502,7 +26556,7 @@ var CanceledError = require('./CanceledError');
 };
 module.exports = CancelToken;
 
-},{"./CanceledError":"9PwCG"}],"dyQ8N":[function(require,module,exports) {
+},{"./Cancel":"kjMy2"}],"dyQ8N":[function(require,module,exports) {
 'use strict';
 /**
  * Syntactic sugar for invoking a function and expanding an array for arguments.
@@ -28541,884 +26595,43 @@ var utils = require('./../utils');
     return utils.isObject(payload) && payload.isAxiosError === true;
 };
 
-},{"./../utils":"5By4s"}],"9YtA0":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"./../utils":"5By4s"}],"bwuIu":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$9fee.prelude(module);
+$parcel$ReactRefreshHelpers$67b2.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "LoginView", ()=>LoginView
+parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
 );
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _registerView = require("../register-view/register-view");
-var _registerViewDefault = parcelHelpers.interopDefault(_registerView);
-var _loginViewScss = require("./login-view.scss");
-var _s = $RefreshSig$();
-function LoginView(props) {
-    _s();
-    const [username, setUsername] = _react.useState('');
-    const [password, setPassword] = _react.useState('');
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        console.log(username, password);
-        /*
-    Send a request to the server for authentication then call props.onLoggedIn(username)
-     */ props.onLoggedIn(username);
-    };
-    const handleNewUser = ()=>{
-        console.log('Register new user');
-        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_registerViewDefault.default, {}, void 0, false, {
-            fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 22,
-            columnNumber: 12
+class MovieCard extends _reactDefault.default.Component {
+    render() {
+        const { movie , onMovieClick  } = this.props;
+        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+            className: "movie-card",
+            onClick: ()=>{
+                onMovieClick(movie);
+            },
+            children: movie.Title
+        }, void 0, false, {
+            fileName: "src/components/movie-card/movie-card.jsx",
+            lineNumber: 7,
+            columnNumber: 7
         }, this);
-    };
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("form", {
-                children: [
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                        children: [
-                            "Username:",
-                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                                type: "text",
-                                value: username,
-                                onChange: (e)=>setUsername(e.target.value)
-                            }, void 0, false, {
-                                fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 30,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 28,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                        children: [
-                            "Password:",
-                            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                                type: "password",
-                                value: password,
-                                onChange: (e)=>setPassword(e.target.value)
-                            }, void 0, false, {
-                                fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 38,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 36,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
-                        type: "button",
-                        onClick: handleSubmit,
-                        children: "Login"
-                    }, void 0, false, {
-                        fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 44,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 27,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
-                children: [
-                    "Don't have account?",
-                    ' ',
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("a", {
-                        href: "",
-                        onClick: handleNewUser,
-                        children: "Register"
-                    }, void 0, false, {
-                        fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 50,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 48,
-                columnNumber: 7
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/login-view/login-view.jsx",
-        lineNumber: 26,
-        columnNumber: 5
-    }, this);
+    }
 }
-_s(LoginView, "wuQOK7xaXdVz4RMrZQhWbI751Oc=");
-_c = LoginView;
-LoginView.propTypes = {
-    user: _propTypesDefault.default.exact({
-        username: _propTypesDefault.default.string.isRequired,
-        password: _propTypesDefault.default.string.isRequired
-    }),
-    onLoggedIn: _propTypesDefault.default.func.isRequired
-};
-var _c;
-$RefreshReg$(_c, "LoginView");
 
-  $parcel$ReactRefreshHelpers$9fee.postlude(module);
+  $parcel$ReactRefreshHelpers$67b2.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./login-view.scss":"e57ax","../register-view/register-view":"6jAr6"}],"7wKI2":[function(require,module,exports) {
-var ReactIs = require('react-is');
-// By explicitly using `prop-types` you are opting into new development behavior.
-// http://fb.me/prop-types-in-prod
-var throwOnDirectAccess = true;
-module.exports = require('./factoryWithTypeCheckers')(ReactIs.isElement, throwOnDirectAccess);
-
-},{"react-is":"7EuwB","./factoryWithTypeCheckers":"bBUgD"}],"7EuwB":[function(require,module,exports) {
-'use strict';
-module.exports = require('./cjs/react-is.development.js');
-
-},{"./cjs/react-is.development.js":"5DsXl"}],"5DsXl":[function(require,module,exports) {
-/** @license React v16.13.1
- * react-is.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */ 'use strict';
-(function() {
-    // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
-    // nor polyfill, then a plain number is used for performance.
-    var hasSymbol = typeof Symbol === 'function' && Symbol.for;
-    var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
-    var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
-    var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
-    var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
-    var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
-    var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
-    var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
-    // (unstable) APIs that have been removed. Can we remove the symbols?
-    var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
-    var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
-    var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
-    var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
-    var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
-    var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
-    var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
-    var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
-    var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
-    var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
-    var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
-    function isValidElementType(type) {
-        return typeof type === 'string' || typeof type === 'function' || type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
-    }
-    function typeOf(object) {
-        if (typeof object === 'object' && object !== null) {
-            var $$typeof = object.$$typeof;
-            switch($$typeof){
-                case REACT_ELEMENT_TYPE:
-                    var type = object.type;
-                    switch(type){
-                        case REACT_ASYNC_MODE_TYPE:
-                        case REACT_CONCURRENT_MODE_TYPE:
-                        case REACT_FRAGMENT_TYPE:
-                        case REACT_PROFILER_TYPE:
-                        case REACT_STRICT_MODE_TYPE:
-                        case REACT_SUSPENSE_TYPE:
-                            return type;
-                        default:
-                            var $$typeofType = type && type.$$typeof;
-                            switch($$typeofType){
-                                case REACT_CONTEXT_TYPE:
-                                case REACT_FORWARD_REF_TYPE:
-                                case REACT_LAZY_TYPE:
-                                case REACT_MEMO_TYPE:
-                                case REACT_PROVIDER_TYPE:
-                                    return $$typeofType;
-                                default:
-                                    return $$typeof;
-                            }
-                    }
-                case REACT_PORTAL_TYPE:
-                    return $$typeof;
-            }
-        }
-        return undefined;
-    } // AsyncMode is deprecated along with isAsyncMode
-    var AsyncMode = REACT_ASYNC_MODE_TYPE;
-    var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
-    var ContextConsumer = REACT_CONTEXT_TYPE;
-    var ContextProvider = REACT_PROVIDER_TYPE;
-    var Element = REACT_ELEMENT_TYPE;
-    var ForwardRef = REACT_FORWARD_REF_TYPE;
-    var Fragment = REACT_FRAGMENT_TYPE;
-    var Lazy = REACT_LAZY_TYPE;
-    var Memo = REACT_MEMO_TYPE;
-    var Portal = REACT_PORTAL_TYPE;
-    var Profiler = REACT_PROFILER_TYPE;
-    var StrictMode = REACT_STRICT_MODE_TYPE;
-    var Suspense = REACT_SUSPENSE_TYPE;
-    var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
-    function isAsyncMode(object) {
-        if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-            hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
-            console['warn']("The ReactIs.isAsyncMode() alias has been deprecated, and will be removed in React 17+. Update your code to use ReactIs.isConcurrentMode() instead. It has the exact same API.");
-        }
-        return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
-    }
-    function isConcurrentMode(object) {
-        return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
-    }
-    function isContextConsumer(object) {
-        return typeOf(object) === REACT_CONTEXT_TYPE;
-    }
-    function isContextProvider(object) {
-        return typeOf(object) === REACT_PROVIDER_TYPE;
-    }
-    function isElement(object) {
-        return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-    }
-    function isForwardRef(object) {
-        return typeOf(object) === REACT_FORWARD_REF_TYPE;
-    }
-    function isFragment(object) {
-        return typeOf(object) === REACT_FRAGMENT_TYPE;
-    }
-    function isLazy(object) {
-        return typeOf(object) === REACT_LAZY_TYPE;
-    }
-    function isMemo(object) {
-        return typeOf(object) === REACT_MEMO_TYPE;
-    }
-    function isPortal(object) {
-        return typeOf(object) === REACT_PORTAL_TYPE;
-    }
-    function isProfiler(object) {
-        return typeOf(object) === REACT_PROFILER_TYPE;
-    }
-    function isStrictMode(object) {
-        return typeOf(object) === REACT_STRICT_MODE_TYPE;
-    }
-    function isSuspense(object) {
-        return typeOf(object) === REACT_SUSPENSE_TYPE;
-    }
-    exports.AsyncMode = AsyncMode;
-    exports.ConcurrentMode = ConcurrentMode;
-    exports.ContextConsumer = ContextConsumer;
-    exports.ContextProvider = ContextProvider;
-    exports.Element = Element;
-    exports.ForwardRef = ForwardRef;
-    exports.Fragment = Fragment;
-    exports.Lazy = Lazy;
-    exports.Memo = Memo;
-    exports.Portal = Portal;
-    exports.Profiler = Profiler;
-    exports.StrictMode = StrictMode;
-    exports.Suspense = Suspense;
-    exports.isAsyncMode = isAsyncMode;
-    exports.isConcurrentMode = isConcurrentMode;
-    exports.isContextConsumer = isContextConsumer;
-    exports.isContextProvider = isContextProvider;
-    exports.isElement = isElement;
-    exports.isForwardRef = isForwardRef;
-    exports.isFragment = isFragment;
-    exports.isLazy = isLazy;
-    exports.isMemo = isMemo;
-    exports.isPortal = isPortal;
-    exports.isProfiler = isProfiler;
-    exports.isStrictMode = isStrictMode;
-    exports.isSuspense = isSuspense;
-    exports.isValidElementType = isValidElementType;
-    exports.typeOf = typeOf;
-})();
-
-},{}],"bBUgD":[function(require,module,exports) {
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */ 'use strict';
-var ReactIs = require('react-is');
-var assign = require('object-assign');
-var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
-var has = require('./lib/has');
-var checkPropTypes = require('./checkPropTypes');
-var printWarning = function() {};
-printWarning = function(text) {
-    var message = 'Warning: ' + text;
-    if (typeof console !== 'undefined') console.error(message);
-    try {
-        // --- Welcome to debugging React ---
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-    } catch (x) {}
-};
-function emptyFunctionThatReturnsNull() {
-    return null;
-}
-module.exports = function(isValidElement, throwOnDirectAccess) {
-    /* global Symbol */ var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-    var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
-    /**
-   * Returns the iterator method function contained on the iterable object.
-   *
-   * Be sure to invoke the function with the iterable as context:
-   *
-   *     var iteratorFn = getIteratorFn(myIterable);
-   *     if (iteratorFn) {
-   *       var iterator = iteratorFn.call(myIterable);
-   *       ...
-   *     }
-   *
-   * @param {?object} maybeIterable
-   * @return {?function}
-   */ function getIteratorFn(maybeIterable) {
-        var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
-        if (typeof iteratorFn === 'function') return iteratorFn;
-    }
-    /**
-   * Collection of methods that allow declaration and validation of props that are
-   * supplied to React components. Example usage:
-   *
-   *   var Props = require('ReactPropTypes');
-   *   var MyArticle = React.createClass({
-   *     propTypes: {
-   *       // An optional string prop named "description".
-   *       description: Props.string,
-   *
-   *       // A required enum prop named "category".
-   *       category: Props.oneOf(['News','Photos']).isRequired,
-   *
-   *       // A prop named "dialog" that requires an instance of Dialog.
-   *       dialog: Props.instanceOf(Dialog).isRequired
-   *     },
-   *     render: function() { ... }
-   *   });
-   *
-   * A more formal specification of how these methods are used:
-   *
-   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
-   *   decl := ReactPropTypes.{type}(.isRequired)?
-   *
-   * Each and every declaration produces a function with the same signature. This
-   * allows the creation of custom validation functions. For example:
-   *
-   *  var MyLink = React.createClass({
-   *    propTypes: {
-   *      // An optional string or URI prop named "href".
-   *      href: function(props, propName, componentName) {
-   *        var propValue = props[propName];
-   *        if (propValue != null && typeof propValue !== 'string' &&
-   *            !(propValue instanceof URI)) {
-   *          return new Error(
-   *            'Expected a string or an URI for ' + propName + ' in ' +
-   *            componentName
-   *          );
-   *        }
-   *      }
-   *    },
-   *    render: function() {...}
-   *  });
-   *
-   * @internal
-   */ var ANONYMOUS = '<<anonymous>>';
-    // Important!
-    // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
-    var ReactPropTypes = {
-        array: createPrimitiveTypeChecker('array'),
-        bigint: createPrimitiveTypeChecker('bigint'),
-        bool: createPrimitiveTypeChecker('boolean'),
-        func: createPrimitiveTypeChecker('function'),
-        number: createPrimitiveTypeChecker('number'),
-        object: createPrimitiveTypeChecker('object'),
-        string: createPrimitiveTypeChecker('string'),
-        symbol: createPrimitiveTypeChecker('symbol'),
-        any: createAnyTypeChecker(),
-        arrayOf: createArrayOfTypeChecker,
-        element: createElementTypeChecker(),
-        elementType: createElementTypeTypeChecker(),
-        instanceOf: createInstanceTypeChecker,
-        node: createNodeChecker(),
-        objectOf: createObjectOfTypeChecker,
-        oneOf: createEnumTypeChecker,
-        oneOfType: createUnionTypeChecker,
-        shape: createShapeTypeChecker,
-        exact: createStrictShapeTypeChecker
-    };
-    /**
-   * inlined Object.is polyfill to avoid requiring consumers ship their own
-   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
-   */ /*eslint-disable no-self-compare*/ function is(x, y) {
-        // SameValue algorithm
-        if (x === y) // Steps 1-5, 7-10
-        // Steps 6.b-6.e: +0 != -0
-        return x !== 0 || 1 / x === 1 / y;
-        else // Step 6.a: NaN == NaN
-        return x !== x && y !== y;
-    }
-    /*eslint-enable no-self-compare*/ /**
-   * We use an Error-like object for backward compatibility as people may call
-   * PropTypes directly and inspect their output. However, we don't use real
-   * Errors anymore. We don't inspect their stack anyway, and creating them
-   * is prohibitively expensive if they are created too often, such as what
-   * happens in oneOfType() for any type before the one that matched.
-   */ function PropTypeError(message, data) {
-        this.message = message;
-        this.data = data && typeof data === 'object' ? data : {};
-        this.stack = '';
-    }
-    // Make `instanceof Error` still work for returned errors.
-    PropTypeError.prototype = Error.prototype;
-    function createChainableTypeChecker(validate) {
-        var manualPropTypeCallCache = {};
-        var manualPropTypeWarningCount = 0;
-        function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
-            componentName = componentName || ANONYMOUS;
-            propFullName = propFullName || propName;
-            if (secret !== ReactPropTypesSecret) {
-                if (throwOnDirectAccess) {
-                    // New behavior only for users of `prop-types` package
-                    var err = new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types");
-                    err.name = 'Invariant Violation';
-                    throw err;
-                } else if (typeof console !== 'undefined') {
-                    // Old behavior for people using React.PropTypes
-                    var cacheKey = componentName + ':' + propName;
-                    if (!manualPropTypeCallCache[cacheKey] && // Avoid spamming the console because they are often not actionable except for lib authors
-                    manualPropTypeWarningCount < 3) {
-                        printWarning("You are manually calling a React.PropTypes validation function for the `" + propFullName + '` prop on `' + componentName + '`. This is deprecated ' + 'and will throw in the standalone `prop-types` package. ' + 'You may be seeing this warning due to a third-party PropTypes ' + 'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.');
-                        manualPropTypeCallCache[cacheKey] = true;
-                        manualPropTypeWarningCount++;
-                    }
-                }
-            }
-            if (props[propName] == null) {
-                if (isRequired) {
-                    if (props[propName] === null) return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
-                    return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
-                }
-                return null;
-            } else return validate(props, propName, componentName, location, propFullName);
-        }
-        var chainedCheckType = checkType.bind(null, false);
-        chainedCheckType.isRequired = checkType.bind(null, true);
-        return chainedCheckType;
-    }
-    function createPrimitiveTypeChecker(expectedType) {
-        function validate(props, propName, componentName, location, propFullName, secret) {
-            var propValue = props[propName];
-            var propType = getPropType(propValue);
-            if (propType !== expectedType) {
-                // `propValue` being instance of, say, date/regexp, pass the 'object'
-                // check, but we can offer a more precise error message here rather than
-                // 'of type `object`'.
-                var preciseType = getPreciseType(propValue);
-                return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'), {
-                    expectedType: expectedType
-                });
-            }
-            return null;
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function createAnyTypeChecker() {
-        return createChainableTypeChecker(emptyFunctionThatReturnsNull);
-    }
-    function createArrayOfTypeChecker(typeChecker) {
-        function validate(props, propName, componentName, location, propFullName) {
-            if (typeof typeChecker !== 'function') return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
-            var propValue = props[propName];
-            if (!Array.isArray(propValue)) {
-                var propType = getPropType(propValue);
-                return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
-            }
-            for(var i = 0; i < propValue.length; i++){
-                var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
-                if (error instanceof Error) return error;
-            }
-            return null;
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function createElementTypeChecker() {
-        function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
-            if (!isValidElement(propValue)) {
-                var propType = getPropType(propValue);
-                return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
-            }
-            return null;
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function createElementTypeTypeChecker() {
-        function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
-            if (!ReactIs.isValidElementType(propValue)) {
-                var propType = getPropType(propValue);
-                return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
-            }
-            return null;
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function createInstanceTypeChecker(expectedClass) {
-        function validate(props, propName, componentName, location, propFullName) {
-            if (!(props[propName] instanceof expectedClass)) {
-                var expectedClassName = expectedClass.name || ANONYMOUS;
-                var actualClassName = getClassName(props[propName]);
-                return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
-            }
-            return null;
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function createEnumTypeChecker(expectedValues) {
-        if (!Array.isArray(expectedValues)) {
-            {
-                if (arguments.length > 1) printWarning('Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' + 'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).');
-                else printWarning('Invalid argument supplied to oneOf, expected an array.');
-            }
-            return emptyFunctionThatReturnsNull;
-        }
-        function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
-            for(var i = 0; i < expectedValues.length; i++){
-                if (is(propValue, expectedValues[i])) return null;
-            }
-            var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
-                var type = getPreciseType(value);
-                if (type === 'symbol') return String(value);
-                return value;
-            });
-            return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + String(propValue) + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function createObjectOfTypeChecker(typeChecker) {
-        function validate(props, propName, componentName, location, propFullName) {
-            if (typeof typeChecker !== 'function') return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
-            var propValue = props[propName];
-            var propType = getPropType(propValue);
-            if (propType !== 'object') return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
-            for(var key in propValue)if (has(propValue, key)) {
-                var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-                if (error instanceof Error) return error;
-            }
-            return null;
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function createUnionTypeChecker(arrayOfTypeCheckers) {
-        if (!Array.isArray(arrayOfTypeCheckers)) {
-            printWarning('Invalid argument supplied to oneOfType, expected an instance of array.');
-            return emptyFunctionThatReturnsNull;
-        }
-        for(var i1 = 0; i1 < arrayOfTypeCheckers.length; i1++){
-            var checker = arrayOfTypeCheckers[i1];
-            if (typeof checker !== 'function') {
-                printWarning("Invalid argument supplied to oneOfType. Expected an array of check functions, but received " + getPostfixForTypeWarning(checker) + ' at index ' + i1 + '.');
-                return emptyFunctionThatReturnsNull;
-            }
-        }
-        function validate(props, propName, componentName, location, propFullName) {
-            var expectedTypes = [];
-            for(var i = 0; i < arrayOfTypeCheckers.length; i++){
-                var checker = arrayOfTypeCheckers[i];
-                var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
-                if (checkerResult == null) return null;
-                if (checkerResult.data && has(checkerResult.data, 'expectedType')) expectedTypes.push(checkerResult.data.expectedType);
-            }
-            var expectedTypesMessage = expectedTypes.length > 0 ? ', expected one of type [' + expectedTypes.join(', ') + ']' : '';
-            return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`' + expectedTypesMessage + '.'));
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function createNodeChecker() {
-        function validate(props, propName, componentName, location, propFullName) {
-            if (!isNode(props[propName])) return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
-            return null;
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function invalidValidatorError(componentName, location, propFullName, key, type) {
-        return new PropTypeError((componentName || 'React class') + ': ' + location + ' type `' + propFullName + '.' + key + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + type + '`.');
-    }
-    function createShapeTypeChecker(shapeTypes) {
-        function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
-            var propType = getPropType(propValue);
-            if (propType !== 'object') return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-            for(var key in shapeTypes){
-                var checker = shapeTypes[key];
-                if (typeof checker !== 'function') return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
-                var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-                if (error) return error;
-            }
-            return null;
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function createStrictShapeTypeChecker(shapeTypes) {
-        function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
-            var propType = getPropType(propValue);
-            if (propType !== 'object') return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-            // We need to check all keys in case some are required but missing from props.
-            var allKeys = assign({}, props[propName], shapeTypes);
-            for(var key in allKeys){
-                var checker = shapeTypes[key];
-                if (has(shapeTypes, key) && typeof checker !== 'function') return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
-                if (!checker) return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' + '\nBad object: ' + JSON.stringify(props[propName], null, '  ') + '\nValid keys: ' + JSON.stringify(Object.keys(shapeTypes), null, '  '));
-                var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-                if (error) return error;
-            }
-            return null;
-        }
-        return createChainableTypeChecker(validate);
-    }
-    function isNode(propValue) {
-        switch(typeof propValue){
-            case 'number':
-            case 'string':
-            case 'undefined':
-                return true;
-            case 'boolean':
-                return !propValue;
-            case 'object':
-                if (Array.isArray(propValue)) return propValue.every(isNode);
-                if (propValue === null || isValidElement(propValue)) return true;
-                var iteratorFn = getIteratorFn(propValue);
-                if (iteratorFn) {
-                    var iterator = iteratorFn.call(propValue);
-                    var step;
-                    if (iteratorFn !== propValue.entries) while(!(step = iterator.next()).done){
-                        if (!isNode(step.value)) return false;
-                    }
-                    else // Iterator will provide entry [k,v] tuples rather than values.
-                    while(!(step = iterator.next()).done){
-                        var entry = step.value;
-                        if (entry) {
-                            if (!isNode(entry[1])) return false;
-                        }
-                    }
-                } else return false;
-                return true;
-            default:
-                return false;
-        }
-    }
-    function isSymbol(propType, propValue) {
-        // Native Symbol.
-        if (propType === 'symbol') return true;
-        // falsy value can't be a Symbol
-        if (!propValue) return false;
-        // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
-        if (propValue['@@toStringTag'] === 'Symbol') return true;
-        // Fallback for non-spec compliant Symbols which are polyfilled.
-        if (typeof Symbol === 'function' && propValue instanceof Symbol) return true;
-        return false;
-    }
-    // Equivalent of `typeof` but with special handling for array and regexp.
-    function getPropType(propValue) {
-        var propType = typeof propValue;
-        if (Array.isArray(propValue)) return 'array';
-        if (propValue instanceof RegExp) // Old webkits (at least until Android 4.0) return 'function' rather than
-        // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
-        // passes PropTypes.object.
-        return 'object';
-        if (isSymbol(propType, propValue)) return 'symbol';
-        return propType;
-    }
-    // This handles more types than `getPropType`. Only used for error messages.
-    // See `createPrimitiveTypeChecker`.
-    function getPreciseType(propValue) {
-        if (typeof propValue === 'undefined' || propValue === null) return '' + propValue;
-        var propType = getPropType(propValue);
-        if (propType === 'object') {
-            if (propValue instanceof Date) return 'date';
-            else if (propValue instanceof RegExp) return 'regexp';
-        }
-        return propType;
-    }
-    // Returns a string that is postfixed to a warning about an invalid type.
-    // For example, "undefined" or "of type array"
-    function getPostfixForTypeWarning(value) {
-        var type = getPreciseType(value);
-        switch(type){
-            case 'array':
-            case 'object':
-                return 'an ' + type;
-            case 'boolean':
-            case 'date':
-            case 'regexp':
-                return 'a ' + type;
-            default:
-                return type;
-        }
-    }
-    // Returns class name of the object, if any.
-    function getClassName(propValue) {
-        if (!propValue.constructor || !propValue.constructor.name) return ANONYMOUS;
-        return propValue.constructor.name;
-    }
-    ReactPropTypes.checkPropTypes = checkPropTypes;
-    ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
-    ReactPropTypes.PropTypes = ReactPropTypes;
-    return ReactPropTypes;
-};
-
-},{"react-is":"7EuwB","object-assign":"7OXxh","./lib/ReactPropTypesSecret":"jZTZJ","./lib/has":"fqKuf","./checkPropTypes":"5VwyJ"}],"7OXxh":[function(require,module,exports) {
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/ 'use strict';
-/* eslint-disable no-unused-vars */ var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-function toObject(val) {
-    if (val === null || val === undefined) throw new TypeError('Object.assign cannot be called with null or undefined');
-    return Object(val);
-}
-function shouldUseNative() {
-    try {
-        if (!Object.assign) return false;
-        // Detect buggy property enumeration order in older V8 versions.
-        // https://bugs.chromium.org/p/v8/issues/detail?id=4118
-        var test1 = new String('abc'); // eslint-disable-line no-new-wrappers
-        test1[5] = 'de';
-        if (Object.getOwnPropertyNames(test1)[0] === '5') return false;
-        // https://bugs.chromium.org/p/v8/issues/detail?id=3056
-        var test2 = {};
-        for(var i = 0; i < 10; i++)test2['_' + String.fromCharCode(i)] = i;
-        var order2 = Object.getOwnPropertyNames(test2).map(function(n) {
-            return test2[n];
-        });
-        if (order2.join('') !== '0123456789') return false;
-        // https://bugs.chromium.org/p/v8/issues/detail?id=3056
-        var test3 = {};
-        'abcdefghijklmnopqrst'.split('').forEach(function(letter) {
-            test3[letter] = letter;
-        });
-        if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') return false;
-        return true;
-    } catch (err) {
-        // We don't expect any of the above to throw, but better to be safe.
-        return false;
-    }
-}
-module.exports = shouldUseNative() ? Object.assign : function(target, source) {
-    var from;
-    var to = toObject(target);
-    var symbols;
-    for(var s = 1; s < arguments.length; s++){
-        from = Object(arguments[s]);
-        for(var key in from)if (hasOwnProperty.call(from, key)) to[key] = from[key];
-        if (getOwnPropertySymbols) {
-            symbols = getOwnPropertySymbols(from);
-            for(var i = 0; i < symbols.length; i++)if (propIsEnumerable.call(from, symbols[i])) to[symbols[i]] = from[symbols[i]];
-        }
-    }
-    return to;
-};
-
-},{}],"jZTZJ":[function(require,module,exports) {
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */ 'use strict';
-var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-module.exports = ReactPropTypesSecret;
-
-},{}],"fqKuf":[function(require,module,exports) {
-module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
-
-},{}],"5VwyJ":[function(require,module,exports) {
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */ 'use strict';
-var printWarning = function() {};
-var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
-var loggedTypeFailures = {};
-var has = require('./lib/has');
-printWarning = function(text) {
-    var message = 'Warning: ' + text;
-    if (typeof console !== 'undefined') console.error(message);
-    try {
-        // --- Welcome to debugging React ---
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-    } catch (x) {}
-};
-/**
- * Assert that the values match with the type specs.
- * Error messages are memorized and will only be shown once.
- *
- * @param {object} typeSpecs Map of name to a ReactPropType
- * @param {object} values Runtime values that need to be type-checked
- * @param {string} location e.g. "prop", "context", "child context"
- * @param {string} componentName Name of the component for error messages.
- * @param {?Function} getStack Returns the component stack.
- * @private
- */ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-    for(var typeSpecName in typeSpecs)if (has(typeSpecs, typeSpecName)) {
-        var error;
-        // Prop type validation may throw. In case they do, we don't want to
-        // fail the render phase where it didn't fail before. So we log it.
-        // After these have been cleaned up, we'll let them throw.
-        try {
-            // This is intentionally an invariant that gets caught. It's the same
-            // behavior as without this statement except with a better message.
-            if (typeof typeSpecs[typeSpecName] !== 'function') {
-                var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' + 'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.');
-                err.name = 'Invariant Violation';
-                throw err;
-            }
-            error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
-        } catch (ex) {
-            error = ex;
-        }
-        if (error && !(error instanceof Error)) printWarning((componentName || 'React class') + ': type specification of ' + location + ' `' + typeSpecName + '` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a ' + typeof error + '. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).');
-        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-            // Only monitor this failure once because there tends to be a lot of the
-            // same error.
-            loggedTypeFailures[error.message] = true;
-            var stack = getStack ? getStack() : '';
-            printWarning('Failed ' + location + ' type: ' + error.message + (stack != null ? stack : ''));
-        }
-    }
-}
-/**
- * Resets warning cache when testing.
- *
- * @private
- */ checkPropTypes.resetWarningCache = function() {
-    loggedTypeFailures = {};
-};
-module.exports = checkPropTypes;
-
-},{"./lib/ReactPropTypesSecret":"jZTZJ","./lib/has":"fqKuf"}],"fD7H8":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"fD7H8":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -29568,206 +26781,7 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-},{"react-refresh/runtime":"8QnHs"}],"e57ax":[function() {},{}],"6jAr6":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$f521 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$f521.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "RegisterView", ()=>RegisterView
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _registerViewScss = require("./register-view.scss");
-var _s = $RefreshSig$();
-function RegisterView(props) {
-    _s();
-    const [email, setEmail] = _react.useState('');
-    const [username, setUsername] = _react.useState('');
-    const [password, setPassword] = _react.useState('');
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        console.log(email, username, password);
-        /* Send a request to the server for authentication */ /* then call props on registored user(username) */ props.onRegistration(username);
-    };
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "registration-form",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("form", {
-            children: [
-                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                    children: [
-                        "Email:",
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                            type: "email",
-                            value: email,
-                            onChange: (e)=>setEmail(e.target.value)
-                        }, void 0, false, {
-                            fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 24,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 22,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                    children: [
-                        "Username:",
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                            type: "text",
-                            value: username,
-                            onChange: (e)=>setUsername(e.target.value)
-                        }, void 0, false, {
-                            fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 32,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 30,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                    children: [
-                        "Password:",
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                            type: "password",
-                            value: password,
-                            onChange: (e)=>setPassword(e.target.value)
-                        }, void 0, false, {
-                            fileName: "src/components/register-view/register-view.jsx",
-                            lineNumber: 40,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 38,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
-                    type: "button",
-                    onClick: handleSubmit,
-                    children: "Register"
-                }, void 0, false, {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 46,
-                    columnNumber: 9
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "src/components/register-view/register-view.jsx",
-            lineNumber: 21,
-            columnNumber: 7
-        }, this)
-    }, void 0, false, {
-        fileName: "src/components/register-view/register-view.jsx",
-        lineNumber: 20,
-        columnNumber: 5
-    }, this);
-}
-_s(RegisterView, "wACJe+bl+8h3O7KtuFOMof9+G20=");
-_c = RegisterView;
-RegisterView.propTypes = {
-    onRegistration: _propTypesDefault.default.func.isRequired
-};
-var _c;
-$RefreshReg$(_c, "RegisterView");
-
-  $parcel$ReactRefreshHelpers$f521.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","./register-view.scss":"8il1C","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"8il1C":[function() {},{}],"bwuIu":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$67b2.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MovieCard", ()=>MovieCard
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _movieCardScss = require("./movie-card.scss");
-class MovieCard extends _reactDefault.default.Component {
-    render() {
-        const { movie , onMovieClick  } = this.props;
-        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-            className: "movie-card",
-            onClick: ()=>{
-                onMovieClick(movie);
-            },
-            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-                children: [
-                    movie.Title,
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-                        children: movie.ReleaseYear
-                    }, void 0, false, {
-                        fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 19,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
-                        fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 20,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 17,
-                columnNumber: 9
-            }, this)
-        }, void 0, false, {
-            fileName: "src/components/movie-card/movie-card.jsx",
-            lineNumber: 11,
-            columnNumber: 7
-        }, this);
-    }
-}
-MovieCard.propTypes = {
-    movie: _propTypesDefault.default.shape({
-        Title: _propTypesDefault.default.string.isRequired,
-        ReleaseYear: _propTypesDefault.default.string,
-        Description: _propTypesDefault.default.string.isRequired,
-        Genre: _propTypesDefault.default.shape({
-            Name: _propTypesDefault.default.string.isRequired,
-            Description: _propTypesDefault.default.string
-        }),
-        Directors: _propTypesDefault.default.shape({
-            Name: _propTypesDefault.default.string.isRequired,
-            Biography: _propTypesDefault.default.string,
-            Birth: _propTypesDefault.default.string,
-            Death: _propTypesDefault.default.string
-        }),
-        ImagePath: _propTypesDefault.default.string.isRequired,
-        Featured: _propTypesDefault.default.bool
-    }).isRequired,
-    onMovieClick: _propTypesDefault.default.func.isRequired
-};
-
-  $parcel$ReactRefreshHelpers$67b2.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","prop-types":"7wKI2","./movie-card.scss":"d6HH4"}],"d6HH4":[function() {},{}],"ggaUx":[function(require,module,exports) {
+},{"react-refresh/runtime":"8QnHs"}],"ggaUx":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29781,10 +26795,16 @@ parcelHelpers.export(exports, "MovieView", ()=>MovieView
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _movieViewScss = require("./movie-view.scss");
 class MovieView extends _reactDefault.default.Component {
+    keypressCallBack(event) {
+        console.log(event.key);
+    }
+    componentDidMount() {
+        document.addEventListener('keypress', this.keypressCallBack);
+    }
+    componentWillUnmount() {
+        document.addEventListener('keypress', this.keypressCallBack);
+    }
     render() {
         const { movie , onBackClick  } = this.props;
         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -29796,12 +26816,12 @@ class MovieView extends _reactDefault.default.Component {
                         src: movie.ImagePath
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 14,
+                        lineNumber: 22,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 13,
+                    lineNumber: 21,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -29812,7 +26832,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Title: "
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 17,
+                            lineNumber: 25,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
@@ -29820,13 +26840,13 @@ class MovieView extends _reactDefault.default.Component {
                             children: movie.Title
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 18,
+                            lineNumber: 26,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 16,
+                    lineNumber: 24,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
@@ -29837,7 +26857,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Description: "
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 21,
+                            lineNumber: 29,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
@@ -29845,13 +26865,63 @@ class MovieView extends _reactDefault.default.Component {
                             children: movie.Description
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 22,
+                            lineNumber: 30,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 20,
+                    lineNumber: 28,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                    className: "movie-genre",
+                    children: [
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
+                            className: "label",
+                            children: "Genre: "
+                        }, void 0, false, {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 33,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
+                            className: "value",
+                            children: movie.Genre
+                        }, void 0, false, {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 34,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/movie-view/movie-view.jsx",
+                    lineNumber: 32,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                    className: "movie-director",
+                    children: [
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
+                            className: "label",
+                            children: "Director: "
+                        }, void 0, false, {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 37,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
+                            className: "value",
+                            children: movie.Director
+                        }, void 0, false, {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 38,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/movie-view/movie-view.jsx",
+                    lineNumber: 36,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
@@ -29861,31 +26931,23 @@ class MovieView extends _reactDefault.default.Component {
                     children: "Back"
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 24,
+                    lineNumber: 40,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/movie-view/movie-view.jsx",
-            lineNumber: 12,
+            lineNumber: 20,
             columnNumber: 7
         }, this);
     }
 }
-MovieView.propTypes = {
-    movie: _propTypesDefault.default.shape({
-        Title: _propTypesDefault.default.string.isRequired,
-        Description: _propTypesDefault.default.string.isRequired,
-        ImagePath: _propTypesDefault.default.string.isRequired
-    }).isRequired,
-    onBackClick: _propTypesDefault.default.func.isRequired
-};
 
   $parcel$ReactRefreshHelpers$e9f6.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","react":"21dqq","prop-types":"7wKI2","./movie-view.scss":"jnlR5"}],"jnlR5":[function() {},{}],"eBaMl":[function() {},{}],"lJZlQ":[function() {},{}]},["6HQxs","v8Tqx","d8Dch"], "d8Dch", "parcelRequiree3ea")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"lJZlQ":[function() {},{}]},["6HQxs","v8Tqx","d8Dch"], "d8Dch", "parcelRequiree3ea")
 
-//# sourceMappingURL=index.b4b6dfad.js.map
+//# sourceMappingURL=index.js.map
