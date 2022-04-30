@@ -15,13 +15,12 @@ export class MainView extends React.Component {
       movies: [],
       selectedMovie: null,
       user: null,
-      isRegistered: false
+      showRegister: false,
     };
   }
 
   // code executed right after the component is added to the DOM.
   componentDidMount() {
-    
     axios
       .get('https://my-flix-93462.herokuapp.com/movies')
       .then((response) => {
@@ -45,7 +44,6 @@ export class MainView extends React.Component {
   /* 
   When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*
   */
-
   setSelectedMovie(newSelectedMovie) {
     this.setState({ selectedMovie: newSelectedMovie });
   }
@@ -53,25 +51,56 @@ export class MainView extends React.Component {
   /*
   When a user successfully logs in, this function updates the `user` property in state to that *particular user*
   */
-
   onLoggedIn(user) {
     this.setState({ user });
   }
 
+  /**
+  The functin to register new user
+   */
+  onVisitRegister() {
+    this.setState({ showRegister: true });
+  }
+
+  onRegistration(username) {
+    this.setState({
+      user: {
+        name: username,
+      },
+    });
+  }
+
   render() {
-    let { movies, selectedMovie, user } = this.state;
+    let { movies, selectedMovie, user, showRegister } = this.state;
+    console.log(showRegister);
+    /**
+     If the visitor is not registered as a user, the RegistrationView is rendered. If there is no user, the LoginView is rendered.
+    */
+
+    if (!user && showRegister)
+      return (
+        <div className='main-view'>
+          <RegisterView onRegistration={(user) => this.onRegistration(user)} />
+        </div>
+      );
 
     /*
     If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*
     */
     if (!user)
-      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+      return (
+        <LoginView
+          onLoggedIn={(user) => this.onLoggedIn(user)}
+          onVisitRegister={() => this.onVisitRegister()}
+        />
+      );
 
     // Before the movies have been loaded
     if (movies.length === 0) return <div className='main-view' />;
 
     return (
       <div className='main-view'>
+        <p>Hello there, {this.state.user.name}</p>
         {/*
           If the state of the `selectedMovie` is not null, the selected movie will be returned otherwise, all *movies will be returned*
           */}
