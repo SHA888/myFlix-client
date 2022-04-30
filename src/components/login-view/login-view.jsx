@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { RegisterView } from '../register-view/register-view';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 import './login-view.scss';
 
@@ -17,37 +19,37 @@ export function LoginView(props) {
     props.onLoggedIn(username);
   };
 
-  const handleNewUser = () => {
-    console.log('Register new user');
-    return <RegisterView />;
-  };
-
   return (
     <div>
-      <form>
-        <label>
-          Username:
-          <input
+      <Form>
+        <Form.Group controlId='formUsername'>
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
             type='text'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='formPassword'>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
             type='password'
-            value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button type='button' onClick={handleSubmit}>
+          ></Form.Control>
+        </Form.Group>
+
+        <Button variant='primary' type='submit' onClick={handleSubmit}>
           Login
-        </button>
-      </form>
+        </Button>
+      </Form>
+
       <span>
         Don't have any account?{' '}
-        <button type='button' onClick={props.onVisitRegister}>Register</button>
+        <Button variant='link' onClick={props.onVisitRegister}>
+          Register
+        </Button>
       </span>
     </div>
   );
