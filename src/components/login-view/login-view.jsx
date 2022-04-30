@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import RegisterView from '../register-view/register-view';
+import { RegisterView } from '../register-view/register-view';
 
 import './login-view.scss';
 
@@ -46,10 +46,8 @@ export function LoginView(props) {
         </button>
       </form>
       <span>
-        Don't have account?{' '}
-        <a href='' onClick={handleNewUser}>
-          Register
-        </a>
+        Don't have any account?{' '}
+        <button type='button' onClick={props.onVisitRegister}>Register</button>
       </span>
     </div>
   );

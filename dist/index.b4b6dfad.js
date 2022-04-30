@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"6HQxs":[function(require,module,exports) {
+})({"aW5O1":[function(require,module,exports) {
 var Refresh = require('react-refresh/runtime');
 Refresh.injectIntoGlobalHook(window);
 window.$RefreshReg$ = function() {};
@@ -152,11 +152,11 @@ window.$RefreshSig$ = function() {
     };
 };
 
-},{"react-refresh/runtime":"8QnHs"}],"8QnHs":[function(require,module,exports) {
+},{"react-refresh/runtime":"5dYNr"}],"5dYNr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-refresh-runtime.development.js');
 
-},{"./cjs/react-refresh-runtime.development.js":"10Glq"}],"10Glq":[function(require,module,exports) {
+},{"./cjs/react-refresh-runtime.development.js":"8Dvbi"}],"8Dvbi":[function(require,module,exports) {
 /** @license React v0.9.0
  * react-refresh-runtime.development.js
  *
@@ -615,7 +615,7 @@ module.exports = require('./cjs/react-refresh-runtime.development.js');
     exports.setSignature = setSignature;
 })();
 
-},{}],"v8Tqx":[function(require,module,exports) {
+},{}],"1DoIG":[function(require,module,exports) {
 "use strict";
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -1034,7 +1034,7 @@ _reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElemen
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom":"j6uA9","./components/main-view/main-view":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom":"j6uA9","./components/main-view/main-view":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"ldWpY","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"grLXn"}],"iTorj":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-dev-runtime.development.js');
 
@@ -25107,7 +25107,7 @@ class MainView extends _reactDefault.default.Component {
             movies: [],
             selectedMovie: null,
             user: null,
-            isRegistered: false
+            showRegister: false
         };
     }
     // code executed right after the component is added to the DOM.
@@ -25140,50 +25140,95 @@ class MainView extends _reactDefault.default.Component {
             user
         });
     }
+    /**
+  The functin to register new user
+   */ onVisitRegister() {
+        this.setState({
+            showRegister: true
+        });
+    }
+    onRegistration(username) {
+        this.setState({
+            user: {
+                name: username
+            }
+        });
+    }
     render() {
-        let { movies , selectedMovie , user: user1  } = this.state;
+        let { movies , selectedMovie , user: user1 , showRegister  } = this.state;
+        console.log(showRegister);
+        /**
+     If the visitor is not registered as a user, the RegistrationView is rendered. If there is no user, the LoginView is rendered.
+    */ if (!user1 && showRegister) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+            className: "main-view",
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_registerView.RegisterView, {
+                onRegistration: (user)=>this.onRegistration(user)
+            }, void 0, false, {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 83,
+                columnNumber: 11
+            }, this)
+        }, void 0, false, {
+            fileName: "src/components/main-view/main-view.jsx",
+            lineNumber: 82,
+            columnNumber: 9
+        }, this);
         /*
     If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*
     */ if (!user1) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_loginView.LoginView, {
             onLoggedIn: (user)=>this.onLoggedIn(user)
+            ,
+            onVisitRegister: ()=>this.onVisitRegister()
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 68,
-            columnNumber: 14
+            lineNumber: 92,
+            columnNumber: 9
         }, this);
         // Before the movies have been loaded
         if (movies.length === 0) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
             className: "main-view"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 71,
+            lineNumber: 99,
             columnNumber: 37
         }, this);
         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
             className: "main-view",
-            children: selectedMovie ? /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieView.MovieView, {
-                movie: selectedMovie,
-                onBackClick: (newSelectedMovie)=>{
-                    this.setSelectedMovie(newSelectedMovie);
-                }
-            }, void 0, false, {
-                fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 79,
-                columnNumber: 11
-            }, this) : movies.map((movie1)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieCard.MovieCard, {
-                    movie: movie1,
-                    onMovieClick: (movie)=>{
-                        this.setSelectedMovie(movie);
-                    }
-                }, movie1._id, false, {
+            children: [
+                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                    children: [
+                        "Hello there, ",
+                        this.state.user.name
+                    ]
+                }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 87,
-                    columnNumber: 13
-                }, this)
-            )
-        }, void 0, false, {
+                    lineNumber: 103,
+                    columnNumber: 9
+                }, this),
+                selectedMovie ? /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieView.MovieView, {
+                    movie: selectedMovie,
+                    onBackClick: (newSelectedMovie)=>{
+                        this.setSelectedMovie(newSelectedMovie);
+                    }
+                }, void 0, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 108,
+                    columnNumber: 11
+                }, this) : movies.map((movie1)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_movieCard.MovieCard, {
+                        movie: movie1,
+                        onMovieClick: (movie)=>{
+                            this.setSelectedMovie(movie);
+                        }
+                    }, movie1._id, false, {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 116,
+                        columnNumber: 13
+                    }, this)
+                )
+            ]
+        }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 74,
+            lineNumber: 102,
             columnNumber: 7
         }, this);
     }
@@ -25194,7 +25239,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../login-view/login-view":"9YtA0","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./main-view.scss":"eBaMl","../register-view/register-view":"6jAr6"}],"jo6P5":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../login-view/login-view":"9YtA0","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","../register-view/register-view":"6jAr6","./main-view.scss":"eBaMl","@parcel/transformer-js/src/esmodule-helpers.js":"ldWpY","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"grLXn"}],"jo6P5":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"63MyY"}],"63MyY":[function(require,module,exports) {
@@ -28558,7 +28603,6 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _registerView = require("../register-view/register-view");
-var _registerViewDefault = parcelHelpers.interopDefault(_registerView);
 var _loginViewScss = require("./login-view.scss");
 var _s = $RefreshSig$();
 function LoginView(props) {
@@ -28574,7 +28618,7 @@ function LoginView(props) {
     };
     const handleNewUser = ()=>{
         console.log('Register new user');
-        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_registerViewDefault.default, {}, void 0, false, {
+        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_registerView.RegisterView, {}, void 0, false, {
             fileName: "src/components/login-view/login-view.jsx",
             lineNumber: 22,
             columnNumber: 12
@@ -28637,11 +28681,11 @@ function LoginView(props) {
             }, this),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("span", {
                 children: [
-                    "Don't have account?",
+                    "Don't have any account?",
                     ' ',
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("a", {
-                        href: "",
-                        onClick: handleNewUser,
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("button", {
+                        type: "button",
+                        onClick: props.onVisitRegister,
                         children: "Register"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
@@ -28678,7 +28722,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","./login-view.scss":"e57ax","../register-view/register-view":"6jAr6"}],"7wKI2":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","../register-view/register-view":"6jAr6","./login-view.scss":"e57ax","@parcel/transformer-js/src/esmodule-helpers.js":"ldWpY","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"grLXn"}],"7wKI2":[function(require,module,exports) {
 var ReactIs = require('react-is');
 // By explicitly using `prop-types` you are opting into new development behavior.
 // http://fb.me/prop-types-in-prod
@@ -29418,157 +29462,7 @@ printWarning = function(text) {
 };
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":"jZTZJ","./lib/has":"fqKuf"}],"fD7H8":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"fDiVC":[function(require,module,exports) {
-"use strict";
-var Refresh = require('react-refresh/runtime');
-function debounce(func, delay) {
-    var args1;
-    var timeout = undefined;
-    return function(args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            timeout = undefined;
-            func.call(null, args);
-        }, delay);
-    };
-}
-var enqueueUpdate = debounce(function() {
-    Refresh.performReactRefresh();
-}, 30); // Everthing below is either adapted or copied from
-// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
-// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
-module.exports.prelude = function(module) {
-    window.$RefreshReg$ = function(type, id) {
-        Refresh.register(type, module.id + ' ' + id);
-    };
-    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
-};
-module.exports.postlude = function(module) {
-    if (isReactRefreshBoundary(module.exports)) {
-        registerExportsForReactRefresh(module);
-        if (module.hot) {
-            module.hot.dispose(function(data) {
-                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
-                data.prevExports = module.exports;
-            });
-            module.hot.accept(function(getParents) {
-                var prevExports = module.hot.data.prevExports;
-                var nextExports = module.exports; // Since we just executed the code for it, it's possible
-                // that the new exports make it ineligible for being a boundary.
-                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports); // It can also become ineligible if its exports are incompatible
-                // with the previous exports.
-                // For example, if you add/remove/change exports, we'll want
-                // to re-execute the importing modules, and force those components
-                // to re-render. Similarly, if you convert a class component
-                // to a function, we want to invalidate the boundary.
-                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
-                if (isNoLongerABoundary || didInvalidate) {
-                    // We'll be conservative. The only case in which we won't do a full
-                    // reload is if all parent modules are also refresh boundaries.
-                    // In that case we'll add them to the current queue.
-                    var parents = getParents();
-                    if (parents.length === 0) {
-                        // Looks like we bubbled to the root. Can't recover from that.
-                        window.location.reload();
-                        return;
-                    }
-                    return parents;
-                }
-                enqueueUpdate();
-            });
-        }
-    }
-};
-function isReactRefreshBoundary(exports) {
-    if (Refresh.isLikelyComponentType(exports)) return true;
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    return false;
-    var hasExports = false;
-    var areAllExportsComponents = true;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        hasExports = true;
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
-        return false;
-        var exportValue = exports[key];
-        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
-    }
-    return hasExports && areAllExportsComponents;
-}
-function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
-    var prevSignature = getRefreshBoundarySignature(prevExports);
-    var nextSignature = getRefreshBoundarySignature(nextExports);
-    if (prevSignature.length !== nextSignature.length) return true;
-    for(var i = 0; i < nextSignature.length; i++){
-        if (prevSignature[i] !== nextSignature[i]) return true;
-    }
-    return false;
-} // When this signature changes, it's unsafe to stop at this refresh boundary.
-function getRefreshBoundarySignature(exports) {
-    var signature = [];
-    signature.push(Refresh.getFamilyByType(exports));
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return signature;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        signature.push(key);
-        signature.push(Refresh.getFamilyByType(exportValue));
-    }
-    return signature;
-}
-function registerExportsForReactRefresh(module) {
-    var exports = module.exports, id = module.id;
-    Refresh.register(exports, id + ' %exports%');
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        Refresh.register(exportValue, id + ' %exports% ' + key);
-    }
-}
-
-},{"react-refresh/runtime":"8QnHs"}],"e57ax":[function() {},{}],"6jAr6":[function(require,module,exports) {
+},{"./lib/ReactPropTypesSecret":"jZTZJ","./lib/has":"fqKuf"}],"6jAr6":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f521 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29688,7 +29582,157 @@ $RefreshReg$(_c, "RegisterView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","./register-view.scss":"8il1C","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC"}],"8il1C":[function() {},{}],"bwuIu":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","./register-view.scss":"8il1C","@parcel/transformer-js/src/esmodule-helpers.js":"ldWpY","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"grLXn"}],"8il1C":[function() {},{}],"ldWpY":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"grLXn":[function(require,module,exports) {
+"use strict";
+var Refresh = require('react-refresh/runtime');
+function debounce(func, delay) {
+    var args1;
+    var timeout = undefined;
+    return function(args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            timeout = undefined;
+            func.call(null, args);
+        }, delay);
+    };
+}
+var enqueueUpdate = debounce(function() {
+    Refresh.performReactRefresh();
+}, 30); // Everthing below is either adapted or copied from
+// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
+// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
+module.exports.prelude = function(module) {
+    window.$RefreshReg$ = function(type, id) {
+        Refresh.register(type, module.id + ' ' + id);
+    };
+    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
+};
+module.exports.postlude = function(module) {
+    if (isReactRefreshBoundary(module.exports)) {
+        registerExportsForReactRefresh(module);
+        if (module.hot) {
+            module.hot.dispose(function(data) {
+                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
+                data.prevExports = module.exports;
+            });
+            module.hot.accept(function(getParents) {
+                var prevExports = module.hot.data.prevExports;
+                var nextExports = module.exports; // Since we just executed the code for it, it's possible
+                // that the new exports make it ineligible for being a boundary.
+                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports); // It can also become ineligible if its exports are incompatible
+                // with the previous exports.
+                // For example, if you add/remove/change exports, we'll want
+                // to re-execute the importing modules, and force those components
+                // to re-render. Similarly, if you convert a class component
+                // to a function, we want to invalidate the boundary.
+                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
+                if (isNoLongerABoundary || didInvalidate) {
+                    // We'll be conservative. The only case in which we won't do a full
+                    // reload is if all parent modules are also refresh boundaries.
+                    // In that case we'll add them to the current queue.
+                    var parents = getParents();
+                    if (parents.length === 0) {
+                        // Looks like we bubbled to the root. Can't recover from that.
+                        window.location.reload();
+                        return;
+                    }
+                    return parents;
+                }
+                enqueueUpdate();
+            });
+        }
+    }
+};
+function isReactRefreshBoundary(exports) {
+    if (Refresh.isLikelyComponentType(exports)) return true;
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    return false;
+    var hasExports = false;
+    var areAllExportsComponents = true;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        hasExports = true;
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
+        return false;
+        var exportValue = exports[key];
+        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
+    }
+    return hasExports && areAllExportsComponents;
+}
+function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
+    var prevSignature = getRefreshBoundarySignature(prevExports);
+    var nextSignature = getRefreshBoundarySignature(nextExports);
+    if (prevSignature.length !== nextSignature.length) return true;
+    for(var i = 0; i < nextSignature.length; i++){
+        if (prevSignature[i] !== nextSignature[i]) return true;
+    }
+    return false;
+} // When this signature changes, it's unsafe to stop at this refresh boundary.
+function getRefreshBoundarySignature(exports) {
+    var signature = [];
+    signature.push(Refresh.getFamilyByType(exports));
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return signature;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        signature.push(key);
+        signature.push(Refresh.getFamilyByType(exportValue));
+    }
+    return signature;
+}
+function registerExportsForReactRefresh(module) {
+    var exports = module.exports, id = module.id;
+    Refresh.register(exports, id + ' %exports%');
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        Refresh.register(exportValue, id + ' %exports% ' + key);
+    }
+}
+
+},{"react-refresh/runtime":"5dYNr"}],"e57ax":[function() {},{}],"bwuIu":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29767,7 +29811,7 @@ MovieCard.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","prop-types":"7wKI2","./movie-card.scss":"d6HH4"}],"d6HH4":[function() {},{}],"ggaUx":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","./movie-card.scss":"d6HH4","@parcel/transformer-js/src/esmodule-helpers.js":"ldWpY","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"grLXn"}],"d6HH4":[function() {},{}],"ggaUx":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29886,6 +29930,6 @@ MovieView.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"fD7H8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"fDiVC","react":"21dqq","prop-types":"7wKI2","./movie-view.scss":"jnlR5"}],"jnlR5":[function() {},{}],"eBaMl":[function() {},{}],"lJZlQ":[function() {},{}]},["6HQxs","v8Tqx","d8Dch"], "d8Dch", "parcelRequiree3ea")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","./movie-view.scss":"jnlR5","@parcel/transformer-js/src/esmodule-helpers.js":"ldWpY","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"grLXn"}],"jnlR5":[function() {},{}],"eBaMl":[function() {},{}],"lJZlQ":[function() {},{}]},["aW5O1","1DoIG","d8Dch"], "d8Dch", "parcelRequiree3ea")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
