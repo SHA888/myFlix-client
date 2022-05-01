@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { RegisterView } from '../register-view/register-view';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import {
+  Container,
+  Form,
+  Row,
+  Col,
+  Button,
+  Card,
+  CardGroup,
+} from 'react-bootstrap';
 
 import './login-view.scss';
 
@@ -20,38 +27,58 @@ export function LoginView(props) {
   };
 
   return (
-    <div>
-      <Form>
-        <Form.Group controlId='formUsername'>
-          <Form.Label>Username:</Form.Label>
-          <Form.Control
-            type='text'
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          ></Form.Control>
-        </Form.Group>
+    <Container>
+      <Row>
+        <Col></Col>
+        <Col>
+          <Card style={{ marginTop: 100, marginBottom: 50, width: 300 }}>
+            <Card.Body>
+              <Card.Title style={{ textAlign: 'center', fontSize: '2rm' }}>
+                LOGIN
+              </Card.Title>
+              <Form className='login-border'>
+                <Form.Group controlId='formUsername'>
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control
+                    type='text'
+                    value={username}
+                    placeholder='Username'
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
+                    required
+                  ></Form.Control>
+                </Form.Group>
 
-        <Form.Group controlId='formPassword'>
-          <Form.Label>Password:</Form.Label>
-          <Form.Control
-            type='password'
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+                <Form.Group controlId='formPassword'>
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type='password'
+                    value={password}
+                    placeholder='Password'
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    minLength='8'
+                  ></Form.Control>
+                </Form.Group>
 
-        <Button variant='primary' type='submit' onClick={handleSubmit}>
-          Login
-        </Button>
-      </Form>
+                <Button variant='primary' type='submit' onClick={handleSubmit}>
+                  Login
+                </Button>
+              </Form>
 
-      <span>
-        Don't have any account?{' '}
-        <Button variant='link' onClick={props.onVisitRegister}>
-          Register
-        </Button>
-      </span>
-    </div>
+              <span>
+                Don't have any account?{' '}
+                <Button variant='link' onClick={props.onVisitRegister}>
+                  Register
+                </Button>
+              </span>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col></Col>
+      </Row>
+    </Container>
   );
 }
 
