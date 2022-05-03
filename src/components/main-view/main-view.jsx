@@ -5,6 +5,7 @@ import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegisterView } from '../register-view/register-view';
+import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
 
 import './main-view.scss';
 
@@ -51,8 +52,12 @@ export class MainView extends React.Component {
   /*
   When a user successfully logs in, this function updates the `user` property in state to that *particular user*
   */
-  onLoggedIn(user) {
-    this.setState({ user });
+  onLoggedIn(username) {
+    this.setState({
+      user: {
+        name: username,
+      },
+    });
   }
 
   /**
@@ -99,30 +104,36 @@ export class MainView extends React.Component {
     if (movies.length === 0) return <div className='main-view' />;
 
     return (
-      <div className='main-view'>
-        <p>Hello there, {this.state.user.name}</p>
-        {/*
+      <Container>
+        <h5>Hello there, {this.state.user.name}</h5>
+        <Row className='main-view justify-content-md-center'>
+          {/*
           If the state of the `selectedMovie` is not null, the selected movie will be returned otherwise, all *movies will be returned*
           */}
-        {selectedMovie ? (
-          <MovieView
-            movie={selectedMovie}
-            onBackClick={(newSelectedMovie) => {
-              this.setSelectedMovie(newSelectedMovie);
-            }}
-          />
-        ) : (
-          movies.map((movie) => (
-            <MovieCard
-              key={movie._id}
-              movie={movie}
-              onMovieClick={(movie) => {
-                this.setSelectedMovie(movie);
-              }}
-            />
-          ))
-        )}
-      </div>
+          {selectedMovie ? (
+            <Col md={8}>
+              <MovieView
+                movie={selectedMovie}
+                onBackClick={(newSelectedMovie) => {
+                  this.setSelectedMovie(newSelectedMovie);
+                }}
+              />
+            </Col>
+          ) : (
+            movies.map((movie) => (
+              <Col md={4}>
+                <MovieCard
+                  key={movie._id}
+                  movie={movie}
+                  onMovieClick={(movie) => {
+                    this.setSelectedMovie(movie);
+                  }}
+                />
+              </Col>
+            ))
+          )}
+        </Row>
+      </Container>
     );
   }
 }
