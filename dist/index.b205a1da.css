@@ -2,7 +2,17 @@
 
 
 
-
+.col-md-4 {
+  max-width: 33.3333%;
+  width: 100%;
+  flex: 0 0 33.3333%;
+  align-self: stretch;
+  margin: 10px auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  position: relative;
+}
 
 
 
