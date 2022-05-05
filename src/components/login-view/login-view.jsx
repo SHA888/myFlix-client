@@ -21,7 +21,7 @@ export function LoginView(props) {
     e.preventDefault();
     console.log(username, password);
     /*
-    Send a request to the server for authentication then call props.onLoggedIn(username)
+    Send a request to the server for authentication then call props.onLoggedIn(username), which provides the username to our parent component (child to parent communication).
      */
     props.onLoggedIn(username);
   };
