@@ -52,11 +52,9 @@ export class MainView extends React.Component {
   /*
   When a user successfully logs in, this function updates the `user` property in state to that *particular user*
   */
-  onLoggedIn(username) {
+  onLoggedIn(user) {
     this.setState({
-      user: {
-        name: username,
-      },
+      user,
     });
   }
 
