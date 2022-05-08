@@ -25,17 +25,18 @@ export function LoginView(props) {
     Send a request to the server for authentication then call props.onLoggedIn(username), which provides the username to our parent component (child to parent communication).
      */
     // props.onLoggedIn(username);
-    axios.post('/https://my-flix-93462.herokuapp.com/login', {
-      Username: username,
-      Password: password
-    })
-    .then(response => {
-      const data = response.data;
-      props.onLoggedIn(data);
-    })
-    .catch(e => {
-      console.log('User not found');
-    });
+    axios
+      .post('https://my-flix-93462.herokuapp.com/login', {
+        Username: username,
+        Password: password,
+      })
+      .then((response) => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch((e) => {
+        console.log('User not found');
+      });
   };
 
   return (
