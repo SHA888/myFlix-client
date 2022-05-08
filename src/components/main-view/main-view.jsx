@@ -20,6 +20,22 @@ export class MainView extends React.Component {
     };
   }
 
+  getMovies(token) {
+    axios
+      .get('https://my-flix-93462.herokuapp.com/movies', {
+        headers: { Authorization: 'Bearer ${token}' },
+      })
+      .then((response) => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }
+
   // code executed right after the component is added to the DOM.
   componentDidMount() {
     axios

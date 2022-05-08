@@ -25119,6 +25119,20 @@ class MainView extends _reactDefault.default.Component {
             showRegister: false
         };
     }
+    getMovies(token) {
+        _axiosDefault.default.get('https://my-flix-93462.herokuapp.com/movies', {
+            headers: {
+                Authorization: 'Bearer ${token}'
+            }
+        }).then((response)=>{
+            // Assign the result to the state
+            this.setState({
+                movies: response.data
+            });
+        }).catch(function(error) {
+            console.error(error);
+        });
+    }
     // code executed right after the component is added to the DOM.
     componentDidMount() {
         _axiosDefault.default.get('https://my-flix-93462.herokuapp.com/movies').then((response)=>{
@@ -25178,12 +25192,12 @@ class MainView extends _reactDefault.default.Component {
                 onRegistration: (user)=>this.onRegistration(user)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 91,
+                lineNumber: 107,
                 columnNumber: 11
             }, this)
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 90,
+            lineNumber: 106,
             columnNumber: 9
         }, this);
         /*
@@ -25194,7 +25208,7 @@ class MainView extends _reactDefault.default.Component {
             onVisitRegister: ()=>this.onVisitRegister()
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 100,
+            lineNumber: 116,
             columnNumber: 9
         }, this);
         // Before the movies have been loaded
@@ -25202,7 +25216,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 107,
+            lineNumber: 123,
             columnNumber: 37
         }, this);
         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Container, {
@@ -25214,7 +25228,7 @@ class MainView extends _reactDefault.default.Component {
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 111,
+                    lineNumber: 127,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Row, {
@@ -25228,12 +25242,12 @@ class MainView extends _reactDefault.default.Component {
                             }
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 118,
+                            lineNumber: 134,
                             columnNumber: 15
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 117,
+                        lineNumber: 133,
                         columnNumber: 13
                     }, this) : movies.map((movie1)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Col, {
                             md: 4,
@@ -25244,24 +25258,24 @@ class MainView extends _reactDefault.default.Component {
                                 }
                             }, movie1._id, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 128,
+                                lineNumber: 144,
                                 columnNumber: 17
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 127,
+                            lineNumber: 143,
                             columnNumber: 15
                         }, this)
                     )
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 112,
+                    lineNumber: 128,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 110,
+            lineNumber: 126,
             columnNumber: 7
         }, this);
     }
