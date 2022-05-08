@@ -38,16 +38,24 @@ export class MainView extends React.Component {
 
   // code executed right after the component is added to the DOM.
   componentDidMount() {
-    axios
-      .get('https://my-flix-93462.herokuapp.com/movies')
-      .then((response) => {
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
+    // axios
+    //   .get('https://my-flix-93462.herokuapp.com/movies')
+    //   .then((response) => {
+    //     this.setState({
+    //       movies: response.data,
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user'),
       });
+      this.getMovies(accessToken);
+    }
   }
 
   componentDidUpdate() {
