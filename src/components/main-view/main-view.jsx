@@ -102,6 +102,14 @@ export class MainView extends React.Component {
     });
   }
 
+  onloggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null,
+    });
+  }
+
   render() {
     let { movies, selectedMovie, user, showRegister } = this.state;
     console.log(showRegister);
@@ -160,6 +168,13 @@ export class MainView extends React.Component {
             ))
           )}
         </Row>
+        <button
+          onClick={() => {
+            this.onloggedOut();
+          }}
+        >
+          Logout
+        </button>
       </Container>
     );
   }
