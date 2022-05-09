@@ -18,25 +18,48 @@ export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // Declare hook for each input
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+
+  // Validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr('USername is required');
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr('Username must be at least 2 characters');
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr('Password is required');
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr('Password must be 6 characters long');
+    }
+
+    return isReq;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(username, password);
-    /*
-    Send a request to the server for authentication then call props.onLoggedIn(username), which provides the username to our parent component (child to parent communication).
-     */
-    // props.onLoggedIn(username);
-    axios
-      .post('https://my-flix-93462.herokuapp.com/login', {
-        Username: username,
-        Password: password,
-      })
-      .then((response) => {
-        const data = response.data;
-        props.onLoggedIn(data);
-      })
-      .catch((e) => {
-        console.log('User not found');
-      });
+    const isReq = validate();
+    if (isReq) {
+      /** Send request to the server for authentication */
+      axios
+        .post('https://my-flix-93462.herokuapp.com/login', {
+          Username: username,
+          Password: password,
+        })
+        .then((response) => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch((e) => {
+          console.log('User not found');
+        });
+    }
   };
 
   return (
