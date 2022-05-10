@@ -84,6 +84,8 @@ export function LoginView(props) {
                     }}
                     required
                   ></Form.Control>
+                  {/* code added here to display validation error */}
+                  { usernameErr && <p>{usernameErr}</p> }
                 </Form.Group>
 
                 <Form.Group controlId='formPassword'>
@@ -96,6 +98,8 @@ export function LoginView(props) {
                     required
                     minLength='8'
                   ></Form.Control>
+                  {/** code added here to display validation error */}
+                  { passwordErr && <p>{passwordErr}</p> }
                 </Form.Group>
 
                 <Button variant='primary' type='submit' onClick={handleSubmit}>
