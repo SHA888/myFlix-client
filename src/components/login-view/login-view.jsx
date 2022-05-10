@@ -26,7 +26,7 @@ export function LoginView(props) {
   const validate = () => {
     let isReq = true;
     if (!username) {
-      setUsernameErr('USername is required');
+      setUsernameErr('Username is required');
       isReq = false;
     } else if (username.length < 2) {
       setUsernameErr('Username must be at least 2 characters');
@@ -37,6 +37,7 @@ export function LoginView(props) {
       isReq = false;
     } else if (password.length < 6) {
       setPasswordErr('Password must be 6 characters long');
+      isReq = false;
     }
 
     return isReq;
@@ -85,7 +86,7 @@ export function LoginView(props) {
                     required
                   ></Form.Control>
                   {/* code added here to display validation error */}
-                  { usernameErr && <p>{usernameErr}</p> }
+                  {usernameErr && <p>{usernameErr}</p>}
                 </Form.Group>
 
                 <Form.Group controlId='formPassword'>
@@ -99,7 +100,7 @@ export function LoginView(props) {
                     minLength='8'
                   ></Form.Control>
                   {/** code added here to display validation error */}
-                  { passwordErr && <p>{passwordErr}</p> }
+                  {passwordErr && <p>{passwordErr}</p>}
                 </Form.Group>
 
                 <Button variant='primary' type='submit' onClick={handleSubmit}>

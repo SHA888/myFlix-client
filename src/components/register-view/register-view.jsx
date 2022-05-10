@@ -11,18 +11,56 @@ import {
 } from 'react-bootstrap';
 
 import './register-view.scss';
+import axios from 'axios';
 
 export function RegisterView(props) {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // Declare hook for each input
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+
+  // Validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr('Username is required');
+      isReq = false;
+    } else if (username.length < 2) {
+      setUSernameErr('Username must be at least 2 characters');
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr('Password is required');
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr('Password must be at least 6 characters');
+      isReq = false;
+    }
+
+    return isReq;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, username, password);
-    /* Send a request to the server for authentication */
-    /* then call props on registored user(username) */
-    props.onRegistration(username);
+    const isReq = validate();
+    if (isReq) {
+      /* Send a request to the server for authentication */
+      axios
+        .post('https://my-flix-93462.herokuapp.com/register', {
+          Username: username,
+          Password: password,
+        })
+        .then((response) => {
+          const data = response.data;
+          props.onRegistration(data);
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    }
   };
 
   return (
@@ -57,6 +95,8 @@ export function RegisterView(props) {
                     }}
                     required
                   ></Form.Control>
+                  {/* code added here to display validation error */}
+                  {usernameErr && <p>{usernameErr}</p>}
                 </Form.Group>
 
                 <Form.Group controlId='formPassword'>
@@ -67,8 +107,9 @@ export function RegisterView(props) {
                     placeholder='Password'
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    minLength='8'
                   ></Form.Control>
+                  {/** code added here to display validation error */}
+                  {passwordErr && <p>{passwordErr}</p>}
                 </Form.Group>
 
                 <Button variant='primary' type='submit' onClick={handleSubmit}>
