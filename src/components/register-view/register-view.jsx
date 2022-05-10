@@ -15,16 +15,30 @@ import axios from 'axios';
 
 export function RegisterView(props) {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [birthday, setBirthday] = useState('');
 
   // Declare hook for each input
-  const [usernameErr, setUsernameErr] = useState('');
-  const [passwordErr, setPasswordErr] = useState('');
+  const [value, setValue] = useState({
+    emailErr: '',
+    nameErr: '',
+    usernameErr: '',
+    passwordErr: '',
+    birthday: '',
+  });
 
   // Validate user inputs
   const validate = () => {
     let isReq = true;
+    if (!email) {
+      setEmail('Email is required');
+      isReq = false;
+    } else if (indexOf('@') === -1) {
+      setEmailErr('Please provide a valid email address');
+      isReq = false;
+    }
     if (!username) {
       setUsernameErr('Username is required');
       isReq = false;

@@ -29681,14 +29681,28 @@ var _s = $RefreshSig$();
 function RegisterView(props) {
     _s();
     const [email, setEmail] = _react.useState('');
+    const [name, setName] = _react.useState('');
     const [username, setUsername] = _react.useState('');
     const [password, setPassword] = _react.useState('');
+    const [birthday, setBirthday] = _react.useState('');
     // Declare hook for each input
-    const [usernameErr, setUsernameErr] = _react.useState('');
-    const [passwordErr, setPasswordErr] = _react.useState('');
+    const [value, setValue] = _react.useState({
+        emailErr: '',
+        nameErr: '',
+        usernameErr: '',
+        passwordErr: '',
+        birthday: ''
+    });
     // Validate user inputs
     const validate = ()=>{
         let isReq = true;
+        if (!email) {
+            setEmail('Email is required');
+            isReq = false;
+        } else if (indexOf('@') === -1) {
+            setEmailErr('Please provide a valid email address');
+            isReq = false;
+        }
         if (!username) {
             setUsernameErr('Username is required');
             isReq = false;
@@ -29728,7 +29742,7 @@ function RegisterView(props) {
                                 children: "Please Register"
                             }, void 0, false, {
                                 fileName: "src/components/register-view/register-view.jsx",
-                                lineNumber: 72,
+                                lineNumber: 86,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form, {
@@ -29740,7 +29754,7 @@ function RegisterView(props) {
                                                 children: "Email:"
                                             }, void 0, false, {
                                                 fileName: "src/components/register-view/register-view.jsx",
-                                                lineNumber: 75,
+                                                lineNumber: 89,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Control, {
@@ -29752,13 +29766,13 @@ function RegisterView(props) {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "src/components/register-view/register-view.jsx",
-                                                lineNumber: 76,
+                                                lineNumber: 90,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/register-view/register-view.jsx",
-                                        lineNumber: 74,
+                                        lineNumber: 88,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Group, {
@@ -29768,7 +29782,7 @@ function RegisterView(props) {
                                                 children: "Username:"
                                             }, void 0, false, {
                                                 fileName: "src/components/register-view/register-view.jsx",
-                                                lineNumber: 88,
+                                                lineNumber: 102,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Control, {
@@ -29781,20 +29795,20 @@ function RegisterView(props) {
                                                 required: true
                                             }, void 0, false, {
                                                 fileName: "src/components/register-view/register-view.jsx",
-                                                lineNumber: 89,
+                                                lineNumber: 103,
                                                 columnNumber: 19
                                             }, this),
                                             usernameErr && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
                                                 children: usernameErr
                                             }, void 0, false, {
                                                 fileName: "src/components/register-view/register-view.jsx",
-                                                lineNumber: 99,
+                                                lineNumber: 113,
                                                 columnNumber: 35
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/register-view/register-view.jsx",
-                                        lineNumber: 87,
+                                        lineNumber: 101,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Group, {
@@ -29804,7 +29818,7 @@ function RegisterView(props) {
                                                 children: "Password:"
                                             }, void 0, false, {
                                                 fileName: "src/components/register-view/register-view.jsx",
-                                                lineNumber: 103,
+                                                lineNumber: 117,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Form.Control, {
@@ -29816,20 +29830,20 @@ function RegisterView(props) {
                                                 required: true
                                             }, void 0, false, {
                                                 fileName: "src/components/register-view/register-view.jsx",
-                                                lineNumber: 104,
+                                                lineNumber: 118,
                                                 columnNumber: 19
                                             }, this),
                                             passwordErr && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
                                                 children: passwordErr
                                             }, void 0, false, {
                                                 fileName: "src/components/register-view/register-view.jsx",
-                                                lineNumber: 112,
+                                                lineNumber: 126,
                                                 columnNumber: 35
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/register-view/register-view.jsx",
-                                        lineNumber: 102,
+                                        lineNumber: 116,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Button, {
@@ -29839,43 +29853,43 @@ function RegisterView(props) {
                                         children: "Sign Up"
                                     }, void 0, false, {
                                         fileName: "src/components/register-view/register-view.jsx",
-                                        lineNumber: 115,
+                                        lineNumber: 129,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/register-view/register-view.jsx",
-                                lineNumber: 73,
+                                lineNumber: 87,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/register-view/register-view.jsx",
-                        lineNumber: 71,
+                        lineNumber: 85,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 70,
+                    lineNumber: 84,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "src/components/register-view/register-view.jsx",
-                lineNumber: 69,
+                lineNumber: 83,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "src/components/register-view/register-view.jsx",
-            lineNumber: 68,
+            lineNumber: 82,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/components/register-view/register-view.jsx",
-        lineNumber: 67,
+        lineNumber: 81,
         columnNumber: 5
     }, this);
 }
-_s(RegisterView, "SRVDCUeTjz1Nz4VozKHmecQhgGM=");
+_s(RegisterView, "8Wh6DtxVbK9bR7NYVKOAK9s0nIE=");
 _c = RegisterView;
 RegisterView.propTypes = {
     onRegistration: _propTypesDefault.default.func.isRequired
