@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -129,23 +131,26 @@ export class MainView extends React.Component {
     */
     if (!user)
       return (
-        <LoginView
-          onLoggedIn={(user) => this.onLoggedIn(user)}
-          onVisitRegister={() => this.onVisitRegister()}
-        />
+        <Col>
+          <LoginView
+            onLoggedIn={(user) => this.onLoggedIn(user)}
+            onVisitRegister={() => this.onVisitRegister()}
+          />
+        </Col>
       );
 
     // Before the movies have been loaded
     if (movies.length === 0) return <div className='main-view' />;
 
     return (
-      <Container>
-        <h5>Hello there, {this.state.user.name}</h5>
-        <Row className='main-view justify-content-md-center'>
-          {/*
+      <Router>
+        <Container>
+          <h5>Hello there, {this.state.user.name}</h5>
+          <Row className='main-view justify-content-md-center'>
+            {/*
           If the state of the `selectedMovie` is not null, the selected movie will be returned otherwise, all *movies will be returned*
           */}
-          {selectedMovie ? (
+            {/* {selectedMovie ? (
             <Col md={8}>
               <MovieView
                 movie={selectedMovie}
@@ -166,16 +171,40 @@ export class MainView extends React.Component {
                 />
               </Col>
             ))
-          )}
-        </Row>
-        <button
-          onClick={() => {
-            this.onloggedOut();
-          }}
-        >
-          Logout
-        </button>
-      </Container>
+          )} */}
+            <Route
+              exact
+              path='/'
+              render={() => {
+                return movies.map((m) => (
+                  <Col md={3} key={m._id}>
+                    <MovieCard movie={m} />
+                  </Col>
+                ));
+              }}
+            />
+            <Route
+              path='/movies/:movieId'
+              render={({ match }) => {
+                return (
+                  <Col md={8}>
+                    <MovieView
+                      movie={movies.find((m) => m._id === match.params.movieId)}
+                    />
+                  </Col>
+                );
+              }}
+            />
+          </Row>
+          <button
+            onClick={() => {
+              this.onloggedOut();
+            }}
+          >
+            Logout
+          </button>
+        </Container>
+      </Router>
     );
   }
 }
