@@ -25411,26 +25411,7 @@ class ManiView extends _reactDefault.default.Component {
     constructor(){
         super();
         this.state = {
-            movies: [
-                {
-                    _id: 1,
-                    Title: 'Inception',
-                    Description: 'desc1...',
-                    ImagePath: '...'
-                },
-                {
-                    _id: 2,
-                    Title: 'The Shawshank Redemption',
-                    Description: 'desc2...',
-                    ImagePath: '...'
-                },
-                {
-                    _id: 3,
-                    Title: 'Gladiator',
-                    Description: 'desc3...',
-                    ImagePath: '...'
-                }, 
-            ]
+            movies: []
         };
     }
     render() {
@@ -25439,7 +25420,7 @@ class ManiView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 34
+                lineNumber: 15
             },
             __self: this,
             children: "The list is empty!"
@@ -25448,7 +25429,7 @@ class ManiView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 37
+                lineNumber: 18
             },
             __self: this,
             children: movies.map((movie)=>{
@@ -25456,7 +25437,7 @@ class ManiView extends _reactDefault.default.Component {
                     movie: movie,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 39
+                        lineNumber: 20
                     },
                     __self: this
                 }, movie._id));
